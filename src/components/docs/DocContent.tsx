@@ -344,16 +344,16 @@ export function DocContent({
       </div>
 
       {/* Bottom Pagination Links */}
-      <div className="mt-14 pt-6 border-t border-kumo-hairline grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <div className="mt-14 pt-6 border-t border-kumo-hairline flex items-center justify-between gap-4">
         {prevPage ? (
           <Link
             href={`/docs/${space.slug}/${prevPage.slug}`}
-            className="flex items-center gap-3 p-3.5 rounded-lg border border-kumo-line hover:bg-kumo-tint hover:border-kumo-brand transition-none group"
+            className="flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand transition-none"
           >
-            <ArrowLeft weight="thin" size={16} className="text-kumo-subtle group-hover:text-kumo-brand shrink-0" />
-            <div className="min-w-0">
+            <ArrowLeft weight="thin" size={14} className="shrink-0" />
+            <div>
               <div className="text-[10px] uppercase font-mono text-kumo-subtle">Previous</div>
-              <div className="font-medium text-xs text-kumo-strong truncate">{prevPage.title}</div>
+              <div className="font-medium text-sm text-kumo-default">{prevPage.title}</div>
             </div>
           </Link>
         ) : (
@@ -363,13 +363,13 @@ export function DocContent({
         {nextPage && (
           <Link
             href={`/docs/${space.slug}/${nextPage.slug}`}
-            className="flex items-center justify-between p-3.5 rounded-lg border border-kumo-line hover:bg-kumo-tint hover:border-kumo-brand transition-none group text-right"
+            className="ml-auto flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand text-right transition-none"
           >
-            <div className="min-w-0 flex-1 text-left sm:text-right">
+            <div>
               <div className="text-[10px] uppercase font-mono text-kumo-subtle">Next</div>
-              <div className="font-medium text-xs text-kumo-strong truncate">{nextPage.title}</div>
+              <div className="font-medium text-sm text-kumo-default">{nextPage.title}</div>
             </div>
-            <ArrowRight weight="thin" size={16} className="text-kumo-subtle group-hover:text-kumo-brand shrink-0 ml-3" />
+            <ArrowRight weight="thin" size={14} className="shrink-0" />
           </Link>
         )}
       </div>
