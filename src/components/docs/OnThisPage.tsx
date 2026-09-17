@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { TocItem } from "@/lib/types";
-import { SidebarSimple } from "@phosphor-icons/react";
 
 interface OnThisPageProps {
   tocItems: TocItem[];
@@ -72,21 +71,10 @@ export function OnThisPage({
     >
       {!isCollapsed && (
         <>
-          <div className="flex items-center justify-between mb-4">
+          <div className="mb-4">
             <div className="text-[11px] font-semibold tracking-wider uppercase text-kumo-subtle">
               ON THIS PAGE
             </div>
-            {onToggleCollapse && (
-              <button
-                type="button"
-                onClick={onToggleCollapse}
-                className="p-1 text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint rounded transition-none"
-                title="Collapse table of contents"
-                aria-label="Collapse table of contents"
-              >
-                <SidebarSimple weight="thin" size={16} className="rotate-180" />
-              </button>
-            )}
           </div>
 
           <nav className="relative flex flex-col space-y-2 text-[13px]">

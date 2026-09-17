@@ -7,7 +7,6 @@ import { DocSidebar } from "./DocSidebar";
 import { DocContent } from "./DocContent";
 import { OnThisPage } from "./OnThisPage";
 import { MobileTocBar } from "./MobileTocBar";
-import { SidebarSimple } from "@phosphor-icons/react";
 
 interface DocLayoutClientProps {
   spaces: DocSpaceItem[];
@@ -87,32 +86,6 @@ export function DocLayoutClient({
 
       {/* Mobile / Tablet Sticky Table of Contents Sub-bar (< xl) */}
       <MobileTocBar tocItems={tocAnchors} />
-
-      {/* Desktop Floating Sidebar Re-open Edge Button (lg+) */}
-      {isMounted && sidebarCollapsed && (
-        <button
-          type="button"
-          onClick={toggleSidebar}
-          className="hidden lg:flex fixed left-0 top-16 z-20 items-center justify-center p-1.5 bg-kumo-canvas/90 backdrop-blur border border-l-0 border-kumo-line rounded-r-md shadow-xs text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint transition-none"
-          title="Expand navigation sidebar"
-          aria-label="Expand sidebar"
-        >
-          <SidebarSimple weight="thin" size={16} />
-        </button>
-      )}
-
-      {/* Desktop Floating TOC Re-open Edge Button (xl+) */}
-      {isMounted && hasToc && tocCollapsed && (
-        <button
-          type="button"
-          onClick={toggleToc}
-          className="hidden xl:flex fixed right-0 top-16 z-20 items-center justify-center p-1.5 bg-kumo-canvas/90 backdrop-blur border border-r-0 border-kumo-line rounded-l-md shadow-xs text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint transition-none"
-          title="Expand table of contents"
-          aria-label="Expand table of contents"
-        >
-          <SidebarSimple weight="thin" size={16} className="rotate-180" />
-        </button>
-      )}
 
       {/* 3-Column Layout Container */}
       <div className="w-full max-w-[96rem] mx-auto flex justify-between min-w-0 flex-1">

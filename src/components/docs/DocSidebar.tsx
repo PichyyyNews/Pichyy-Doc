@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DocSpaceItem, CategoryItem, DocPageItem } from "@/lib/types";
 import { SearchModal } from "./SearchModal";
-import { CaretDown, CaretRight, MagnifyingGlass, SidebarSimple, X } from "@phosphor-icons/react";
+import { CaretDown, CaretRight, MagnifyingGlass, X } from "@phosphor-icons/react";
 
 interface DocSidebarProps {
   spaces?: DocSpaceItem[];
@@ -69,12 +69,12 @@ export function DocSidebar({
 
   const renderSidebarContent = (isMobile = false) => (
     <>
-      {/* Top Header Row with Title & Collapse / Close Trigger */}
+      {/* Top Header Row with Space Title (and Mobile Close Button) */}
       <div className="flex items-center justify-between pb-3 mb-3 border-b border-kumo-hairline">
         <span className="text-xs font-semibold uppercase tracking-wider text-kumo-subtle truncate">
           {space.name}
         </span>
-        {isMobile ? (
+        {isMobile && (
           <button
             type="button"
             onClick={onMobileClose}
@@ -83,18 +83,6 @@ export function DocSidebar({
           >
             <X weight="thin" size={16} />
           </button>
-        ) : (
-          onToggleCollapse && (
-            <button
-              type="button"
-              onClick={onToggleCollapse}
-              className="p-1 text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint rounded transition-none"
-              title="Collapse sidebar"
-              aria-label="Collapse sidebar"
-            >
-              <SidebarSimple weight="thin" size={16} />
-            </button>
-          )
         )}
       </div>
 
