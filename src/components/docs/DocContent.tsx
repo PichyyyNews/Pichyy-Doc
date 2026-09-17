@@ -297,12 +297,12 @@ export function DocContent({
         </span>
       </nav>
 
-      {/* Page Header (Title + Responsive Copy button) */}
-      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
-        <h1 className="text-2xl sm:text-3xl font-semibold tracking-normal text-kumo-strong break-words">
+      {/* Page Header (Title + Right-aligned Copy page button) */}
+      <div className="flex items-start justify-between gap-3 sm:gap-4 mb-2">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-normal text-kumo-strong break-words min-w-0 flex-1">
           {page.title}
         </h1>
-        <div className="shrink-0 self-start sm:self-auto sm:pt-1">
+        <div className="shrink-0 pt-0.5 sm:pt-1">
           <CopyPageDropdown title={page.title} markdownContent={page.content} />
         </div>
       </div>
