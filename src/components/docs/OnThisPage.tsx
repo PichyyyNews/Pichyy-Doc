@@ -2,12 +2,19 @@
 
 import React, { useEffect, useState } from "react";
 import { TocItem } from "@/lib/types";
+import { SidebarSimple } from "@phosphor-icons/react";
 
 interface OnThisPageProps {
   tocItems: TocItem[];
+  isCollapsed?: boolean;
+  onToggleCollapse?: () => void;
 }
 
-export function OnThisPage({ tocItems }: OnThisPageProps) {
+export function OnThisPage({
+  tocItems,
+  isCollapsed = false,
+  onToggleCollapse,
+}: OnThisPageProps) {
   // Only display items that are enabled
   const visibleItems = tocItems.filter((item) => item.enabled !== false);
   const [activeId, setActiveId] = useState<string>(visibleItems[0]?.id || "");
@@ -56,41 +63,64 @@ export function OnThisPage({ tocItems }: OnThisPageProps) {
   };
 
   return (
-    <aside className="w-60 flex-shrink-0 hidden xl:block sticky top-12 h-[calc(100vh-3rem)] overflow-y-auto px-6 py-6 select-none border-l border-kumo-line">
-      <div className="text-[11px] font-semibold tracking-wider uppercase text-kumo-subtle mb-4">
-        ON THIS PAGE
-      </div>
-
-      <nav className="relative flex flex-col space-y-2 text-[13px]">
-        {visibleItems.map((item) => {
-          const isActive = activeId === item.id;
-          const isH3 = item.level === 3;
-
-          return (
-            <div key={item.id} className="relative flex items-center">
-              {/* Active Blue Indicator Bar */}
-              {isActive && (
-                <span className="absolute -left-6 top-0 bottom-0 w-[2px] bg-blue-600 rounded-full" />
-              )}
-
-              <a
-                href={`#${item.id}`}
-                onClick={(e) => scrollToHeading(item.id, e)}
-                className={`transition-none block truncate ${
-                  isH3 ? "pl-4 text-xs" : ""
-                } ${
-                  isActive
-                    ? "font-semibold text-kumo-strong"
-                    : "text-kumo-subtle hover:text-kumo-default"
-                }`}
-                title={item.text}
-              >
-                {item.text}
-              </a>
+    <aside
+      className={`hidden xl:block border-l border-kumo-line bg-kumo-canvas h-[calc(100vh-3rem)] sticky top-12 overflow-y-auto select-none transition-all duration-200 ease-in-out shrink-0 ${
+        isCollapsed
+          ? "w-0 p-0 border-l-0 overflow-hidden opacity-0 pointer-events-none"
+          : "w-60 px-6 py-6 opacity-100"
+      }`}
+    >
+      {!isCollapsed && (
+        <>
+          <div className="flex items-center justify-between mb-4">
+            <div className="text-[11px] font-semibold tracking-wider uppercase text-kumo-subtle">
+              ON THIS PAGE
             </div>
-          );
-        })}
-      </nav>
+            {onToggleCollapse && (
+              <button
+                type="button"
+                onClick={onToggleCollapse}
+                className="p-1 text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint rounded transition-none"
+                title="Collapse table of contents"
+                aria-label="Collapse table of contents"
+              >
+                <SidebarSimple weight="thin" size={16} className="rotate-180" />
+              </button>
+            )}
+          </div>
+
+          <nav className="relative flex flex-col space-y-2 text-[13px]">
+            {visibleItems.map((item) => {
+              const isActive = activeId === item.id;
+              const isH3 = item.level === 3;
+
+              return (
+                <div key={item.id} className="relative flex items-center">
+                  {/* Active Blue Indicator Bar */}
+                  {isActive && (
+                    <span className="absolute -left-6 top-0 bottom-0 w-[2px] bg-blue-600 rounded-full" />
+                  )}
+
+                  <a
+                    href={`#${item.id}`}
+                    onClick={(e) => scrollToHeading(item.id, e)}
+                    className={`transition-none block truncate ${
+                      isH3 ? "pl-4 text-xs" : ""
+                    } ${
+                      isActive
+                        ? "font-semibold text-kumo-strong"
+                        : "text-kumo-subtle hover:text-kumo-default"
+                    }`}
+                    title={item.text}
+                  >
+                    {item.text}
+                  </a>
+                </div>
+              );
+            })}
+          </nav>
+        </>
+      )}
     </aside>
   );
 }

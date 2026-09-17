@@ -15,6 +15,8 @@ interface DocContentProps {
   space: DocSpaceItem;
   page: DocPageItem;
   tocAnchors: TocItem[];
+  sidebarCollapsed?: boolean;
+  tocCollapsed?: boolean;
 }
 
 // Code Block with Copy Button
@@ -63,7 +65,21 @@ function CodeBlock({ children, className }: { children: React.ReactNode; classNa
   );
 }
 
-export function DocContent({ space, page, tocAnchors }: DocContentProps) {
+export function DocContent({
+  space,
+  page,
+  tocAnchors,
+  sidebarCollapsed = false,
+  tocCollapsed = false,
+}: DocContentProps) {
+  // Compute dynamic reading max-width based on sidebar collapse states
+  let maxWidthClass = "max-w-3xl";
+  if (sidebarCollapsed && tocCollapsed) {
+    maxWidthClass = "max-w-5xl";
+  } else if (sidebarCollapsed || tocCollapsed) {
+    maxWidthClass = "max-w-4xl";
+  }
+
   // Find Previous and Next pages in this doc space
   const allPages = space.pages.filter((p) => p.isPublished);
   const currentIndex = allPages.findIndex((p) => p.slug === page.slug);
@@ -253,10 +269,12 @@ export function DocContent({ space, page, tocAnchors }: DocContentProps) {
   };
 
   return (
-    <article className="flex-1 min-w-0 max-w-3xl px-6 sm:px-10 py-8">
+    <article
+      className={`flex-1 min-w-0 ${maxWidthClass} transition-all duration-200 px-4 sm:px-8 lg:px-10 py-6 sm:py-8`}
+    >
       {/* Page Header (Title + Right-aligned Copy page button) */}
       <div className="flex items-start justify-between gap-4 mb-2">
-        <h1 className="text-3xl font-semibold tracking-normal text-kumo-strong">
+        <h1 className="text-2xl sm:text-3xl font-semibold tracking-normal text-kumo-strong break-words">
           {page.title}
         </h1>
         <div className="shrink-0 pt-1">
@@ -301,7 +319,7 @@ export function DocContent({ space, page, tocAnchors }: DocContentProps) {
       </div>
 
       {/* Bottom Pagination Links */}
-      <div className="mt-14 pt-6 border-t border-kumo-hairline flex items-center justify-between">
+      <div className="mt-14 pt-6 border-t border-kumo-hairline flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         {prevPage ? (
           <Link
             href={`/docs/${space.slug}/${prevPage.slug}`}
