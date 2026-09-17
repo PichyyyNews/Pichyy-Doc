@@ -78,3 +78,105 @@ export function parseImageSrc(src?: string): ImageOptions {
   return { cleanSrc, hasBorder, width, align, wrap };
 }
 
+export interface GalleryImage {
+  src: string;
+  alt: string;
+}
+
+export interface GalleryBlock {
+  type: "gallery";
+  cols: 2 | 3 | 4;
+  ratio: "16:9" | "4:3" | "1:1" | "natural";
+  hasBorder: boolean;
+  images: GalleryImage[];
+}
+
+export interface MarkdownSegment {
+  type: "markdown" | "gallery";
+  content?: string;
+  gallery?: GalleryBlock;
+}
+
+export function splitMarkdownGalleries(markdown: string): MarkdownSegment[] {
+  if (!markdown) return [];
+
+  const segments: MarkdownSegment[] = [];
+  const galleryRegex = /:::gallery([^\n]*)\n([\s\S]*?):::/g;
+  let lastIndex = 0;
+  let match: RegExpExecArray | null;
+
+  while ((match = galleryRegex.exec(markdown)) !== null) {
+    if (match.index > lastIndex) {
+      const textChunk = markdown.substring(lastIndex, match.index);
+      if (textChunk.trim()) {
+        segments.push({ type: "markdown", content: textChunk });
+      }
+    }
+
+    const header = match[1] || "";
+    const body = match[2] || "";
+
+    // Parse options from header
+    const colsMatch = header.match(/cols=(\d+)/i);
+    let cols: 2 | 3 | 4 = 3;
+    if (colsMatch) {
+      const parsedCols = parseInt(colsMatch[1], 10);
+      if (parsedCols === 2 || parsedCols === 3 || parsedCols === 4) {
+        cols = parsedCols;
+      }
+    }
+
+    const ratioMatch = header.match(/ratio=([\w:/]+)/i);
+    let ratio: "16:9" | "4:3" | "1:1" | "natural" = "16:9";
+    if (ratioMatch) {
+      const r = ratioMatch[1].toLowerCase();
+      if (r === "4:3" || r === "1:1" || r === "natural" || r === "16:9") {
+        ratio = r as any;
+      }
+    }
+
+    const borderMatch = header.match(/border=(true|false)/i);
+    const hasBorder = borderMatch ? borderMatch[1].toLowerCase() !== "false" : true;
+
+    // Parse images from body
+    const images: GalleryImage[] = [];
+    const imgRegex = /!\[(.*?)\]\((.*?)\)/g;
+    let imgMatch: RegExpExecArray | null;
+    while ((imgMatch = imgRegex.exec(body)) !== null) {
+      images.push({
+        alt: imgMatch[1] || "",
+        src: imgMatch[2] || "",
+      });
+    }
+
+    if (images.length > 0) {
+      segments.push({
+        type: "gallery",
+        gallery: {
+          type: "gallery",
+          cols,
+          ratio,
+          hasBorder,
+          images,
+        },
+      });
+    }
+
+    lastIndex = match.index + match[0].length;
+  }
+
+  if (lastIndex < markdown.length) {
+    const remaining = markdown.substring(lastIndex);
+    if (remaining.trim()) {
+      segments.push({ type: "markdown", content: remaining });
+    }
+  }
+
+  // If no galleries found, return single markdown segment
+  if (segments.length === 0) {
+    return [{ type: "markdown", content: markdown }];
+  }
+
+  return segments;
+}
+

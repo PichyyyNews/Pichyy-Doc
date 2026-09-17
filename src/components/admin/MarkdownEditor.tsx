@@ -4,8 +4,11 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { DocPageItem, DocSpaceItem, TocItem } from "@/lib/types";
-import { parseHeadingsFromMarkdown, parseImageSrc } from "@/lib/markdown";
+import { parseHeadingsFromMarkdown, parseImageSrc, splitMarkdownGalleries, GalleryImage } from "@/lib/markdown";
 import { ImageSettingsModal } from "./ImageSettingsModal";
+import { GallerySettingsModal } from "./GallerySettingsModal";
+import { GalleryGrid } from "@/components/docs/GalleryGrid";
+import { ImageLightbox } from "@/components/docs/ImageLightbox";
 import {
   Check,
   FloppyDisk,
@@ -16,6 +19,7 @@ import {
   Spinner,
   X,
   SlidersHorizontal,
+  SquaresFour,
 } from "@phosphor-icons/react";
 import Link from "next/link";
 
@@ -86,6 +90,11 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
   const [isUploadingImage, setIsUploadingImage] = useState(false);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [modalImage, setModalImage] = useState<{ url: string; alt?: string } | null>(null);
+  const [isGalleryModalOpen, setIsGalleryModalOpen] = useState(false);
+  const [previewLightbox, setPreviewLightbox] = useState<{
+    images: GalleryImage[];
+    index: number;
+  } | null>(null);
 
   const insertMarkdownAtCursor = (markdownTag: string) => {
     if (textareaRef.current) {
@@ -461,6 +470,17 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
             <SlidersHorizontal weight="thin" size={14} />
             <span>Image options</span>
           </button>
+
+          {/* Insert Gallery / Album Button */}
+          <button
+            type="button"
+            onClick={() => setIsGalleryModalOpen(true)}
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs border border-kumo-line bg-kumo-base hover:bg-kumo-tint text-kumo-default transition-none select-none"
+            title="Insert Image Gallery / Album Grid (2-4 columns, uniform ratio, lightbox)"
+          >
+            <SquaresFour weight="thin" size={14} />
+            <span>Insert gallery</span>
+          </button>
         </div>
 
         <div className="flex items-center gap-1 p-0.5 rounded border border-kumo-line bg-kumo-control text-xs">
@@ -537,92 +557,121 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
               <span>Live Rendered Preview</span>
             </div>
             <div className="flex-1 p-6 overflow-y-auto prose prose-sm dark:prose-invert max-w-none text-kumo-default text-xs leading-relaxed">
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                components={{
-                  h2: ({ children }) => (
-                    <h2 className="text-lg font-semibold text-kumo-strong mt-6 mb-2 border-b border-kumo-hairline pb-1 clear-both">
-                      {children}
-                    </h2>
-                  ),
-                  h3: ({ children }) => (
-                    <h3 className="text-sm font-semibold text-kumo-strong mt-4 mb-1.5 clear-both">
-                      {children}
-                    </h3>
-                  ),
-                  hr: () => <hr className="my-6 border-kumo-line clear-both" />,
-                  p: ({ children }) => <p className="mb-3 text-kumo-default">{children}</p>,
-                  ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1">{children}</ul>,
-                  ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 space-y-1">{children}</ol>,
-                  code: ({ inline, children }: any) =>
-                    inline ? (
-                      <code className="font-mono text-[0.9em] px-1 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong">
-                        {children}
-                      </code>
-                    ) : (
-                      <pre className="p-3 my-3 rounded bg-kumo-recessed border border-kumo-line font-mono text-[11px] overflow-x-auto clear-both">
-                        <code>{children}</code>
-                      </pre>
-                    ),
-                  blockquote: ({ children }) => (
-                    <blockquote className="border-l-2 border-kumo-brand bg-kumo-recessed px-3 py-2 my-3 text-xs">
-                      {children}
-                    </blockquote>
-                  ),
-                  img: ({ src, alt }: any) => {
-                    const opts = parseImageSrc(src);
+              {splitMarkdownGalleries(content).map((seg, sIdx) => {
+                if (seg.type === "gallery" && seg.gallery) {
+                  return (
+                    <GalleryGrid
+                      key={`preview-gallery-${sIdx}`}
+                      block={seg.gallery}
+                      onImageClick={(imgs, idx) =>
+                        setPreviewLightbox({ images: imgs, index: idx })
+                      }
+                    />
+                  );
+                }
 
-                    let layoutClass = "";
-                    if (opts.wrap && opts.align === "right") {
-                      layoutClass = "float-none md:float-right md:ml-4 mb-3 my-1 max-w-full clear-none";
-                    } else if (opts.wrap && opts.align === "left") {
-                      layoutClass = "float-none md:float-left md:mr-4 mb-3 my-1 max-w-full clear-none";
-                    } else {
-                      const alignClass =
-                        opts.align === "center"
-                          ? "mx-auto"
-                          : opts.align === "right"
-                          ? "ml-auto mr-0"
-                          : "mr-auto ml-0";
-                      layoutClass = `my-4 ${alignClass}`;
-                    }
+                return (
+                  <ReactMarkdown
+                    key={`preview-md-${sIdx}`}
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h2: ({ children }) => (
+                        <h2 className="text-lg font-semibold text-kumo-strong mt-6 mb-2 border-b border-kumo-hairline pb-1 clear-both">
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-sm font-semibold text-kumo-strong mt-4 mb-1.5 clear-both">
+                          {children}
+                        </h3>
+                      ),
+                      hr: () => <hr className="my-6 border-kumo-line clear-both" />,
+                      p: ({ children }) => <p className="mb-3 text-kumo-default">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 space-y-1">{children}</ol>,
+                      code: ({ inline, children }: any) =>
+                        inline ? (
+                          <code className="font-mono text-[0.9em] px-1 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong">
+                            {children}
+                          </code>
+                        ) : (
+                          <pre className="p-3 my-3 rounded bg-kumo-recessed border border-kumo-line font-mono text-[11px] overflow-x-auto clear-both">
+                            <code>{children}</code>
+                          </pre>
+                        ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-2 border-kumo-brand bg-kumo-recessed px-3 py-2 my-3 text-xs">
+                          {children}
+                        </blockquote>
+                      ),
+                      img: ({ src, alt }: any) => {
+                        const opts = parseImageSrc(src);
 
-                    return (
-                      <figure
-                        className={layoutClass}
-                        style={{ width: opts.width, maxWidth: "100%" }}
-                      >
-                        <div
-                          className={`overflow-hidden ${
-                            opts.hasBorder
-                              ? "rounded-lg border border-kumo-line bg-kumo-base"
-                              : ""
-                          }`}
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={opts.cleanSrc}
-                            alt={alt || ""}
-                            className="w-full h-auto object-contain max-h-80 block"
-                          />
-                          {opts.hasBorder && alt && (
-                            <div className="px-3 py-1.5 text-[11px] text-kumo-subtle border-t border-kumo-hairline bg-kumo-control">
-                              {alt}
+                        let layoutClass = "";
+                        if (opts.wrap && opts.align === "right") {
+                          layoutClass = "float-none md:float-right md:ml-4 mb-3 my-1 max-w-full clear-none";
+                        } else if (opts.wrap && opts.align === "left") {
+                          layoutClass = "float-none md:float-left md:mr-4 mb-3 my-1 max-w-full clear-none";
+                        } else {
+                          const alignClass =
+                            opts.align === "center"
+                              ? "mx-auto"
+                              : opts.align === "right"
+                              ? "ml-auto mr-0"
+                              : "mr-auto ml-0";
+                          layoutClass = `my-4 ${alignClass}`;
+                        }
+
+                        return (
+                          <figure
+                            className={layoutClass}
+                            style={{ width: opts.width, maxWidth: "100%" }}
+                          >
+                            <div
+                              className={`overflow-hidden ${
+                                opts.hasBorder
+                                  ? "rounded-lg border border-kumo-line bg-kumo-base"
+                                  : ""
+                              }`}
+                            >
+                              <button
+                                type="button"
+                                onClick={() =>
+                                  setPreviewLightbox({
+                                    images: [{ src: opts.cleanSrc, alt: alt || "" }],
+                                    index: 0,
+                                  })
+                                }
+                                className="w-full block text-left cursor-zoom-in"
+                                title="Click to preview image"
+                              >
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={opts.cleanSrc}
+                                  alt={alt || ""}
+                                  className="w-full h-auto object-contain max-h-80 block"
+                                />
+                              </button>
+                              {opts.hasBorder && alt && (
+                                <div className="px-3 py-1.5 text-[11px] text-kumo-subtle border-t border-kumo-hairline bg-kumo-control">
+                                  {alt}
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        {!opts.hasBorder && alt && (
-                          <figcaption className="text-center text-[11px] text-kumo-subtle mt-1">
-                            {alt}
-                          </figcaption>
-                        )}
-                      </figure>
-                    );
-                  },
-                }}
-              >
-                {content}
-              </ReactMarkdown>
+                            {!opts.hasBorder && alt && (
+                              <figcaption className="text-center text-[11px] text-kumo-subtle mt-1">
+                                {alt}
+                              </figcaption>
+                            )}
+                          </figure>
+                        );
+                      },
+                    }}
+                  >
+                    {seg.content || ""}
+                  </ReactMarkdown>
+                );
+              })}
             </div>
           </div>
         )}
@@ -639,6 +688,30 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
             insertMarkdownAtCursor(markdownTag);
             setModalImage(null);
           }}
+        />
+      )}
+
+      {/* Gallery / Album Settings Dialog */}
+      {isGalleryModalOpen && (
+        <GallerySettingsModal
+          open={isGalleryModalOpen}
+          onClose={() => setIsGalleryModalOpen(false)}
+          onConfirm={(galleryBlock) => {
+            insertMarkdownAtCursor(galleryBlock);
+            setIsGalleryModalOpen(false);
+          }}
+        />
+      )}
+
+      {/* Lightbox Preview in Admin */}
+      {previewLightbox && (
+        <ImageLightbox
+          images={previewLightbox.images}
+          currentIndex={previewLightbox.index}
+          onClose={() => setPreviewLightbox(null)}
+          onNavigate={(newIdx) =>
+            setPreviewLightbox((prev) => (prev ? { ...prev, index: newIdx } : null))
+          }
         />
       )}
     </div>
