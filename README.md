@@ -1,4 +1,4 @@
-﻿# Kumo UI Documentation & Blog Platform
+# Kumo UI Documentation & Blog Platform
 
 A modern, high-performance documentation and knowledge base platform built strictly with **Next.js 15 (App Router)**, **Cloudflare Kumo UI Design System**, **Tailwind CSS**, and **PostgreSQL with Prisma ORM** (with resilient local JSON storage fallback).
 
@@ -39,7 +39,14 @@ Designed with authentic Cloudflare dashboard aesthetics: 14px content typography
 - **Heading Clearance**: Subsequent headings (`h2`, `h3`, `hr`) automatically clear floats (`clear: both`).
 - **Click-to-Zoom Lightbox**: Full-resolution interactive modal preview on click.
 
-### 3. Command Palette Search (`Cmd+K` / `Ctrl+K`)
+### 3. Image Gallery & Album Grid (`:::gallery`)
+- **Multi-column Grid**: Organize photos into 2, 3, or 4 columns with responsive mobile folding.
+- **Aspect Ratio Control**: Choose Uniform tiles (`16:9`, `4:3`, `1:1`) for aligned rows or Natural file aspect ratios.
+- **Border Customization**: Framed Kumo cards or sleek borderless tiles.
+- **Interactive Album Lightbox**: Step through all album photos using `<` and `>` buttons or keyboard Left/Right arrows with position indicator (`X / Y`).
+- **Visual Modal Builder**: Multi-file batch upload and live grid preview from the admin editor toolbar.
+
+### 4. Command Palette Search (`Cmd+K` / `Ctrl+K`)
 - Instant fuzzy search across page titles, headings, content snippets, and admin-assigned keywords.
 - Keyboard accessible navigation (Up / Down arrow keys, Enter to jump, ESC to close).
 
