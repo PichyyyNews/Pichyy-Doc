@@ -93,13 +93,16 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center pt-20 px-4 bg-black/40 backdrop-blur-xs">
+    <div
+      className="fixed inset-0 z-50 flex items-start justify-center pt-4 sm:pt-20 px-3 sm:px-4 bg-black/50 backdrop-blur-xs"
+      onClick={onClose}
+    >
       <div
         className="w-full max-w-xl rounded-lg border border-kumo-line bg-kumo-elevated shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-100"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header Search Input */}
-        <div className="flex items-center gap-3 px-4 py-3 border-b border-kumo-hairline bg-kumo-base">
+        <div className="flex items-center gap-2.5 px-3.5 sm:px-4 py-3 border-b border-kumo-hairline bg-kumo-base">
           <MagnifyingGlass weight="thin" size={20} className="text-kumo-subtle flex-shrink-0" />
           <input
             ref={inputRef}
@@ -107,20 +110,29 @@ export function SearchModal({ open, onClose }: SearchModalProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Search documentation, headings, keywords..."
+            placeholder="Search documentation, headings..."
             className="w-full bg-transparent text-sm text-kumo-default placeholder-kumo-subtle focus:outline-none"
           />
           {query && (
             <button
               onClick={() => setQuery("")}
-              className="text-kumo-subtle hover:text-kumo-default p-1"
+              className="text-kumo-subtle hover:text-kumo-default p-1 shrink-0"
+              aria-label="Clear query"
             >
               <X weight="thin" size={16} />
             </button>
           )}
-          <span className="text-[11px] px-1.5 py-0.5 rounded border border-kumo-line text-kumo-subtle font-mono">
+          <span className="hidden sm:inline-block text-[11px] px-1.5 py-0.5 rounded border border-kumo-line text-kumo-subtle font-mono shrink-0">
             ESC
           </span>
+          <button
+            type="button"
+            onClick={onClose}
+            className="sm:hidden text-xs text-kumo-subtle hover:text-kumo-strong px-2 py-1 rounded hover:bg-kumo-tint shrink-0"
+            aria-label="Close search"
+          >
+            Cancel
+          </button>
         </div>
 
         {/* Results List */}

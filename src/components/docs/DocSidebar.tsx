@@ -15,6 +15,7 @@ interface DocSidebarProps {
   onToggleCollapse?: () => void;
   isMobileOpen?: boolean;
   onMobileClose?: () => void;
+  onOpenSearch?: () => void;
 }
 
 export function DocSidebar({
@@ -25,9 +26,10 @@ export function DocSidebar({
   onToggleCollapse,
   isMobileOpen = false,
   onMobileClose,
+  onOpenSearch,
 }: DocSidebarProps) {
   const pathname = usePathname();
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [internalSearchOpen, setInternalSearchOpen] = useState(false);
   const [collapsedCategories, setCollapsedCategories] = useState<Record<string, boolean>>({});
 
   // Prevent background body scroll when mobile drawer is open
@@ -60,6 +62,16 @@ export function DocSidebar({
     }));
   };
 
+  const handleSearchClick = () => {
+    if (onOpenSearch) {
+      if (isMobileOpen) onMobileClose?.();
+      onOpenSearch();
+    } else {
+      if (isMobileOpen) onMobileClose?.();
+      setInternalSearchOpen(true);
+    }
+  };
+
   // Group pages: uncategorized (root) pages first, then pages per category
   const rootPages = space.pages.filter((p) => !p.categoryId);
   const categoriesWithPages = space.categories.map((cat) => ({
@@ -67,151 +79,90 @@ export function DocSidebar({
     pages: space.pages.filter((p) => p.categoryId === cat.id),
   }));
 
-  const renderSidebarContent = (isMobile = false) => (
-    <>
-      {/* Top Header Row with Space Title (and Mobile Close Button) */}
-      <div className="flex items-center justify-between pb-3 mb-3 border-b border-kumo-hairline">
-        <span className="text-xs font-semibold uppercase tracking-wider text-kumo-subtle truncate">
-          {space.name}
-        </span>
-        {isMobile && (
-          <button
-            type="button"
-            onClick={onMobileClose}
-            className="p-1.5 text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint rounded transition-none"
-            aria-label="Close menu"
-          >
-            <X weight="thin" size={16} />
-          </button>
-        )}
-      </div>
+  const renderNavigationLinks = (isMobile = false) => (
+    <nav className="flex flex-col gap-0.5">
+      {rootPages.map((page) => {
+        const isActive = page.slug === currentPageSlug;
+        const href = `/docs/${space.slug}/${page.slug}`;
 
-      {/* Mobile-only Space Selector if multiple spaces exist */}
-      {isMobile && spaces && spaces.length > 1 && (
-        <div className="mb-4 pb-3 border-b border-kumo-hairline">
-          <div className="text-[10px] uppercase font-mono tracking-wider text-kumo-subtle mb-2">
-            DOC SPACES
-          </div>
-          <div className="flex flex-wrap gap-1">
-            {spaces.map((sp) => {
-              const isActive = sp.slug === space.slug;
-              const targetPage = sp.pages[0]?.slug || "overview";
-              return (
-                <Link
-                  key={sp.id}
-                  href={`/docs/${sp.slug}/${targetPage}`}
-                  onClick={onMobileClose}
-                  className={`px-2.5 py-1 text-xs rounded transition-none ${
-                    isActive
-                      ? "bg-kumo-tint font-semibold text-kumo-strong"
-                      : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
-                  }`}
-                >
-                  {sp.name}
-                </Link>
-              );
-            })}
-          </div>
-        </div>
+        return (
+          <Link
+            key={page.id}
+            href={href}
+            onClick={() => {
+              if (isMobile) onMobileClose?.();
+            }}
+            className={`px-3 py-1.5 rounded-md text-sm transition-none flex items-center justify-between ${
+              isActive
+                ? "bg-kumo-tint text-kumo-strong font-medium"
+                : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
+            }`}
+          >
+            <span>{page.title}</span>
+          </Link>
+        );
+      })}
+
+      {/* Hairline Divider if there are categories */}
+      {categoriesWithPages.length > 0 && rootPages.length > 0 && (
+        <div className="my-3 border-t border-kumo-hairline" />
       )}
 
-      {/* Search Bar Input (Trigger for Command Palette) */}
-      <div className="mb-4">
-        <button
-          type="button"
-          onClick={() => setSearchOpen(true)}
-          className="w-full flex items-center gap-2 px-3 py-2 rounded-lg border border-kumo-line bg-kumo-control text-xs text-kumo-subtle hover:bg-kumo-tint focus:outline-none transition-none text-left"
-        >
-          <MagnifyingGlass weight="thin" size={16} />
-          <span>Search...</span>
-        </button>
-      </div>
+      {/* Categorized Sections */}
+      {categoriesWithPages.map((cat) => {
+        const isCategoryCollapsed = !!collapsedCategories[cat.id];
+        const hasPages = cat.pages && cat.pages.length > 0;
 
-      {/* Root / Direct Links */}
-      <nav className="flex flex-col gap-0.5">
-        {rootPages.map((page) => {
-          const isActive = page.slug === currentPageSlug;
-          const href = `/docs/${space.slug}/${page.slug}`;
-
-          return (
-            <Link
-              key={page.id}
-              href={href}
-              onClick={() => {
-                if (isMobile) onMobileClose?.();
-              }}
-              className={`px-3 py-1.5 rounded-md text-sm transition-none ${
-                isActive
-                  ? "bg-kumo-tint text-kumo-strong font-medium"
-                  : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
-              }`}
+        return (
+          <div key={cat.id} className="mb-3">
+            {/* Category Header with Chevron Toggle */}
+            <button
+              type="button"
+              onClick={() => toggleCategory(cat.id)}
+              className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold text-kumo-strong hover:text-kumo-default transition-none rounded hover:bg-kumo-tint"
             >
-              {page.title}
-            </Link>
-          );
-        })}
-
-        {/* Hairline Divider if there are categories */}
-        {categoriesWithPages.length > 0 && rootPages.length > 0 && (
-          <div className="my-3 border-t border-kumo-hairline" />
-        )}
-
-        {/* Categorized Sections */}
-        {categoriesWithPages.map((cat) => {
-          const isCategoryCollapsed = !!collapsedCategories[cat.id];
-          const hasPages = cat.pages && cat.pages.length > 0;
-
-          return (
-            <div key={cat.id} className="mb-3">
-              {/* Category Header with Chevron Toggle */}
-              <button
-                type="button"
-                onClick={() => toggleCategory(cat.id)}
-                className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold text-kumo-strong hover:text-kumo-default transition-none rounded hover:bg-kumo-tint"
-              >
-                <span className="truncate">{cat.name}</span>
-                {hasPages && (
-                  <span className="text-kumo-subtle">
-                    {isCategoryCollapsed ? (
-                      <CaretRight weight="thin" size={12} />
-                    ) : (
-                      <CaretDown weight="thin" size={12} />
-                    )}
-                  </span>
-                )}
-              </button>
-
-              {/* Sub-pages */}
-              {!isCategoryCollapsed && hasPages && (
-                <div className="mt-1 ml-2 flex flex-col gap-0.5 border-l border-kumo-hairline pl-2">
-                  {cat.pages!.map((page) => {
-                    const isActive = page.slug === currentPageSlug;
-                    const href = `/docs/${space.slug}/${page.slug}`;
-
-                    return (
-                      <Link
-                        key={page.id}
-                        href={href}
-                        onClick={() => {
-                          if (isMobile) onMobileClose?.();
-                        }}
-                        className={`px-2.5 py-1 rounded text-sm transition-none truncate ${
-                          isActive
-                            ? "bg-kumo-tint text-kumo-strong font-medium"
-                            : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
-                        }`}
-                      >
-                        {page.title}
-                      </Link>
-                    );
-                  })}
-                </div>
+              <span className="truncate">{cat.name}</span>
+              {hasPages && (
+                <span className="text-kumo-subtle">
+                  {isCategoryCollapsed ? (
+                    <CaretRight weight="thin" size={12} />
+                  ) : (
+                    <CaretDown weight="thin" size={12} />
+                  )}
+                </span>
               )}
-            </div>
-          );
-        })}
-      </nav>
-    </>
+            </button>
+
+            {/* Sub-pages */}
+            {!isCategoryCollapsed && hasPages && (
+              <div className="mt-1 ml-2 flex flex-col gap-0.5 border-l border-kumo-hairline pl-2">
+                {cat.pages!.map((page) => {
+                  const isActive = page.slug === currentPageSlug;
+                  const href = `/docs/${space.slug}/${page.slug}`;
+
+                  return (
+                    <Link
+                      key={page.id}
+                      href={href}
+                      onClick={() => {
+                        if (isMobile) onMobileClose?.();
+                      }}
+                      className={`px-2.5 py-1.5 rounded text-sm transition-none truncate ${
+                        isActive
+                          ? "bg-kumo-tint text-kumo-strong font-medium"
+                          : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
+                      }`}
+                    >
+                      {page.title}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </nav>
   );
 
   return (
@@ -224,28 +175,157 @@ export function DocSidebar({
             : "w-64 p-4 opacity-100"
         }`}
       >
-        {!isCollapsed && renderSidebarContent(false)}
+        {!isCollapsed && (
+          <>
+            {/* Space Title Header */}
+            <div className="pb-3 mb-3 border-b border-kumo-hairline">
+              <span className="text-xs font-semibold uppercase tracking-wider text-kumo-subtle truncate block">
+                {space.name}
+              </span>
+            </div>
+
+            {/* Search Bar Input (Trigger for Command Palette) */}
+            <div className="mb-4">
+              <button
+                type="button"
+                onClick={handleSearchClick}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-lg border border-kumo-line bg-kumo-control text-xs text-kumo-subtle hover:bg-kumo-tint focus:outline-none transition-none text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <MagnifyingGlass weight="thin" size={15} />
+                  <span>Search...</span>
+                </div>
+                <kbd className="text-[10px] font-mono px-1 py-0.2 rounded border border-kumo-hairline text-kumo-subtle">
+                  ⌘K
+                </kbd>
+              </button>
+            </div>
+
+            {renderNavigationLinks(false)}
+          </>
+        )}
       </aside>
 
-      {/* Mobile/Tablet Drawer (< lg) */}
-      {isMobileOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          {/* Backdrop overlay */}
-          <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
-            onClick={onMobileClose}
-            aria-hidden="true"
-          />
+      {/* Mobile/Tablet Drawer (< lg) with Silky Slide Animation */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
+          isMobileOpen ? "visible" : "invisible pointer-events-none delay-200"
+        }`}
+      >
+        {/* Backdrop overlay */}
+        <div
+          className={`fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity duration-300 ease-out ${
+            isMobileOpen ? "opacity-100" : "opacity-0"
+          }`}
+          onClick={onMobileClose}
+          aria-hidden="true"
+        />
 
-          {/* Slide-out Drawer */}
-          <div className="fixed inset-y-0 left-0 w-72 max-w-[85vw] bg-kumo-canvas border-r border-kumo-line p-4 overflow-y-auto shadow-2xl flex flex-col z-10 transition-transform duration-200 ease-in-out">
-            {renderSidebarContent(true)}
+        {/* Slide-out Drawer Panel */}
+        <div
+          className={`fixed inset-y-0 left-0 w-80 max-w-[85vw] bg-kumo-canvas border-r border-kumo-line p-4 sm:p-5 overflow-y-auto shadow-2xl flex flex-col z-10 transition-transform duration-300 ease-out ${
+            isMobileOpen ? "translate-x-0" : "-translate-x-full"
+          }`}
+        >
+          {/* Mobile Drawer Header */}
+          <div className="flex items-center justify-between pb-3.5 mb-3 border-b border-kumo-line">
+            <div className="flex items-center gap-2">
+              <Link
+                href="/"
+                onClick={onMobileClose}
+                className="font-semibold text-base text-kumo-strong hover:opacity-85"
+              >
+                Kumo Docs
+              </Link>
+            </div>
+            <button
+              type="button"
+              onClick={onMobileClose}
+              className="p-1.5 text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-tint rounded transition-none"
+              aria-label="Close menu"
+            >
+              <X weight="thin" size={18} />
+            </button>
+          </div>
+
+          {/* Mobile-only Space Selector Segment */}
+          {spaces && spaces.length > 1 && (
+            <div className="mb-4 pb-3 border-b border-kumo-line">
+              <div className="text-[10px] uppercase font-mono tracking-wider text-kumo-subtle mb-2">
+                SELECT SPACE
+              </div>
+              <div className="flex flex-col gap-1">
+                {spaces.map((sp) => {
+                  const isActive = sp.slug === space.slug;
+                  const targetPage = sp.pages[0]?.slug || "overview";
+                  return (
+                    <Link
+                      key={sp.id}
+                      href={`/docs/${sp.slug}/${targetPage}`}
+                      onClick={onMobileClose}
+                      className={`flex items-center justify-between px-3 py-2 text-xs rounded-md transition-none ${
+                        isActive
+                          ? "bg-kumo-tint font-semibold text-kumo-strong border-l-2 border-kumo-brand"
+                          : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
+                      }`}
+                    >
+                      <span>{sp.name}</span>
+                      {isActive && (
+                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-kumo-brand/10 text-kumo-brand font-medium">
+                          Active
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Prominent Mobile Search Bar */}
+          <div className="mb-4">
+            <button
+              type="button"
+              onClick={handleSearchClick}
+              className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-lg border border-kumo-line bg-kumo-control text-xs text-kumo-subtle hover:bg-kumo-tint transition-none text-left"
+            >
+              <div className="flex items-center gap-2">
+                <MagnifyingGlass weight="thin" size={16} className="text-kumo-subtle" />
+                <span>Search docs...</span>
+              </div>
+              <kbd className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-kumo-recessed border border-kumo-hairline">
+                ⌘K
+              </kbd>
+            </button>
+          </div>
+
+          {/* Current Space Nav Links */}
+          <div className="text-[10px] uppercase font-mono tracking-wider text-kumo-subtle mb-2">
+            NAVIGATION
+          </div>
+          <div className="flex-1">
+            {renderNavigationLinks(true)}
+          </div>
+
+          {/* Mobile Drawer Footer */}
+          <div className="mt-8 pt-4 border-t border-kumo-line flex items-center justify-between text-xs text-kumo-subtle">
+            <Link
+              href="/admin"
+              onClick={onMobileClose}
+              className="text-xs text-kumo-subtle hover:text-kumo-brand transition-none"
+            >
+              Admin Console
+            </Link>
+            <span className="text-[11px] font-mono text-kumo-subtle">Kumo UI</span>
           </div>
         </div>
-      )}
+      </div>
 
-      {/* Global Search Modal */}
-      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
+      {/* Internal Search Modal (fallback if not managed globally) */}
+      <SearchModal
+        open={internalSearchOpen}
+        onClose={() => setInternalSearchOpen(false)}
+      />
     </>
   );
 }

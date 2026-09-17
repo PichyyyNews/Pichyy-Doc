@@ -7,6 +7,7 @@ import { DocSidebar } from "./DocSidebar";
 import { DocContent } from "./DocContent";
 import { OnThisPage } from "./OnThisPage";
 import { MobileTocBar } from "./MobileTocBar";
+import { SearchModal } from "./SearchModal";
 
 interface DocLayoutClientProps {
   spaces: DocSpaceItem[];
@@ -24,6 +25,7 @@ export function DocLayoutClient({
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [tocCollapsed, setTocCollapsed] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
   // Restore saved collapse preferences from localStorage upon client mount
@@ -41,6 +43,18 @@ export function DocLayoutClient({
     } catch {
       // localStorage may be disabled in private browsing or iframe
     }
+  }, []);
+
+  // Global Cmd+K / Ctrl+K keyboard shortcut
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   const toggleSidebar = () => {
@@ -71,12 +85,13 @@ export function DocLayoutClient({
   const hasToc = visibleTocItems.length > 0;
 
   return (
-    <div className="min-h-screen bg-kumo-canvas text-kumo-default flex flex-col">
+    <div className="min-h-screen bg-kumo-canvas text-kumo-default flex flex-col antialiased">
       {/* Top Navbar */}
       <DocNavbar
         spaces={spaces}
         currentSpaceSlug={space.slug}
         onToggleMobileSidebar={() => setMobileSidebarOpen(true)}
+        onOpenSearch={() => setSearchOpen(true)}
         isSidebarCollapsed={sidebarCollapsed}
         onToggleSidebar={toggleSidebar}
         isTocCollapsed={tocCollapsed}
@@ -87,9 +102,9 @@ export function DocLayoutClient({
       {/* Mobile / Tablet Sticky Table of Contents Sub-bar (< xl) */}
       <MobileTocBar tocItems={tocAnchors} />
 
-      {/* 3-Column Layout Container */}
-      <div className="w-full max-w-[96rem] mx-auto flex justify-between min-w-0 flex-1">
-        {/* Left Sidebar (Desktop collapsible aside + Mobile drawer) */}
+      {/* 3-Column Layout Container - Centered on mobile/tablet */}
+      <div className="w-full max-w-[96rem] mx-auto flex justify-center lg:justify-between min-w-0 flex-1">
+        {/* Left Sidebar (Desktop collapsible aside + Mobile slide-out drawer) */}
         <DocSidebar
           spaces={spaces}
           space={space}
@@ -98,6 +113,7 @@ export function DocLayoutClient({
           onToggleCollapse={toggleSidebar}
           isMobileOpen={mobileSidebarOpen}
           onMobileClose={() => setMobileSidebarOpen(false)}
+          onOpenSearch={() => setSearchOpen(true)}
         />
 
         {/* Center Main Content Area */}
@@ -116,6 +132,9 @@ export function DocLayoutClient({
           onToggleCollapse={toggleToc}
         />
       </div>
+
+      {/* Global Command Palette / Search Modal */}
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
   );
 }

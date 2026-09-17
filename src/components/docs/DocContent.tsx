@@ -109,7 +109,7 @@ export function DocContent({
       return (
         <h2
           id={id}
-          className="text-xl font-semibold text-kumo-strong mt-8 mb-3 scroll-mt-20 group flex items-center gap-2 clear-both"
+          className="text-lg sm:text-xl font-semibold text-kumo-strong mt-8 mb-3 scroll-mt-28 group flex items-center gap-2 clear-both"
         >
           <span>{children}</span>
           {id && (
@@ -130,7 +130,7 @@ export function DocContent({
       return (
         <h3
           id={id}
-          className="text-base font-semibold text-kumo-strong mt-6 mb-2 scroll-mt-20 group flex items-center gap-2 clear-both"
+          className="text-sm sm:text-base font-semibold text-kumo-strong mt-6 mb-2 scroll-mt-28 group flex items-center gap-2 clear-both"
         >
           <span>{children}</span>
           {id && (
@@ -268,16 +268,41 @@ export function DocContent({
     },
   };
 
+  const currentCategory = space.categories.find((c) => c.id === page.categoryId);
+
   return (
     <article
-      className={`flex-1 min-w-0 ${maxWidthClass} transition-all duration-200 px-4 sm:px-8 lg:px-10 py-6 sm:py-8`}
+      className={`flex-1 min-w-0 ${maxWidthClass} transition-all duration-200 px-4 sm:px-8 lg:px-10 py-5 sm:py-8`}
     >
-      {/* Page Header (Title + Right-aligned Copy page button) */}
-      <div className="flex items-start justify-between gap-4 mb-2">
+      {/* Mobile-Friendly Breadcrumb Trail */}
+      <nav
+        className="flex items-center gap-1.5 text-xs text-kumo-subtle mb-3 select-none flex-wrap"
+        aria-label="Breadcrumb navigation"
+      >
+        <Link
+          href={`/docs/${space.slug}/${space.pages[0]?.slug || "overview"}`}
+          className="hover:text-kumo-strong transition-none"
+        >
+          {space.name}
+        </Link>
+        {currentCategory && (
+          <>
+            <span className="text-kumo-hairline">/</span>
+            <span className="text-kumo-subtle">{currentCategory.name}</span>
+          </>
+        )}
+        <span className="text-kumo-hairline">/</span>
+        <span className="text-kumo-strong font-medium truncate max-w-[180px] sm:max-w-none">
+          {page.title}
+        </span>
+      </nav>
+
+      {/* Page Header (Title + Responsive Copy button) */}
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-2">
         <h1 className="text-2xl sm:text-3xl font-semibold tracking-normal text-kumo-strong break-words">
           {page.title}
         </h1>
-        <div className="shrink-0 pt-1">
+        <div className="shrink-0 self-start sm:self-auto sm:pt-1">
           <CopyPageDropdown title={page.title} markdownContent={page.content} />
         </div>
       </div>
@@ -319,16 +344,16 @@ export function DocContent({
       </div>
 
       {/* Bottom Pagination Links */}
-      <div className="mt-14 pt-6 border-t border-kumo-hairline flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+      <div className="mt-14 pt-6 border-t border-kumo-hairline grid grid-cols-1 sm:grid-cols-2 gap-3">
         {prevPage ? (
           <Link
             href={`/docs/${space.slug}/${prevPage.slug}`}
-            className="flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand transition-none"
+            className="flex items-center gap-3 p-3.5 rounded-lg border border-kumo-line hover:bg-kumo-tint hover:border-kumo-brand transition-none group"
           >
-            <ArrowLeft weight="thin" size={14} />
-            <div>
-              <div className="text-[10px] uppercase text-kumo-subtle">Previous</div>
-              <div className="font-medium text-sm text-kumo-default">{prevPage.title}</div>
+            <ArrowLeft weight="thin" size={16} className="text-kumo-subtle group-hover:text-kumo-brand shrink-0" />
+            <div className="min-w-0">
+              <div className="text-[10px] uppercase font-mono text-kumo-subtle">Previous</div>
+              <div className="font-medium text-xs text-kumo-strong truncate">{prevPage.title}</div>
             </div>
           </Link>
         ) : (
@@ -338,13 +363,13 @@ export function DocContent({
         {nextPage && (
           <Link
             href={`/docs/${space.slug}/${nextPage.slug}`}
-            className="flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand text-right transition-none"
+            className="flex items-center justify-between p-3.5 rounded-lg border border-kumo-line hover:bg-kumo-tint hover:border-kumo-brand transition-none group text-right"
           >
-            <div>
-              <div className="text-[10px] uppercase text-kumo-subtle">Next</div>
-              <div className="font-medium text-sm text-kumo-default">{nextPage.title}</div>
+            <div className="min-w-0 flex-1 text-left sm:text-right">
+              <div className="text-[10px] uppercase font-mono text-kumo-subtle">Next</div>
+              <div className="font-medium text-xs text-kumo-strong truncate">{nextPage.title}</div>
             </div>
-            <ArrowRight weight="thin" size={14} />
+            <ArrowRight weight="thin" size={16} className="text-kumo-subtle group-hover:text-kumo-brand shrink-0 ml-3" />
           </Link>
         )}
       </div>
