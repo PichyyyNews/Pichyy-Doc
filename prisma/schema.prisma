@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DocSpace {
+  id          String     @id @default(cuid())
+  name        String
+  slug        String     @unique
+  description String?
+  order       Int        @default(0)
+  isDefault   Boolean    @default(false)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  categories  Category[]
+  pages       DocPage[]
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  docSpaceId  String
+  docSpace    DocSpace  @relation(fields: [docSpaceId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  order       Int       @default(0)
+  isCollapsed Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  pages       DocPage[]
+
+  @@unique([docSpaceId, slug])
+}
+
+model DocPage {
+  id             String    @id @default(cuid())
+  docSpaceId     String
+  docSpace       DocSpace  @relation(fields: [docSpaceId], references: [id], onDelete: Cascade)
+  categoryId     String?
+  category       Category? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  title          String
+  slug           String
+  description    String?
+  content        String
+  tocAnchors     String    @default("[]")
+  searchKeywords String    @default("[]")
+  order          Int       @default(0)
+  isPublished    Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@unique([docSpaceId, slug])
+}

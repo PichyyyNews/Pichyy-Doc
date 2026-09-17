@@ -1,0 +1,168 @@
+[
+  {
+    "id": "space-dev-docs",
+    "name": "Developer Docs",
+    "slug": "dev-docs",
+    "description": "Internal engineering documentation and architecture guidelines.",
+    "order": 1,
+    "isDefault": true,
+    "categories": [
+      {
+        "id": "cat-getting-started",
+        "docSpaceId": "space-dev-docs",
+        "name": "Getting Started",
+        "slug": "getting-started",
+        "order": 1,
+        "isCollapsed": false
+      },
+      {
+        "id": "cat-core-arch",
+        "docSpaceId": "space-dev-docs",
+        "name": "Core Architecture",
+        "slug": "core-architecture",
+        "order": 2,
+        "isCollapsed": false
+      },
+      {
+        "id": "cat-components",
+        "docSpaceId": "space-dev-docs",
+        "name": "Components",
+        "slug": "components",
+        "order": 3,
+        "isCollapsed": false
+      }
+    ],
+    "pages": [
+      {
+        "id": "page-overview",
+        "docSpaceId": "space-dev-docs",
+        "categoryId": "cat-getting-started",
+        "title": "Overview",
+        "slug": "overview",
+        "description": "Welcome to the central developer documentation portal.",
+        "content": "\n\nWelcome to the central engineering documentation. This system provides developer specifications, internal guidelines, and design system components.\n\n## What is this platform?\n\n![sydney-b-Qx69-7box6U-unsplash](/uploads/sydney-b-qx69-7box6u-1789623000502-59lux.jpg#border=false&width=45%&align=right&wrap=true)\nThis platform serves as our internal single source of truth for technical architecture, development standards, and reusable UI components across all engineering initiatives. By maintaining a centralized hub, teams can align on unified best practices, rapid prototyping, and consistent Kumo UI styling across all administrative workflows.\n\n## Core principles\n- **High performance**: Fast response times and edge caching.\n- **Utilitarian UI**: Clean hairline borders, standard 14px typography, and zero clutter.\n- **Strict standards**: Consistency across all internal tooling.\n\n### Key technologies\n- **Next.js 15 (App Router)**: Full-stack React framework.\n- **Cloudflare Kumo UI**: Authentic design system tokens and components.\n- **PostgreSQL & Prisma**: Robust data persistence.\n",
+        "tocAnchors": "[{\"id\":\"what-is-this-platform\",\"text\":\"What is this platform?\",\"level\":2,\"enabled\":true},{\"id\":\"core-principles\",\"text\":\"Core principles\",\"level\":2,\"enabled\":true},{\"id\":\"key-technologies\",\"text\":\"Key technologies\",\"level\":3,\"enabled\":true}]",
+        "searchKeywords": "[\"overview\",\"introduction\",\"welcome\",\"getting started\"]",
+        "order": 1,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.173Z",
+        "updatedAt": "2026-09-17T05:41:42.303Z"
+      },
+      {
+        "id": "page-contributing",
+        "docSpaceId": "space-dev-docs",
+        "categoryId": "cat-getting-started",
+        "title": "Contributing",
+        "slug": "contributing",
+        "description": "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.",
+        "content": "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.\n\n## Before You Start\nFor non-trivial changes, start with alignment before coding:\n- Comment on an existing issue or open one first.\n- Confirm scope, API direction, and migration impact.\n- For small fixes/docs tweaks, you can go straight to a PR.\n\n## 1. Get Set Up Once\nFrom repo root:\n```bash\npnpm install\npnpm dev\n```\n\n### Repository Access and Branching\nEnsure you have cloned the repository and created a new branch following the standard convention:\n```bash\ngit checkout -b feat/my-new-feature\n```\n\n## 2. Pick the Right Contribution Type\nBefore writing code, decide whether this is a component, primitive, fix, or documentation change:\n- **Component**: Reusable design system block.\n- **Fix**: Bug repair without changing API signatures.\n- **Doc update**: Adding guides and code snippets.\n\n## 3. Start the Dev Loop\nRun the local development server:\n```bash\nnpm run dev\n```\nChanges are immediately reflected via hot module reloading.\n\n## 4. Implement the Change\nFollow the official Cloudflare design rules:\n1. Always use 14px for content text.\n2. Always sentence case headings.\n3. Use `font-semibold` for headings and `font-medium` for bold text—never use `font-bold`.\n4. Never transition colors for hover states.\n\n## 5. Run Validation Before PR\nRun the test suite and type check:\n```bash\nnpm run build\n```\n\n## 6. Handle Changesets Correctly\nGenerate a changeset for your patch or minor bump.\n\n## 7. Open and Maintain the PR\nSubmit your pull request and link corresponding issues.\n\n## PR Previews and Tests\nAutomated checks will run on every push to your branch.\n\n## Release Process (How Your Change Ships)\nMerged changes are automatically versioned and deployed to internal registry.\n\n## Practical Guidelines\nKeep PRs focused on a single responsibility to speed up code reviews.\n\n## Related Docs\nSee Architecture overview and Component specifications.\n",
+        "tocAnchors": "[{\"id\":\"before-you-start\",\"text\":\"Before You Start\",\"level\":2,\"enabled\":true},{\"id\":\"1-get-set-up-once\",\"text\":\"1. Get Set Up Once\",\"level\":2,\"enabled\":true},{\"id\":\"repository-access-and-branching\",\"text\":\"Repository Access and Branching\",\"level\":3,\"enabled\":true},{\"id\":\"2-pick-the-right-contribution-type\",\"text\":\"2. Pick the Right Contribution Type\",\"level\":2,\"enabled\":true},{\"id\":\"3-start-the-dev-loop\",\"text\":\"3. Start the Dev Loop\",\"level\":2,\"enabled\":true},{\"id\":\"4-implement-the-change\",\"text\":\"4. Implement the Change\",\"level\":2,\"enabled\":true},{\"id\":\"5-run-validation-before-pr\",\"text\":\"5. Run Validation Before PR\",\"level\":2,\"enabled\":true},{\"id\":\"6-handle-changesets-correctly\",\"text\":\"6. Handle Changesets Correctly\",\"level\":2,\"enabled\":true},{\"id\":\"7-open-and-maintain-the-pr\",\"text\":\"7. Open and Maintain the PR\",\"level\":2,\"enabled\":true},{\"id\":\"pr-previews-and-tests\",\"text\":\"PR Previews and Tests\",\"level\":2,\"enabled\":true},{\"id\":\"release-process-how-your-change-ships\",\"text\":\"Release Process (How Your Change Ships)\",\"level\":2,\"enabled\":true},{\"id\":\"practical-guidelines\",\"text\":\"Practical Guidelines\",\"level\":2,\"enabled\":true},{\"id\":\"related-docs\",\"text\":\"Related Docs\",\"level\":2,\"enabled\":true}]",
+        "searchKeywords": "[\"contributing\",\"git\",\"setup\",\"pull request\",\"pr\",\"workflow\"]",
+        "order": 2,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.175Z",
+        "updatedAt": "2026-09-17T04:34:06.175Z"
+      },
+      {
+        "id": "page-system-design",
+        "docSpaceId": "space-dev-docs",
+        "categoryId": "cat-core-arch",
+        "title": "System Design",
+        "slug": "system-design",
+        "description": "High-level overview of our architecture, network edge, and data pipelines.",
+        "content": "This document explains the high-level architecture of our services.\n\n## Edge layer\nIncoming traffic is terminated at the edge with DDoS mitigation, SSL termination, and routing rules.\n\n## Service topology\nMicroservices communicate over gRPC with protobuf definitions.\n\n### Database architecture\nWe employ PostgreSQL for relational state and distributed caching for read-heavy workloads.\n",
+        "tocAnchors": "[{\"id\":\"edge-layer\",\"text\":\"Edge layer\",\"level\":2,\"enabled\":true},{\"id\":\"service-topology\",\"text\":\"Service topology\",\"level\":2,\"enabled\":true},{\"id\":\"database-architecture\",\"text\":\"Database architecture\",\"level\":3,\"enabled\":true}]",
+        "searchKeywords": "[\"architecture\",\"edge\",\"grpc\",\"postgres\",\"topology\"]",
+        "order": 1,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.175Z",
+        "updatedAt": "2026-09-17T04:34:06.175Z"
+      },
+      {
+        "id": "page-button",
+        "docSpaceId": "space-dev-docs",
+        "categoryId": "cat-components",
+        "title": "Button",
+        "slug": "button",
+        "description": "Interactive button supporting primary, secondary, destructive, and subtle variants.",
+        "content": "Buttons allow users to take actions and make choices with a single tap.\n\n## Variants\n- **Primary**: Use for the primary action on a page or container.\n- **Secondary**: Use for secondary or alternative actions.\n- **Destructive**: Use for dangerous actions like deleting a resource.\n- **Subtle / Ghost**: Use for minimal clutter in toolbars.\n\n## Usage example\n```tsx\nimport { Button } from \"@cloudflare/kumo\";\nimport { Plus } from \"@phosphor-icons/react\";\n\nexport function Example() {\n  return (\n    <Button variant=\"primary\" icon={<Plus weight=\"thin\" size={16} />}>\n      Add item\n    </Button>\n  );\n}\n```\n",
+        "tocAnchors": "[{\"id\":\"variants\",\"text\":\"Variants\",\"level\":2,\"enabled\":true},{\"id\":\"usage-example\",\"text\":\"Usage example\",\"level\":2,\"enabled\":true}]",
+        "searchKeywords": "[\"button\",\"actions\",\"component\",\"ui\"]",
+        "order": 1,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.175Z",
+        "updatedAt": "2026-09-17T04:34:06.175Z"
+      }
+    ]
+  },
+  {
+    "id": "space-company-wiki",
+    "name": "Company Wiki",
+    "slug": "company-wiki",
+    "description": "Internal company policies, handbook, and team directories.",
+    "order": 2,
+    "isDefault": false,
+    "categories": [
+      {
+        "id": "cat-handbook",
+        "docSpaceId": "space-company-wiki",
+        "name": "General Handbook",
+        "slug": "general-handbook",
+        "order": 1,
+        "isCollapsed": false
+      }
+    ],
+    "pages": [
+      {
+        "id": "page-welcome-wiki",
+        "docSpaceId": "space-company-wiki",
+        "categoryId": "cat-handbook",
+        "title": "Company Handbook",
+        "slug": "handbook",
+        "description": "General guidelines, communication etiquette, and team resources.",
+        "content": "Welcome to our Company Wiki. Here you will find policies, team directories, and standard operating procedures.\n\n## Communication guidelines\nWe prioritize asynchronous communication:\n- Write clear issue descriptions.\n- Document decisions publicly.\n\n## Tools & Access\nCheck the IT portal for VPN credentials and password managers.\n",
+        "tocAnchors": "[{\"id\":\"communication-guidelines\",\"text\":\"Communication guidelines\",\"level\":2,\"enabled\":true},{\"id\":\"tools-access\",\"text\":\"Tools & Access\",\"level\":2,\"enabled\":true}]",
+        "searchKeywords": "[\"handbook\",\"company\",\"wiki\",\"communication\",\"policies\"]",
+        "order": 1,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.175Z",
+        "updatedAt": "2026-09-17T04:34:06.175Z"
+      }
+    ]
+  },
+  {
+    "id": "space-api-ref",
+    "name": "API Reference",
+    "slug": "api-reference",
+    "description": "REST API endpoints, authentication tokens, and request schemas.",
+    "order": 3,
+    "isDefault": false,
+    "categories": [
+      {
+        "id": "cat-endpoints",
+        "docSpaceId": "space-api-ref",
+        "name": "Core Endpoints",
+        "slug": "core-endpoints",
+        "order": 1,
+        "isCollapsed": false
+      }
+    ],
+    "pages": [
+      {
+        "id": "page-auth-api",
+        "docSpaceId": "space-api-ref",
+        "categoryId": "cat-endpoints",
+        "title": "Authentication",
+        "slug": "authentication",
+        "description": "API authentication via Bearer tokens.",
+        "content": "All requests to the REST API must be authenticated using an API token in the Authorization header.\n\n## Request format\n```bash\ncurl -H \"Authorization: Bearer <YOUR_API_TOKEN>\" \\\n  https://api.internal.company.com/v1/user\n```\n\n## Error responses\n- `401 Unauthorized`: Missing or invalid token.\n- `403 Forbidden`: Token lacks required permissions.\n",
+        "tocAnchors": "[{\"id\":\"request-format\",\"text\":\"Request format\",\"level\":2,\"enabled\":true},{\"id\":\"error-responses\",\"text\":\"Error responses\",\"level\":2,\"enabled\":true}]",
+        "searchKeywords": "[\"api\",\"rest\",\"auth\",\"token\",\"endpoints\"]",
+        "order": 1,
+        "isPublished": true,
+        "createdAt": "2026-09-17T04:34:06.175Z",
+        "updatedAt": "2026-09-17T04:34:06.175Z"
+      }
+    ]
+  }
+]

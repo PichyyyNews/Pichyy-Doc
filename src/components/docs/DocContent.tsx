@@ -1,0 +1,350 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { CopyPageDropdown } from "./CopyPageDropdown";
+import { DocPageItem, DocSpaceItem, TocItem } from "@/lib/types";
+import { parseImageSrc } from "@/lib/markdown";
+import { ArrowLeft, ArrowRight, Check, Copy, X } from "@phosphor-icons/react";
+
+interface DocContentProps {
+  space: DocSpaceItem;
+  page: DocPageItem;
+  tocAnchors: TocItem[];
+}
+
+// Code Block with Copy Button
+function CodeBlock({ children, className }: { children: React.ReactNode; className?: string }) {
+  const [copied, setCopied] = useState(false);
+  const codeText = String(children).replace(/\n$/, "");
+  const match = /language-(\w+)/.exec(className || "");
+  const language = match ? match[1] : "";
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(codeText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch (err) {
+      console.error("Failed to copy code:", err);
+    }
+  };
+
+  return (
+    <div className="relative group my-4 rounded-lg border border-kumo-line bg-kumo-recessed overflow-hidden">
+      <div className="flex items-center justify-between px-3 py-1.5 border-b border-kumo-hairline bg-kumo-base text-[11px] text-kumo-subtle font-mono">
+        <span>{language || "text"}</span>
+        <button
+          onClick={handleCopy}
+          className="flex items-center gap-1 px-1.5 py-0.5 rounded hover:bg-kumo-tint text-kumo-subtle hover:text-kumo-default transition-none"
+          title="Copy code"
+        >
+          {copied ? (
+            <>
+              <Check weight="thin" size={12} className="text-emerald-500" />
+              <span className="text-emerald-500">Copied</span>
+            </>
+          ) : (
+            <>
+              <Copy weight="thin" size={12} />
+              <span>Copy</span>
+            </>
+          )}
+        </button>
+      </div>
+      <pre className="p-4 text-xs font-mono leading-relaxed overflow-x-auto text-kumo-default">
+        <code>{children}</code>
+      </pre>
+    </div>
+  );
+}
+
+export function DocContent({ space, page, tocAnchors }: DocContentProps) {
+  // Find Previous and Next pages in this doc space
+  const allPages = space.pages.filter((p) => p.isPublished);
+  const currentIndex = allPages.findIndex((p) => p.slug === page.slug);
+  const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
+  const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
+
+  // Track heading ID indices
+  let headingCounter = 0;
+
+  // Lightbox Zoom Preview State
+  const [activeLightbox, setActiveLightbox] = useState<{ src: string; alt?: string } | null>(null);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setActiveLightbox(null);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  return (
+    <article className="flex-1 min-w-0 max-w-3xl px-6 sm:px-10 py-8">
+      {/* Top Action Bar: Copy Page Dropdown */}
+      <CopyPageDropdown title={page.title} markdownContent={page.content} />
+
+      {/* Page Title (Rule #2: sentence case) */}
+      <h1 className="text-3xl font-semibold tracking-normal text-kumo-strong mb-2">
+        {page.title}
+      </h1>
+
+      {/* Description / Subtitle */}
+      {page.description && (
+        <p className="text-sm text-kumo-subtle leading-relaxed mb-8">
+          {page.description}
+        </p>
+      )}
+
+      {/* Hairline Divider */}
+      <div className="border-b border-kumo-hairline mb-8" />
+
+      {/* Markdown Content Area */}
+      <div className="prose prose-sm dark:prose-invert max-w-none text-kumo-default text-sm">
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          components={{
+            h1: ({ children }) => (
+              <h2 className="text-2xl font-semibold text-kumo-strong mt-8 mb-4 clear-both">
+                {children}
+              </h2>
+            ),
+            h2: ({ children }) => {
+              const anchor = tocAnchors[headingCounter++];
+              const id = anchor?.id;
+              return (
+                <h2
+                  id={id}
+                  className="text-xl font-semibold text-kumo-strong mt-8 mb-3 scroll-mt-20 group flex items-center gap-2 clear-both"
+                >
+                  <span>{children}</span>
+                  {id && (
+                    <a
+                      href={`#${id}`}
+                      className="opacity-0 group-hover:opacity-100 text-kumo-subtle hover:text-kumo-brand text-sm transition-none"
+                      aria-label={`Link to ${String(children)}`}
+                    >
+                      #
+                    </a>
+                  )}
+                </h2>
+              );
+            },
+            h3: ({ children }) => {
+              const anchor = tocAnchors[headingCounter++];
+              const id = anchor?.id;
+              return (
+                <h3
+                  id={id}
+                  className="text-base font-semibold text-kumo-strong mt-6 mb-2 scroll-mt-20 group flex items-center gap-2 clear-both"
+                >
+                  <span>{children}</span>
+                  {id && (
+                    <a
+                      href={`#${id}`}
+                      className="opacity-0 group-hover:opacity-100 text-kumo-subtle hover:text-kumo-brand text-xs transition-none"
+                      aria-label={`Link to ${String(children)}`}
+                    >
+                      #
+                    </a>
+                  )}
+                </h3>
+              );
+            },
+            hr: () => <hr className="my-8 border-kumo-line clear-both" />,
+            p: ({ children }) => (
+              <p className="text-sm leading-relaxed mb-4 text-kumo-default">
+                {children}
+              </p>
+            ),
+            ul: ({ children }) => (
+              <ul className="list-disc pl-5 mb-4 text-sm space-y-1.5 text-kumo-default">
+                {children}
+              </ul>
+            ),
+            ol: ({ children }) => (
+              <ol className="list-decimal pl-5 mb-4 text-sm space-y-1.5 text-kumo-default">
+                {children}
+              </ol>
+            ),
+            li: ({ children }) => <li className="text-sm">{children}</li>,
+            // Rule #11: Reduce the font size of inline monospaced text to ~0.9em
+            code: ({ inline, className, children, ...props }: any) => {
+              if (inline) {
+                return (
+                  <code
+                    className="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong"
+                    {...props}
+                  >
+                    {children}
+                  </code>
+                );
+              }
+              return <CodeBlock className={className}>{children}</CodeBlock>;
+            },
+            blockquote: ({ children }) => (
+              <blockquote className="border-l-2 border-kumo-brand bg-kumo-recessed px-4 py-2.5 my-4 rounded-r-md text-sm text-kumo-default">
+                {children}
+              </blockquote>
+            ),
+            table: ({ children }) => (
+              <div className="my-6 overflow-x-auto rounded-lg border border-kumo-line bg-kumo-base clear-both">
+                <table className="w-full text-left border-collapse text-xs">
+                  {children}
+                </table>
+              </div>
+            ),
+            thead: ({ children }) => (
+              <thead className="border-b border-kumo-line bg-kumo-recessed text-kumo-strong font-semibold">
+                {children}
+              </thead>
+            ),
+            th: ({ children }) => <th className="px-4 py-2 font-medium">{children}</th>,
+            td: ({ children }) => (
+              <td className="px-4 py-2 border-t border-kumo-hairline text-kumo-default">
+                {children}
+              </td>
+            ),
+            img: ({ src, alt }: any) => {
+              const opts = parseImageSrc(src);
+
+              let layoutClass = "";
+              if (opts.wrap && opts.align === "right") {
+                // Float right on desktop, stack on mobile
+                layoutClass = "float-none md:float-right md:ml-6 mb-4 my-2 max-w-full clear-none";
+              } else if (opts.wrap && opts.align === "left") {
+                // Float left on desktop, stack on mobile
+                layoutClass = "float-none md:float-left md:mr-6 mb-4 my-2 max-w-full clear-none";
+              } else {
+                const alignClass =
+                  opts.align === "center"
+                    ? "mx-auto"
+                    : opts.align === "right"
+                    ? "ml-auto mr-0"
+                    : "mr-auto ml-0";
+                layoutClass = `my-6 ${alignClass}`;
+              }
+
+              return (
+                <figure
+                  className={layoutClass}
+                  style={{ width: opts.width, maxWidth: "100%" }}
+                >
+                  <div
+                    className={`overflow-hidden ${
+                      opts.hasBorder
+                        ? "rounded-lg border border-kumo-line bg-kumo-base shadow-xs"
+                        : ""
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveLightbox({ src: opts.cleanSrc, alt })}
+                      className={`w-full block text-left cursor-zoom-in group ${
+                        opts.hasBorder ? "bg-kumo-control/30" : ""
+                      }`}
+                      title="Click to zoom image"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={opts.cleanSrc}
+                        alt={alt || ""}
+                        className="w-full h-auto object-contain max-h-[520px] group-hover:opacity-95 transition-opacity block rounded"
+                        loading="lazy"
+                      />
+                    </button>
+                    {opts.hasBorder && alt && (
+                      <figcaption className="px-4 py-2 text-xs text-kumo-subtle border-t border-kumo-hairline bg-kumo-control flex items-center justify-between">
+                        <span>{alt}</span>
+                        <span className="text-[10px] uppercase font-mono text-kumo-subtle">
+                          Click to zoom
+                        </span>
+                      </figcaption>
+                    )}
+                  </div>
+                  {!opts.hasBorder && alt && (
+                    <figcaption className="mt-2 text-center text-xs text-kumo-subtle">
+                      {alt}
+                    </figcaption>
+                  )}
+                </figure>
+              );
+            },
+
+          }}
+        >
+          {page.content}
+        </ReactMarkdown>
+      </div>
+
+      {/* Bottom Pagination Links */}
+      <div className="mt-14 pt-6 border-t border-kumo-hairline flex items-center justify-between">
+        {prevPage ? (
+          <Link
+            href={`/docs/${space.slug}/${prevPage.slug}`}
+            className="flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand transition-none"
+          >
+            <ArrowLeft weight="thin" size={14} />
+            <div>
+              <div className="text-[10px] uppercase text-kumo-subtle">Previous</div>
+              <div className="font-medium text-sm text-kumo-default">{prevPage.title}</div>
+            </div>
+          </Link>
+        ) : (
+          <div />
+        )}
+
+        {nextPage && (
+          <Link
+            href={`/docs/${space.slug}/${nextPage.slug}`}
+            className="flex items-center gap-2 text-xs text-kumo-subtle hover:text-kumo-brand text-right transition-none"
+          >
+            <div>
+              <div className="text-[10px] uppercase text-kumo-subtle">Next</div>
+              <div className="font-medium text-sm text-kumo-default">{nextPage.title}</div>
+            </div>
+            <ArrowRight weight="thin" size={14} />
+          </Link>
+        )}
+      </div>
+
+      {/* Lightbox Zoom Modal */}
+      {activeLightbox && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/80 backdrop-blur-sm animate-in fade-in duration-100"
+          onClick={() => setActiveLightbox(null)}
+        >
+          <div
+            className="relative max-w-5xl max-h-[90vh] flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setActiveLightbox(null)}
+              className="absolute -top-10 right-0 p-1.5 text-white/80 hover:text-white rounded-full bg-black/40 hover:bg-black/60 transition-none"
+              title="Close (ESC)"
+            >
+              <X weight="thin" size={20} />
+            </button>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={activeLightbox.src}
+              alt={activeLightbox.alt || ""}
+              className="rounded-lg border border-white/10 shadow-2xl max-h-[85vh] max-w-full object-contain"
+            />
+            {activeLightbox.alt && (
+              <div className="mt-3 px-3 py-1 rounded bg-black/60 backdrop-blur-xs text-white/90 text-xs font-medium">
+                {activeLightbox.alt}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </article>
+  );
+}
+

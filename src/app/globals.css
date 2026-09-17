@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --kumo-canvas: #ffffff;
+  --kumo-base: #fbfbfc;
+  --kumo-elevated: #ffffff;
+  --kumo-recessed: #f4f4f6;
+  --kumo-control: #f8f9fa;
+  --kumo-tint: rgba(0, 0, 0, 0.04);
+  --kumo-line: rgba(0, 0, 0, 0.12);
+  --kumo-hairline: rgba(0, 0, 0, 0.07);
+  --kumo-default: #1c1d1f;
+  --kumo-subtle: #6b7280;
+  --kumo-strong: #09090b;
+  --kumo-glass-bg: rgba(255, 255, 255, 0.82);
+}
+
+[data-mode="dark"],
+.dark {
+  color-scheme: dark;
+  --kumo-canvas: #121214;
+  --kumo-base: #18181b;
+  --kumo-elevated: #202024;
+  --kumo-recessed: #0d0d0f;
+  --kumo-control: #1a1a1e;
+  --kumo-tint: rgba(255, 255, 255, 0.06);
+  --kumo-line: rgba(255, 255, 255, 0.14);
+  --kumo-hairline: rgba(255, 255, 255, 0.08);
+  --kumo-default: #e5e7eb;
+  --kumo-subtle: #9ca3af;
+  --kumo-strong: #f9fafb;
+  --kumo-glass-bg: rgba(18, 18, 20, 0.82);
+}
+
+/* Authentic Frosted Glass Navbar */
+.kumo-glass-nav {
+  background-color: var(--kumo-glass-bg) !important;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+body {
+  background-color: var(--kumo-canvas);
+  color: var(--kumo-default);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Kumo Rule #7: Never transition colors for hover states */
+*, ::before, ::after {
+  /* Ensure instant hover reactions */
+}
+
+/* Smooth anchor scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--kumo-line);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--kumo-subtle);
+}
