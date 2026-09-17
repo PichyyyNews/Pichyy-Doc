@@ -86,13 +86,15 @@ export function DocContent({ space, page, tocAnchors }: DocContentProps) {
 
   return (
     <article className="flex-1 min-w-0 max-w-3xl px-6 sm:px-10 py-8">
-      {/* Top Action Bar: Copy Page Dropdown */}
-      <CopyPageDropdown title={page.title} markdownContent={page.content} />
-
-      {/* Page Title (Rule #2: sentence case) */}
-      <h1 className="text-3xl font-semibold tracking-normal text-kumo-strong mb-2">
-        {page.title}
-      </h1>
+      {/* Page Header (Title + Right-aligned Copy page button) */}
+      <div className="flex items-start justify-between gap-4 mb-2">
+        <h1 className="text-3xl font-semibold tracking-normal text-kumo-strong">
+          {page.title}
+        </h1>
+        <div className="shrink-0 pt-1">
+          <CopyPageDropdown title={page.title} markdownContent={page.content} />
+        </div>
+      </div>
 
       {/* Description / Subtitle */}
       {page.description && (

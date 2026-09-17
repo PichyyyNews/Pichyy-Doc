@@ -37,10 +37,10 @@ export function CopyPageDropdown({ title, markdownContent }: CopyPageDropdownPro
   };
 
   return (
-    <div className="relative inline-block text-left mb-4" ref={menuRef}>
+    <div className="relative inline-block text-left" ref={menuRef}>
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded border border-kumo-line bg-kumo-base hover:bg-kumo-tint text-kumo-default transition-none select-none"
+        className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded border border-kumo-line bg-kumo-base hover:bg-kumo-tint text-kumo-default transition-none select-none shadow-xs"
       >
         <Copy weight="thin" size={14} />
         <span>Copy page</span>
@@ -48,7 +48,7 @@ export function CopyPageDropdown({ title, markdownContent }: CopyPageDropdownPro
       </button>
 
       {open && (
-        <div className="absolute left-0 mt-1 w-48 rounded-md border border-kumo-line bg-kumo-elevated shadow-lg z-30 py-1 text-xs animate-in fade-in zoom-in-95 duration-100">
+        <div className="absolute right-0 mt-1.5 w-48 rounded-md border border-kumo-line bg-kumo-elevated shadow-lg z-30 py-1 text-xs animate-in fade-in zoom-in-95 duration-100">
           <button
             onClick={() => copyToClipboard(window.location.href, "url")}
             className="w-full flex items-center justify-between px-3 py-2 text-left text-kumo-default hover:bg-kumo-tint transition-none"
