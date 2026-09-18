@@ -586,7 +586,8 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
                         </h3>
                       ),
                       hr: () => <hr className="my-6 border-kumo-line clear-both" />,
-                      p: ({ children }) => <p className="mb-3 text-kumo-default">{children}</p>,
+                      p: ({ children }) => <div className="mb-3 text-kumo-default">{children}</div>,
+                      pre: ({ children }: any) => <>{children}</>,
                       ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1">{children}</ul>,
                       ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 space-y-1">{children}</ol>,
                       code: ({ inline, children }: any) =>
