@@ -143,59 +143,129 @@ During this practicum period, I am assigned to teach students across two academi
         categoryId: "cat-introduction",
         title: "Mentor & Department Faculty",
         slug: "mentor-and-faculty",
-        description: "Supervisory guidance, mentor teacher credentials, and academic faculty members of the Department of Computer Technology.",
-        content: `> Supervision, pedagogical guidance, and faculty directory within the Department of Computer Technology at Lopburi Technical College.
+        description: "ข้อมูลครูพี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี",
+        content: `> ข้อมูลอาจารย์พี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี (Supervisory guidance, mentor teacher credentials, and faculty directory of the Department of Computer Technology, Lopburi Technical College).
 
-## Practicum Mentor Teacher
+## Practicum Mentor Teacher (ครูพี่เลี้ยง)
 
-The practicum mentor teacher provides direct supervision, classroom management mentorship, lesson plan evaluation, and pedagogical feedback throughout the teaching practicum period.
+ครูพี่เลี้ยงมีหน้าที่ให้คำปรึกษา แนะนำการจัดทำแผนการจัดการเรียนรู้ การควบคุมชั้นเรียน การประเมินผลการเรียนรู้ ตลอดจนการปฏิบัติตนตามจรรยาบรรณวิชาชีพครูตลอดระยะเวลาการฝึกปฏิบัติการสอนในสถานศึกษา
 
-### Mentor Information
+### Mentor Information (ข้อมูลครูพี่เลี้ยง)
 
-- **Role**: Practicum Mentor Teacher (อาจารย์พี่เลี้ยง)
-- **Full Name**: [Mentor Teacher Name / รอระบุชื่ออาจารย์พี่เลี้ยง]
-- **Academic Title / Position**: Vocational Teacher / Senior Instructor (ครูชำนาญการ)
-- **Department**: Department of Computer Technology (แผนกวิชาเทคโนโลยีคอมพิวเตอร์)
-- **Office Location**: Department of Computer Technology, Building 5, Lopburi Technical College
-- **Email / Contact**: [Contact Information / รอระบุข้อมูลการติดต่อ]
+- **ชื่อ - สกุล**: นายไพบูลย์ สมนึก (Mr. Paiboon Somnuek)
+- **ตำแหน่ง / วิทยฐานะ**: ครู ชำนาญการ (Senior Teacher / Instructor)
+- **ตำแหน่งในแผนกวิชา**: ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+- **ภาระหน้าที่รับผิดชอบ**:
+  - หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานบริหารงานทั่วไป
+- **หน่วยงาน / สังกัด**: แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี
 
-### Supervisory Responsibilities
+### Supervisory Responsibilities (หน้าที่ในการนิเทศการสอน)
 
-1. **Instructional Guidance**: Reviewing and approving weekly lesson plans and learning materials.
-2. **Classroom Observation**: Conducting formal and informal teaching observations to assess classroom management and instructional delivery.
-3. **Assessment & Feedback**: Providing constructive evaluation and mentoring on student evaluation methodologies.
-4. **Professional Ethics**: Mentoring on vocational teacher ethics, institutional protocol, and administrative duties.
+1. **การวางแผนการจัดการเรียนรู้**: ให้คำแนะนำและตรวจประเมินแผนการจัดการเรียนรู้ สื่อการสอน และใบงานปฏิบัติการ
+2. **การสังเกตและประเมินการสอน**: สังเกตการณ์จัดกิจกรรมการเรียนรู้ในชั้นเรียน การควบคุมดูแลผู้เรียนในห้องปฏิบัติการคอมพิวเตอร์ และให้ข้อเสนอแนะเพื่อพัฒนาทักษะการสอน
+3. **การวัดและประเมินผล**: ให้คำปรึกษาการออกแบบเครื่องมือวัดผลสัมฤทธิ์ทางการเรียนและการประเมินทักษะภาคปฏิบัติ
+4. **จรรยาบรรณและการปฏิบัติงานสถานศึกษา**: แนะนำการปฏิบัติตนตามระเบียบวินัย จรรยาบรรณวิชาชีพครู และงานธุรการที่เกี่ยวข้อง
 
-## Department Faculty
+---
 
-The Department of Computer Technology at Lopburi Technical College comprises dedicated faculty members specializing in hardware engineering, software development, networking, and applied information technology.
+## Department Faculty (ครูในแผนกวิชา)
 
-### Faculty Directory
+ทำเนียบคณาจารย์และบุคลากร แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี รวมทั้งสิ้น 10 ท่าน ซึ่งร่วมกันขับเคลื่อนการจัดการเรียนการสอน พัฒนาหลักสูตรวิชาชีพ และดูแลงานบริหารตามภารกิจของสถานศึกษา
 
-| No. | Name & Academic Title | Position / Specialization | Department Role |
-| :--- | :--- | :--- | :--- |
-| 1 | [Head of Department Name] | Department Head / Vocational Instructor | Department Administration & Curriculum |
-| 2 | [Mentor Teacher Name] | Practicum Mentor / Vocational Instructor | Student Teacher Supervision & Instruction |
-| 3 | [Faculty Member Name] | Vocational Instructor | Computer Hardware & Maintenance |
-| 4 | [Faculty Member Name] | Vocational Instructor | Software Development & Database Systems |
-| 5 | [Faculty Member Name] | Vocational Instructor | Computer Networks & Telecommunications |
-| 6 | [Faculty Member Name] | Vocational Instructor | Digital Multimedia & Web Technologies |
+### Faculty Directory (ตารางสรุปข้อมูลครูในแผนก)
 
-### Department Collaboration and Support
+| ลำดับ | ชื่อ - สกุล | ตำแหน่ง / วิทยฐานะ | บทบาทหน้าที่ในแผนกวิชา | หน้าที่รับผิดชอบอื่นในสถานศึกษา |
+| :---: | :--- | :--- | :--- | :--- |
+| 1 | **นายรณภูมิ นาคสมบูรณ์** | ครู | หัวหน้าแผนกวิชาเทคโนโลยีคอมพิวเตอร์<br>ครูประจำแผนก | เจ้าหน้าที่ งานบริหารงานทั่วไป (เลขา ผอ.) |
+| 2 | **นายจิตวัฒน์ เปิ่นวงษ์** | ครู ชำนาญการพิเศษ | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | การจัดการเรียนการสอนและพัฒนาผู้เรียน |
+| 3 | **นางสาวศิริพิไลย พรหมแพทย์** | ครู ชำนาญการพิเศษ | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | หัวหน้างาน งานการเงิน<br>เจ้าหน้าที่ งานการเงิน |
+| 4 | **นายไพบูลย์ สมนึก** | ครู ชำนาญการ *(ครูพี่เลี้ยง)* | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ<br>เจ้าหน้าที่ งานบริหารงานทั่วไป |
+| 5 | **นางสาวรจนาถ มูลตรีแก้ว** | ครูผู้ช่วย | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานบริหารงานทั่วไป |
+| 6 | **นายอนุชา ดำรงค์สกุล** | ครูผู้ช่วย | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
+| 7 | **นายธนกฤต จำปาทอง** | ครู | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
+| 8 | **นายเมธาวี ภู่โต** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
+| 9 | **นางสาวรพีพร ชูสุวรรณ** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
+| 10 | **นางสาวเพ็ญพิชชา ประยงค์หอม** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์ |
 
-- **Curriculum Alignment**: Faculty members collaborate on standardizing vocational competencies across both Vocational Certificate (ปวช.) and High Vocational Certificate (ปวส.) programs.
-- **Laboratory Coordination**: Managing specialized computer labs, hardware diagnostic stations, and software development workstations.
-- **Student Development Activities**: Organizing vocational skills competitions, academic coaching, and professional certification prep.
+### Faculty Details (รายละเอียดบทบาทหน้าที่รายบุคคล)
+
+#### 1. นายรณภูมิ นาคสมบูรณ์
+- **ตำแหน่ง**: ครู
+- **หน้าที่รับผิดชอบ**:
+  - หัวหน้าแผนก แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานบริหารงานทั่วไป (เลขา ผอ.)
+
+#### 2. นายจิตวัฒน์ เปิ่นวงษ์
+- **ตำแหน่ง**: ครู ชำนาญการพิเศษ
+- **หน้าที่รับผิดชอบ**:
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+
+#### 3. นางสาวศิริพิไลย พรหมแพทย์
+- **ตำแหน่ง**: ครู ชำนาญการพิเศษ
+- **หน้าที่รับผิดชอบ**:
+  - หัวหน้างาน งานการเงิน
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานการเงิน
+
+#### 4. นายไพบูลย์ สมนึก (ครูพี่เลี้ยง)
+- **ตำแหน่ง**: ครู ชำนาญการ
+- **หน้าที่รับผิดชอบ**:
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ
+  - เจ้าหน้าที่ งานบริหารงานทั่วไป
+
+#### 5. นางสาวรจนาถ มูลตรีแก้ว
+- **ตำแหน่ง**: ครูผู้ช่วย
+- **หน้าที่รับผิดชอบ**:
+  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานบริหารงานทั่วไป
+
+#### 6. นายอนุชา ดำรงค์สกุล
+- **ตำแหน่ง**: ครูผู้ช่วย
+- **หน้าที่รับผิดชอบ**:
+  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
+  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+
+#### 7. นายธนกฤต จำปาทอง
+- **ตำแหน่ง**: ครู
+- **หน้าที่รับผิดชอบ**:
+  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
+  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+
+#### 8. นายเมธาวี ภู่โต
+- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
+- **หน้าที่รับผิดชอบ**:
+  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
+  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+
+#### 9. นางสาวรพีพร ชูสุวรรณ
+- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
+- **หน้าที่รับผิดชอบ**:
+  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
+  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+
+#### 10. นางสาวเพ็ญพิชชา ประยงค์หอม
+- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
+- **หน้าที่รับผิดชอบ**:
+  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
 `,
         tocAnchors: JSON.stringify([
-          { id: "practicum-mentor-teacher", text: "Practicum Mentor Teacher", level: 2, enabled: true },
-          { id: "mentor-information", text: "Mentor Information", level: 3, enabled: true },
-          { id: "supervisory-responsibilities", text: "Supervisory Responsibilities", level: 3, enabled: true },
-          { id: "department-faculty", text: "Department Faculty", level: 2, enabled: true },
-          { id: "faculty-directory", text: "Faculty Directory", level: 3, enabled: true },
-          { id: "department-collaboration-and-support", text: "Department Collaboration and Support", level: 3, enabled: true },
+          { id: "practicum-mentor-teacher", text: "Practicum Mentor Teacher (ครูพี่เลี้ยง)", level: 2, enabled: true },
+          { id: "mentor-information", text: "Mentor Information (ข้อมูลครูพี่เลี้ยง)", level: 3, enabled: true },
+          { id: "supervisory-responsibilities", text: "Supervisory Responsibilities (หน้าที่ในการนิเทศการสอน)", level: 3, enabled: true },
+          { id: "department-faculty", text: "Department Faculty (ครูในแผนกวิชา)", level: 2, enabled: true },
+          { id: "faculty-directory", text: "Faculty Directory (ตารางสรุปข้อมูลครูในแผนก)", level: 3, enabled: true },
+          { id: "faculty-details", text: "Faculty Details (รายละเอียดบทบาทหน้าที่รายบุคคล)", level: 3, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["mentor", "faculty", "teacher", "supervision", "computer technology", "department", "instructor", "staff"]),
+        searchKeywords: JSON.stringify(["ครูพี่เลี้ยง", "อาจารย์พี่เลี้ยง", "ไพบูลย์", "รณภูมิ", "จิตวัฒน์", "ศิริพิไลย", "รจนาถ", "อนุชา", "ธนกฤต", "เมธาวี", "รพีพร", "เพ็ญพิชชา", "mentor", "faculty", "computer technology"]),
         order: 3,
         isPublished: true,
         createdAt: new Date().toISOString(),
