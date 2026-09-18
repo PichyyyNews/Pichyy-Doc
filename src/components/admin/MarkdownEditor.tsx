@@ -585,7 +585,12 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
                           {children}
                         </h3>
                       ),
-                      hr: () => <hr className="my-6 border-kumo-line clear-both" />,
+                      h4: ({ children }) => (
+                        <h4 className="text-sm font-semibold text-kumo-strong mt-0 mb-1.5">
+                          {children}
+                        </h4>
+                      ),
+                      hr: () => <hr className="my-5 border-kumo-line/60 clear-both" />,
                       p: ({ children }) => <div className="mb-3 text-kumo-default">{children}</div>,
                       pre: ({ children }: any) => <>{children}</>,
                       ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1">{children}</ul>,
@@ -610,9 +615,9 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
 
                         let layoutClass = "";
                         if (opts.wrap && opts.align === "right") {
-                          layoutClass = "float-none md:float-right md:ml-4 mb-3 my-1 max-w-full clear-none";
+                          layoutClass = "float-right ml-4 mb-3 mt-0 max-w-full clear-none";
                         } else if (opts.wrap && opts.align === "left") {
-                          layoutClass = "float-none md:float-left md:mr-4 mb-3 my-1 max-w-full clear-none";
+                          layoutClass = "float-left mr-4 mb-3 mt-0 max-w-full clear-none";
                         } else {
                           const alignClass =
                             opts.align === "center"

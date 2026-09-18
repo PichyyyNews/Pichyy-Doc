@@ -184,7 +184,12 @@ export function DocContent({
         </h3>
       );
     },
-    hr: () => <hr className="my-8 border-kumo-line clear-both" />,
+    h4: ({ children }: any) => (
+      <h4 className="text-base font-semibold text-kumo-strong mt-0 mb-2">
+        {children}
+      </h4>
+    ),
+    hr: () => <hr className="my-6 border-kumo-line/60 clear-both" />,
     p: ({ children }: any) => (
       <div className="text-sm leading-relaxed mb-4 text-kumo-default">
         {children}
@@ -243,9 +248,9 @@ export function DocContent({
 
       let layoutClass = "";
       if (opts.wrap && opts.align === "right") {
-        layoutClass = "float-none md:float-right md:ml-6 mb-4 my-2 max-w-full clear-none";
+        layoutClass = "float-right ml-4 sm:ml-6 mb-3 mt-0 max-w-[45%] sm:max-w-full clear-none";
       } else if (opts.wrap && opts.align === "left") {
-        layoutClass = "float-none md:float-left md:mr-6 mb-4 my-2 max-w-full clear-none";
+        layoutClass = "float-left mr-4 sm:mr-6 mb-3 mt-0 max-w-[45%] sm:max-w-full clear-none";
       } else {
         const alignClass =
           opts.align === "center"
