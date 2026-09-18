@@ -41,8 +41,11 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-kumo-canvas flex items-center justify-center px-4">
       <div className="w-full max-w-sm rounded-lg border border-kumo-line bg-kumo-base p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-2">
-          <ShieldCheck weight="thin" size={24} className="text-kumo-brand" />
-          <h1 className="text-lg font-semibold text-kumo-strong">Admin Console</h1>
+          <ShieldCheck weight="thin" size={24} className="text-kumo-brand shrink-0" />
+          <h1 className="text-lg font-semibold text-kumo-strong flex items-center">
+            <span className="font-handwriting font-bold text-2xl mr-1.5">Pichyy</span>
+            <span>Admin</span>
+          </h1>
         </div>
         <p className="text-xs text-kumo-subtle mb-6">
           Enter the administrator PIN to manage doc spaces, hierarchy, and contents.

@@ -240,9 +240,9 @@ export function DocSidebar({
               <Link
                 href="/"
                 onClick={onMobileClose}
-                className="font-semibold text-base text-kumo-strong hover:opacity-85"
+                className="font-handwriting font-bold text-2xl text-kumo-strong hover:opacity-85"
               >
-                Kumo Docs
+                Pichyy
               </Link>
             </div>
             <button
@@ -320,7 +320,7 @@ export function DocSidebar({
             >
               Admin Console
             </Link>
-            <span className="text-[11px] font-mono text-kumo-subtle">Kumo UI</span>
+            <span className="text-[11px] font-mono text-kumo-subtle">Pichyy Docs</span>
           </div>
         </div>
       </div>

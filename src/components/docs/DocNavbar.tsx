@@ -67,12 +67,12 @@ export function DocNavbar({
           </button>
         )}
 
-        {/* Brand */}
+        {/* Brand Logo */}
         <Link
           href="/"
-          className="font-semibold text-kumo-strong hover:opacity-85 select-none text-[15px] tracking-normal shrink-0"
+          className="font-handwriting font-bold text-kumo-strong hover:opacity-85 select-none text-2xl tracking-wide shrink-0 transition-opacity"
         >
-          Kumo
+          Pichyy
         </Link>
 
         {/* Mobile Doc Space Badge (< md) */}

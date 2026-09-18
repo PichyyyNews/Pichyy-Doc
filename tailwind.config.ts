@@ -31,6 +31,9 @@ const config: Config = {
       lineHeight: {
         lh: "1.4",
       },
+      fontFamily: {
+        handwriting: ["var(--font-handwriting)", "Caveat", "cursive"],
+      },
     },
   },
   plugins: [],

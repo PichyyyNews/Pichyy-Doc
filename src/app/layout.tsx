@@ -1,10 +1,18 @@
 import type { Metadata, Viewport } from "next";
+import { Caveat } from "next/font/google";
 import { ThemeProvider } from "@/components/kumo/ThemeProvider";
 import "./globals.css";
 
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  variable: "--font-handwriting",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Kumo UI Documentation & Internal Portal",
-  description: "Internal documentation, guides, and engineering knowledge base powered by Cloudflare Kumo UI.",
+  title: "Pichyy Docs - Documentation & Internal Portal",
+  description: "Internal documentation, guides, and engineering knowledge base powered by Kumo UI.",
 };
 
 export const viewport: Viewport = {
@@ -24,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen bg-kumo-canvas text-kumo-default antialiased">
+      <body className={`min-h-screen bg-kumo-canvas text-kumo-default antialiased ${caveat.variable}`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
