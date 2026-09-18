@@ -137,6 +137,124 @@ During this practicum period, I am assigned to teach students across two academi
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
+      {
+        id: "page-mentor-faculty",
+        docSpaceId: "space-teaching-practicum",
+        categoryId: "cat-introduction",
+        title: "Mentor & Department Faculty",
+        slug: "mentor-and-faculty",
+        description: "Supervisory guidance, mentor teacher credentials, and academic faculty members of the Department of Computer Technology.",
+        content: `> Supervision, pedagogical guidance, and faculty directory within the Department of Computer Technology at Lopburi Technical College.
+
+## Practicum Mentor Teacher
+
+The practicum mentor teacher provides direct supervision, classroom management mentorship, lesson plan evaluation, and pedagogical feedback throughout the teaching practicum period.
+
+### Mentor Information
+
+- **Role**: Practicum Mentor Teacher (อาจารย์พี่เลี้ยง)
+- **Full Name**: [Mentor Teacher Name / รอระบุชื่ออาจารย์พี่เลี้ยง]
+- **Academic Title / Position**: Vocational Teacher / Senior Instructor (ครูชำนาญการ)
+- **Department**: Department of Computer Technology (แผนกวิชาเทคโนโลยีคอมพิวเตอร์)
+- **Office Location**: Department of Computer Technology, Building 5, Lopburi Technical College
+- **Email / Contact**: [Contact Information / รอระบุข้อมูลการติดต่อ]
+
+### Supervisory Responsibilities
+
+1. **Instructional Guidance**: Reviewing and approving weekly lesson plans and learning materials.
+2. **Classroom Observation**: Conducting formal and informal teaching observations to assess classroom management and instructional delivery.
+3. **Assessment & Feedback**: Providing constructive evaluation and mentoring on student evaluation methodologies.
+4. **Professional Ethics**: Mentoring on vocational teacher ethics, institutional protocol, and administrative duties.
+
+## Department Faculty
+
+The Department of Computer Technology at Lopburi Technical College comprises dedicated faculty members specializing in hardware engineering, software development, networking, and applied information technology.
+
+### Faculty Directory
+
+| No. | Name & Academic Title | Position / Specialization | Department Role |
+| :--- | :--- | :--- | :--- |
+| 1 | [Head of Department Name] | Department Head / Vocational Instructor | Department Administration & Curriculum |
+| 2 | [Mentor Teacher Name] | Practicum Mentor / Vocational Instructor | Student Teacher Supervision & Instruction |
+| 3 | [Faculty Member Name] | Vocational Instructor | Computer Hardware & Maintenance |
+| 4 | [Faculty Member Name] | Vocational Instructor | Software Development & Database Systems |
+| 5 | [Faculty Member Name] | Vocational Instructor | Computer Networks & Telecommunications |
+| 6 | [Faculty Member Name] | Vocational Instructor | Digital Multimedia & Web Technologies |
+
+### Department Collaboration and Support
+
+- **Curriculum Alignment**: Faculty members collaborate on standardizing vocational competencies across both Vocational Certificate (ปวช.) and High Vocational Certificate (ปวส.) programs.
+- **Laboratory Coordination**: Managing specialized computer labs, hardware diagnostic stations, and software development workstations.
+- **Student Development Activities**: Organizing vocational skills competitions, academic coaching, and professional certification prep.
+`,
+        tocAnchors: JSON.stringify([
+          { id: "practicum-mentor-teacher", text: "Practicum Mentor Teacher", level: 2, enabled: true },
+          { id: "mentor-information", text: "Mentor Information", level: 3, enabled: true },
+          { id: "supervisory-responsibilities", text: "Supervisory Responsibilities", level: 3, enabled: true },
+          { id: "department-faculty", text: "Department Faculty", level: 2, enabled: true },
+          { id: "faculty-directory", text: "Faculty Directory", level: 3, enabled: true },
+          { id: "department-collaboration-and-support", text: "Department Collaboration and Support", level: 3, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["mentor", "faculty", "teacher", "supervision", "computer technology", "department", "instructor", "staff"]),
+        order: 3,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "page-teaching-schedule",
+        docSpaceId: "space-teaching-practicum",
+        categoryId: "cat-introduction",
+        title: "Teaching Schedule",
+        slug: "schedule",
+        description: "Weekly teaching schedule, assigned course hours, classroom cohorts, and laboratory allocations.",
+        content: `> Official weekly teaching schedule and class timetable across assigned vocational cohorts for the academic term.
+
+## Weekly Teaching Timetable
+
+The following timetable details the scheduled instructional periods, courses, assigned student cohorts, and laboratory locations for the current semester:
+
+| Day | Periods | Time | Course Title | Cohort | Room / Laboratory |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Monday** | 1 – 4 | 08:30 – 12:30 | Computer Technical Fundamentals (ปฏิบัติการคอมพิวเตอร์) | \`1 ชทค 1\` | Computer Lab 521 |
+| **Tuesday** | 5 – 8 | 13:00 – 17:00 | Programming & Web Application Development | \`1 สทค 2\` | Computer Lab 523 |
+| **Wednesday** | 1 – 4 | 08:30 – 12:30 | Computer Hardware & Peripheral Maintenance | \`1 ชทค 2\` | Hardware Workshop 522 |
+| **Thursday** | 5 – 8 | 13:00 – 17:00 | Advanced Database Management Systems | \`2 สทค 4\` | Computer Lab 524 |
+| **Friday** | 1 – 2 | 08:30 – 10:30 | Homeroom & Student Mentorship Activity | All Cohorts | Building 5 Hall |
+| **Friday** | 3 – 8 | 10:30 – 16:30 | Instructional Preparation & Practicum Duties | — | Department Office |
+
+## Teaching Load Summary
+
+Summary of assigned instructional workload per academic week across Vocational Certificate (ปวช.) and High Vocational Certificate (ปวส.) programs:
+
+| Level | Cohort Code | Course Name | Lecture (Hrs) | Lab (Hrs) | Total (Hrs/Wk) |
+| :--- | :--- | :--- | :---: | :---: | :---: |
+| **ปวช. 1** | \`1 ชทค 1\` | Computer Technical Fundamentals | 1 | 3 | 4 |
+| **ปวช. 1** | \`1 ชทค 2\` | Computer Hardware & Maintenance | 1 | 3 | 4 |
+| **ปวส. 1** | \`1 สทค 2\` | Programming & Web App Development | 1 | 3 | 4 |
+| **ปวส. 2** | \`2 สทค 4\` | Advanced Database Management Systems | 1 | 3 | 4 |
+| **All Levels** | All Cohorts | Homeroom & Student Guidance Activity | 2 | 0 | 2 |
+| **Total** | | | **6** | **12** | **18** |
+
+## Instructional Preparation and Office Hours
+
+Dedicated hours outside of scheduled classroom contact time are allocated for curriculum planning, grading, and student academic consultation:
+
+- **Office Hours**: Monday – Friday, 12:30 – 13:30
+- **Location**: Department of Computer Technology Staff Office, Building 5
+- **Consultation Scope**: Academic inquiries, laboratory assignment assistance, makeup practical sessions, and technical project mentoring.
+`,
+        tocAnchors: JSON.stringify([
+          { id: "weekly-teaching-timetable", text: "Weekly Teaching Timetable", level: 2, enabled: true },
+          { id: "teaching-load-summary", text: "Teaching Load Summary", level: 2, enabled: true },
+          { id: "instructional-preparation-and-office-hours", text: "Instructional Preparation and Office Hours", level: 2, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["schedule", "timetable", "teaching", "hours", "periods", "classes", "load", "ปวช", "ปวส"]),
+        order: 4,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
     ],
   },
 ];
