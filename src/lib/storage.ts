@@ -21,7 +21,7 @@ const INITIAL_DATA: DocSpaceItem[] = [
       {
         id: "cat-introduction",
         docSpaceId: "space-teaching-practicum",
-        name: "Introduction",
+        name: "บทนำ",
         slug: "introduction",
         order: 1,
         isCollapsed: false,
@@ -32,45 +32,45 @@ const INITIAL_DATA: DocSpaceItem[] = [
         id: "page-about",
         docSpaceId: "space-teaching-practicum",
         categoryId: "cat-introduction",
-        title: "About Me",
+        title: "ประวัติส่วนตัว",
         slug: "about",
-        description: "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
-        content: `> Welcome to my teaching practicum portfolio and documentation portal. This section outlines my personal background, education, and current academic standing.
+        description: "ประวัติส่วนตัว ข้อมูลการศึกษา และข้อมูลการฝึกประสบการณ์วิชาชีพครู นายพิชญุตย์ สมบุญ",
+        content: `> ยินดีต้อนรับสู่ระบบเอกสารและพอร์ตโฟลิโอการฝึกประสบการณ์วิชาชีพครู รวบรวมข้อมูลประวัติส่วนตัว ข้อมูลทางการศึกษา และสถานะการปฏิบัติการสอนในสถานศึกษา
 
-## Personal Profile
+## ข้อมูลส่วนตัว (Personal Profile)
 
-- **Full Name**: Mr. Pichayut Sombun (นาย พิชญุตย์ สมบุญ)
-- **Role**: Pre-Service Teacher / Student Teacher (นักศึกษาฝึกประสบการณ์วิชาชีพครู)
-- **Academic Year**: 3rd Year Undergraduate (ชั้นปีที่ 3)
-- **Student ID**: \`672041510113\`
-- **Program / Branch**: TCT DERA
-- **Status**: Currently undergoing Educational Institution Teaching Practicum
+- **ชื่อ - นามสกุล**: นาย พิชญุตย์ สมบุญ (Mr. Pichayut Sombun)
+- **สถานะ**: นักศึกษาฝึกประสบการณ์วิชาชีพครู (Pre-Service Student Teacher)
+- **ระดับการศึกษา**: ชั้นปีที่ 3
+- **รหัสนักศึกษา**: \`672041510113\`
+- **หลักสูตร / สาขาวิชา**: TCT DERA
+- **สถานะปัจจุบัน**: อยู่ในช่วงของการฝึกสอนสถานศึกษา
 
-## Academic Background
+## ประวัติการศึกษา (Academic Background)
 
-I am currently pursuing a Bachelor of Science in Technical Education at King Mongkut's University of Technology North Bangkok:
+กำลังศึกษาระดับปริญญาตรี คณะครุศาสตร์อุตสาหกรรม มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ:
 
-- **Department**: Department of Computer Education (ภาควิชาคอมพิวเตอร์ศึกษา)
-- **Faculty**: Faculty of Technical Education (คณะครุศาสตร์อุตสาหกรรม)
-- **University**: King Mongkut's University of Technology North Bangkok (KMUTNB) (มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ)
+- **ภาควิชา**: ภาควิชาคอมพิวเตอร์ศึกษา (Department of Computer Education)
+- **คณะ**: คณะครุศาสตร์อุตสาหกรรม (Faculty of Technical Education)
+- **มหาวิทยาลัย**: มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)
 
-## Current Practicum Status
+## สถานะการฝึกปฏิบัติการสอน (Current Practicum Status)
 
-I am actively engaged in my **Educational Institution Teaching Practicum** (การฝึกสอนสถานศึกษา). This practicum provides real-world pedagogical training, curriculum delivery, and instructional design experience in an accredited vocational institution.
+ปัจจุบันอยู่ในช่วงของการ **ฝึกสอนสถานศึกษา** (Educational Institution Teaching Practicum) เพื่อเสริมสร้างทักษะและประสบการณ์วิชาชีพครู การบริหารจัดการชั้นเรียน และการจัดกิจกรรมการเรียนรู้ในสถานศึกษาอาชีวศึกษาจริง
 
-### Objectives of the Practicum
+### วัตถุประสงค์การฝึกสอน (Practicum Objectives)
 
-1. **Instructional Delivery**: Deliver structured computer education curricula adhering to modern technical standards.
-2. **Pedagogical Practice**: Implement effective classroom management, technical demonstrations, and student assessments.
-3. **Mentorship & Guidance**: Support students in developing practical computer skills, ethics, and professional technical competencies.
+1. **การจัดการเรียนการสอน**: นำความรู้ด้านวิชาชีพคอมพิวเตอร์และครุศาสตร์มาถ่ายทอดสู่ผู้เรียนอย่างมีแบบแผนและถูกต้องตามหลักสูตร
+2. **การบริหารจัดการชั้นเรียน**: ฝึกฝนทักษะการดูแลชั้นเรียน การใช้นวัตกรรมสื่อการสอน และการวัดผลสัมฤทธิ์ทางการเรียน
+3. **การให้คำปรึกษาและแนะแนว**: ดูแลและส่งเสริมผู้เรียนทั้งในด้านวิชาการ ทักษะการปฏิบัติงาน และจรรยาบรรณวิชาชีพ
 `,
         tocAnchors: JSON.stringify([
-          { id: "personal-profile", text: "Personal Profile", level: 2, enabled: true },
-          { id: "academic-background", text: "Academic Background", level: 2, enabled: true },
-          { id: "current-practicum-status", text: "Current Practicum Status", level: 2, enabled: true },
-          { id: "objectives-of-the-practicum", text: "Objectives of the Practicum", level: 3, enabled: true },
+          { id: "personal-profile", text: "ข้อมูลส่วนตัว (Personal Profile)", level: 2, enabled: true },
+          { id: "academic-background", text: "ประวัติการศึกษา (Academic Background)", level: 2, enabled: true },
+          { id: "current-practicum-status", text: "สถานะการฝึกปฏิบัติการสอน (Current Practicum Status)", level: 2, enabled: true },
+          { id: "practicum-objectives", text: "วัตถุประสงค์การฝึกสอน (Practicum Objectives)", level: 3, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["about", "profile", "pichayut", "sombun", "kmutnb", "computer education", "tct"]),
+        searchKeywords: JSON.stringify(["ประวัติส่วนตัว", "พิชญุตย์", "สมบุญ", "มจพ", "คอมพิวเตอร์ศึกษา", "ครุศาสตร์อุตสาหกรรม", "tct", "dera"]),
         order: 1,
         isPublished: true,
         createdAt: new Date().toISOString(),
@@ -80,58 +80,58 @@ I am actively engaged in my **Educational Institution Teaching Practicum** (ก�
         id: "page-college",
         docSpaceId: "space-teaching-practicum",
         categoryId: "cat-introduction",
-        title: "About the College",
+        title: "เกี่ยวกับวิทยาลัย",
         slug: "college",
-        description: "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",
-        content: `> Institutional overview of Lopburi Technical College, host department information, and assigned teaching coursework.
+        description: "ข้อมูลทั่วไปของวิทยาลัยเทคนิคลพบุรี แผนกวิชาเทคโนโลยีคอมพิวเตอร์ และกลุ่มชั้นเรียนที่ได้รับมอบหมายการสอน",
+        content: `> ข้อมูลภาพรวมวิทยาลัยเทคนิคลพบุรี แผนกวิชาที่สังกัดปฏิบัติการสอน และภาระงานสอนประจำภาคเรียน
 
-## Institutional Profile
+## ข้อมูลสถานศึกษา (Institutional Profile)
 
-- **Institution Name**: Lopburi Technical College (วิทยาลัยเทคนิคลพบุรี)
-- **Address**: 323 Narai Maharach Road, Thale Chup Sorn Subdistrict, Mueang Lop Buri District, Lop Buri 15000, Thailand
-- **Telephone**: \`036-411-083\` / \`+66 36 411 083\`
-- **Jurisdiction**: Vocational Education Commission, Ministry of Education, Thailand
+- **ชื่อสถานศึกษา**: วิทยาลัยเทคนิคลพบุรี (Lopburi Technical College)
+- **ที่อยู่**: 323 ถนนนารายณ์มหาราช ตำบลทะเลชุบศร อำเภอเมืองลพบุรี จังหวัดลพบุรี 15000
+- **เบอร์โทรศัพท์**: \`036-411-083\` / \`+66 36 411 083\`
+- **สังกัด**: สำนักงานคณะกรรมการการอาชีวศึกษา (สอศ.) กระทรวงศึกษาธิการ
 
-## Host Department
+## แผนกวิชาที่สังกัดปฏิบัติการสอน (Host Department)
 
-I am stationed at the **Department of Computer Technology** (แผนกวิชาเทคโนโลยีคอมพิวเตอร์), which focuses on providing technical and vocational skills across hardware, networking, programming, and IT applications.
+สังกัดปฏิบัติการสอน ณ **แผนกวิชาเทคโนโลยีคอมพิวเตอร์** ซึ่งมุ่งเน้นการจัดการเรียนการสอนทักษะวิชาชีพทั้งด้านฮาร์ดแวร์ ระบบเครือข่าย การพัฒนาโปรแกรม และการประยุกต์ใช้เทคโนโลยีสารสนเทศ
 
-## Teaching Assignments
+## ภาระงานสอนที่ได้รับมอบหมาย (Teaching Assignments)
 
-During this practicum period, I am assigned to teach students across two academic tiers: the **Vocational Certificate (ปวช.)** and the **High Vocational Certificate (ปวส.)**, encompassing a total of **4 classroom cohorts**:
+ในภาคเรียนนี้ ได้รับมอบหมายให้ปฏิบัติหน้าที่การสอนแก่นักเรียนนักศึกษา 2 ระดับชั้นการศึกษา คือ ระดับประกาศนียบัตรวิชาชีพ (ปวช.) และระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) รวมทั้งหมด **4 ห้องเรียน**:
 
-### Vocational Certificate Level (ปวช.)
-- **Program**: Computer Technical (ช่างเทคนิคคอมพิวเตอร์)
-- **Grade**: Year 1 (ปวช. 1)
-- **Classrooms (2 Rooms)**:
-  - \`1 ชทค 1\` (Section 1)
-  - \`1 ชทค 2\` (Section 2)
+### ระดับประกาศนียบัตรวิชาชีพ (ปวช.)
+- **สาขาวิชา**: ช่างเทคนิคคอมพิวเตอร์
+- **ระดับชั้น**: ปีที่ 1 (ปวช. 1)
+- **ห้องเรียนที่รับผิดชอบ (2 ห้อง)**:
+  - \`1 ชทค 1\` (กลุ่ม 1)
+  - \`1 ชทค 2\` (กลุ่ม 2)
 
-### High Vocational Certificate Level (ปวส.)
-- **Program**: Computer Technology (เทคโนโลยีคอมพิวเตอร์)
-- **Grade**: Year 1 (ปวส. 1)
-  - **Classroom (1 Room)**: \`1 สทค 2\`
-- **Grade**: Year 2 (ปวส. 2)
-  - **Classroom (1 Room)**: \`2 สทค 4\`
+### ระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)
+- **สาขาวิชา**: เทคโนโลยีคอมพิวเตอร์
+- **ระดับชั้น**: ปีที่ 1 (ปวส. 1)
+  - **ห้องเรียนที่รับผิดชอบ (1 ห้อง)**: \`1 สทค 2\`
+- **ระดับชั้น**: ปีที่ 2 (ปวส. 2)
+  - **ห้องเรียนที่รับผิดชอบ (1 ห้อง)**: \`2 สทค 4\`
 
-## Summary of Teaching Load
+## สรุปกลุ่มชั้นเรียนที่รับผิดชอบการสอน (Summary of Teaching Load)
 
-| Level | Program / Major | Academic Year | Section Code | Cohort Name |
+| ระดับการศึกษา | สาขาวิชา | ชั้นปี | กลุ่ม | รหัสห้องเรียน |
 | :--- | :--- | :--- | :--- | :--- |
-| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 1 | \`1 ชทค 1\` |
-| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 2 | \`1 ชทค 2\` |
-| **High Vocational (ปวส.)** | Computer Technology | Year 1 | Section 2 | \`1 สทค 2\` |
-| **High Vocational (ปวส.)** | Computer Technology | Year 2 | Section 4 | \`2 สทค 4\` |
+| **ระดับ ปวช.** | ช่างเทคนิคคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 1 | \`1 ชทค 1\` |
+| **ระดับ ปวช.** | ช่างเทคนิคคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 2 | \`1 ชทค 2\` |
+| **ระดับ ปวส.** | เทคโนโลยีคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 2 | \`1 สทค 2\` |
+| **ระดับ ปวส.** | เทคโนโลยีคอมพิวเตอร์ | ปีที่ 2 | กลุ่ม 4 | \`2 สทค 4\` |
 `,
         tocAnchors: JSON.stringify([
-          { id: "institutional-profile", text: "Institutional Profile", level: 2, enabled: true },
-          { id: "host-department", text: "Host Department", level: 2, enabled: true },
-          { id: "teaching-assignments", text: "Teaching Assignments", level: 2, enabled: true },
-          { id: "vocational-certificate-level", text: "Vocational Certificate Level (ปวช.)", level: 3, enabled: true },
-          { id: "high-vocational-certificate-level", text: "High Vocational Certificate Level (ปวส.)", level: 3, enabled: true },
-          { id: "summary-of-teaching-load", text: "Summary of Teaching Load", level: 2, enabled: true },
+          { id: "institutional-profile", text: "ข้อมูลสถานศึกษา (Institutional Profile)", level: 2, enabled: true },
+          { id: "host-department", text: "แผนกวิชาที่สังกัดปฏิบัติการสอน (Host Department)", level: 2, enabled: true },
+          { id: "teaching-assignments", text: "ภาระงานสอนที่ได้รับมอบหมาย (Teaching Assignments)", level: 2, enabled: true },
+          { id: "vocational-level", text: "ระดับประกาศนียบัตรวิชาชีพ (ปวช.)", level: 3, enabled: true },
+          { id: "high-vocational-level", text: "ระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)", level: 3, enabled: true },
+          { id: "summary-of-teaching-load", text: "สรุปกลุ่มชั้นเรียนที่รับผิดชอบการสอน (Summary of Teaching Load)", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["college", "lopburi", "technical", "practicum", "teaching", "computer technology", "ปวช", "ปวส"]),
+        searchKeywords: JSON.stringify(["วิทยาลัยเทคนิคลพบุรี", "เทคนิคลพบุรี", "เทคโนโลยีคอมพิวเตอร์", "ช่างเทคนิคคอมพิวเตอร์", "ปวช", "ปวส", "1 ชทค 1", "1 ชทค 2", "1 สทค 2", "2 สทค 4"]),
         order: 2,
         isPublished: true,
         createdAt: new Date().toISOString(),
@@ -141,7 +141,7 @@ During this practicum period, I am assigned to teach students across two academi
         id: "page-mentor-faculty",
         docSpaceId: "space-teaching-practicum",
         categoryId: "cat-introduction",
-        title: "Mentor & Department Faculty",
+        title: "อาจารย์พี่เลี้ยงและอาจารย์ในแผนก",
         slug: "mentor-and-faculty",
         description: "ข้อมูลครูพี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี",
         content: `> ข้อมูลอาจารย์พี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี (Supervisory guidance, mentor teacher credentials, and faculty directory of the Department of Computer Technology, Lopburi Technical College).
@@ -275,51 +275,51 @@ During this practicum period, I am assigned to teach students across two academi
         id: "page-teaching-schedule",
         docSpaceId: "space-teaching-practicum",
         categoryId: "cat-introduction",
-        title: "Teaching Schedule",
+        title: "ตารางสอน",
         slug: "schedule",
-        description: "Weekly teaching schedule, assigned course hours, classroom cohorts, and laboratory allocations.",
-        content: `> Official weekly teaching schedule and class timetable across assigned vocational cohorts for the academic term.
+        description: "ตารางสอนประจำสัปดาห์ คาบเรียน ห้องปฏิบัติการ และภาระงานสอนที่ได้รับมอบหมาย",
+        content: `> ตารางสอนประจำสัปดาห์ คาบเรียน รายวิชาที่สอน และห้องปฏิบัติการคอมพิวเตอร์ ประจำภาคเรียน
 
-## Weekly Teaching Timetable
+## ตารางสอนประจำสัปดาห์ (Weekly Timetable)
 
-The following timetable details the scheduled instructional periods, courses, assigned student cohorts, and laboratory locations for the current semester:
+รายละเอียดตารางการจัดการเรียนการสอนประจำสัปดาห์ รายวิชา กลุ่มชั้นเรียน และห้องปฏิบัติการคอมพิวเตอร์:
 
-| Day | Periods | Time | Course Title | Cohort | Room / Laboratory |
+| วัน | คาบเรียน | เวลา | รหัสและชื่อวิชา | กลุ่มชั้นเรียน | ห้องเรียน / ปฏิบัติการ |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Monday** | 1 – 4 | 08:30 – 12:30 | Computer Technical Fundamentals (ปฏิบัติการคอมพิวเตอร์) | \`1 ชทค 1\` | Computer Lab 521 |
-| **Tuesday** | 5 – 8 | 13:00 – 17:00 | Programming & Web Application Development | \`1 สทค 2\` | Computer Lab 523 |
-| **Wednesday** | 1 – 4 | 08:30 – 12:30 | Computer Hardware & Peripheral Maintenance | \`1 ชทค 2\` | Hardware Workshop 522 |
-| **Thursday** | 5 – 8 | 13:00 – 17:00 | Advanced Database Management Systems | \`2 สทค 4\` | Computer Lab 524 |
-| **Friday** | 1 – 2 | 08:30 – 10:30 | Homeroom & Student Mentorship Activity | All Cohorts | Building 5 Hall |
-| **Friday** | 3 – 8 | 10:30 – 16:30 | Instructional Preparation & Practicum Duties | — | Department Office |
+| **วันจันทร์** | 1 – 4 | 08:30 – 12:30 น. | ปฏิบัติการคอมพิวเตอร์ (Computer Technical Fundamentals) | \`1 ชทค 1\` | ห้องปฏิบัติการคอมพิวเตอร์ 521 |
+| **วันอังคาร** | 5 – 8 | 13:00 – 17:00 น. | การเขียนโปรแกรมและพัฒนาเว็บแอปพลิเคชัน (Programming & Web App) | \`1 สทค 2\` | ห้องปฏิบัติการคอมพิวเตอร์ 523 |
+| **วันพุธ** | 1 – 4 | 08:30 – 12:30 น. | งานบำรุงรักษาอุปกรณ์และระบบคอมพิวเตอร์ (Computer Maintenance) | \`1 ชทค 2\` | โรงฝึกงานฮาร์ดแวร์ 522 |
+| **วันพฤหัสบดี** | 5 – 8 | 13:00 – 17:00 น. | ระบบจัดการฐานข้อมูลขั้นสูง (Advanced Database Systems) | \`2 สทค 4\` | ห้องปฏิบัติการคอมพิวเตอร์ 524 |
+| **วันศุกร์** | 1 – 2 | 08:30 – 10:30 น. | กิจกรรมโฮมรูมและพัฒนาผู้เรียน (Homeroom & Mentorship) | ทุกกลุ่มชั้นเรียน | ลานอเนกประสงค์ อาคาร 5 |
+| **วันศุกร์** | 3 – 8 | 10:30 – 16:30 น. | เตรียมการสอน ผลิตสื่อการสอน และงานสนับสนุนแผนกวิชา | — | สำนักงานแผนกวิชาฯ |
 
-## Teaching Load Summary
+## สรุปภาระงานสอนประจำสัปดาห์ (Teaching Load Summary)
 
-Summary of assigned instructional workload per academic week across Vocational Certificate (ปวช.) and High Vocational Certificate (ปวส.) programs:
+สรุปชั่วโมงการสอนต่อสัปดาห์ครอบคลุมทั้งระดับ ปวช. และ ปวส.:
 
-| Level | Cohort Code | Course Name | Lecture (Hrs) | Lab (Hrs) | Total (Hrs/Wk) |
+| ระดับการศึกษา | กลุ่มชั้นเรียน | รายวิชา | ทฤษฎี (ชม.) | ปฏิบัติ (ชม.) | รวม (ชม./สัปดาห์) |
 | :--- | :--- | :--- | :---: | :---: | :---: |
-| **ปวช. 1** | \`1 ชทค 1\` | Computer Technical Fundamentals | 1 | 3 | 4 |
-| **ปวช. 1** | \`1 ชทค 2\` | Computer Hardware & Maintenance | 1 | 3 | 4 |
-| **ปวส. 1** | \`1 สทค 2\` | Programming & Web App Development | 1 | 3 | 4 |
-| **ปวส. 2** | \`2 สทค 4\` | Advanced Database Management Systems | 1 | 3 | 4 |
-| **All Levels** | All Cohorts | Homeroom & Student Guidance Activity | 2 | 0 | 2 |
-| **Total** | | | **6** | **12** | **18** |
+| **ปวช. 1** | \`1 ชทค 1\` | ปฏิบัติการคอมพิวเตอร์ | 1 | 3 | 4 |
+| **ปวช. 1** | \`1 ชทค 2\` | งานบำรุงรักษาอุปกรณ์และระบบคอมพิวเตอร์ | 1 | 3 | 4 |
+| **ปวส. 1** | \`1 สทค 2\` | การเขียนโปรแกรมและพัฒนาเว็บแอปพลิเคชัน | 1 | 3 | 4 |
+| **ปวส. 2** | \`2 สทค 4\` | ระบบจัดการฐานข้อมูลขั้นสูง | 1 | 3 | 4 |
+| **ทุกระดับ** | ทุกกลุ่มเรียน | กิจกรรมโฮมรูมและพัฒนาผู้เรียน | 2 | 0 | 2 |
+| **รวมทั้งหมด** | | | **6** | **12** | **18** |
 
-## Instructional Preparation and Office Hours
+## เวลาเตรียมการสอนและให้คำปรึกษา (Office Hours)
 
-Dedicated hours outside of scheduled classroom contact time are allocated for curriculum planning, grading, and student academic consultation:
+ช่วงเวลาสำหรับการเตรียมการสอน การตรวจงาน และการให้คำปรึกษาทางวิชาการแก่นักเรียนนักศึกษา:
 
-- **Office Hours**: Monday – Friday, 12:30 – 13:30
-- **Location**: Department of Computer Technology Staff Office, Building 5
-- **Consultation Scope**: Academic inquiries, laboratory assignment assistance, makeup practical sessions, and technical project mentoring.
+- **ช่วงเวลาให้คำปรึกษา**: วันจันทร์ – วันศุกร์ เวลา 12:30 – 13:30 น.
+- **สถานที่**: สำนักงานแผนกวิชาเทคโนโลยีคอมพิวเตอร์ อาคาร 5
+- **ขอบข่ายการให้คำปรึกษา**: สอบถามเนื้อหาบทเรียน ชดเชยการฝึกปฏิบัติการคอมพิวเตอร์ และให้คำปรึกษาโครงงานวิชาชีพ
 `,
         tocAnchors: JSON.stringify([
-          { id: "weekly-teaching-timetable", text: "Weekly Teaching Timetable", level: 2, enabled: true },
-          { id: "teaching-load-summary", text: "Teaching Load Summary", level: 2, enabled: true },
-          { id: "instructional-preparation-and-office-hours", text: "Instructional Preparation and Office Hours", level: 2, enabled: true },
+          { id: "weekly-timetable", text: "ตารางสอนประจำสัปดาห์ (Weekly Timetable)", level: 2, enabled: true },
+          { id: "teaching-load-summary", text: "สรุปภาระงานสอนประจำสัปดาห์ (Teaching Load Summary)", level: 2, enabled: true },
+          { id: "office-hours", text: "เวลาเตรียมการสอนและให้คำปรึกษา (Office Hours)", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["schedule", "timetable", "teaching", "hours", "periods", "classes", "load", "ปวช", "ปวส"]),
+        searchKeywords: JSON.stringify(["ตารางสอน", "ตารางเรียน", "คาบสอน", "ชั่วโมงสอน", "ภาระงานสอน", "ปวช", "ปวส", "1 ชทค 1", "1 ชทค 2", "1 สทค 2", "2 สทค 4"]),
         order: 4,
         isPublished: true,
         createdAt: new Date().toISOString(),
