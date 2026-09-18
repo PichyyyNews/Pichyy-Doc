@@ -86,8 +86,41 @@ export function DocContent({
   const prevPage = currentIndex > 0 ? allPages[currentIndex - 1] : null;
   const nextPage = currentIndex < allPages.length - 1 ? allPages[currentIndex + 1] : null;
 
-  // Track heading ID indices
-  let headingCounter = 0;
+  // Pure heading text extractor
+  const getHeadingText = (nodes: React.ReactNode): string => {
+    if (typeof nodes === "string") return nodes;
+    if (typeof nodes === "number") return String(nodes);
+    if (Array.isArray(nodes)) return nodes.map(getHeadingText).join("");
+    if (React.isValidElement(nodes)) {
+      return getHeadingText((nodes.props as any)?.children);
+    }
+    return "";
+  };
+
+  // Pure heading anchor resolution
+  const findHeadingAnchor = (children: React.ReactNode, level: number) => {
+    const text = getHeadingText(children).trim();
+    const clean = text.replace(/[`*_~]/g, "").trim().toLowerCase();
+
+    // 1. Match by text and heading level
+    const matched = tocAnchors.find(
+      (a) => a.text.trim().toLowerCase() === clean && a.level === level
+    );
+    if (matched) return matched;
+
+    // 2. Match by text only
+    const textMatch = tocAnchors.find(
+      (a) => a.text.trim().toLowerCase() === clean
+    );
+    if (textMatch) return textMatch;
+
+    // 3. Deterministic fallback slug
+    const fallbackId = clean
+      .replace(/[^\w\s-]/g, "")
+      .trim()
+      .replace(/\s+/g, "-");
+    return { id: fallbackId || `heading-${level}`, text };
+  };
 
   // Gallery Lightbox State
   const [lightboxState, setLightboxState] = useState<{
@@ -104,7 +137,7 @@ export function DocContent({
       </h2>
     ),
     h2: ({ children }: any) => {
-      const anchor = tocAnchors[headingCounter++];
+      const anchor = findHeadingAnchor(children, 2);
       const id = anchor?.id;
       return (
         <h2
@@ -125,7 +158,7 @@ export function DocContent({
       );
     },
     h3: ({ children }: any) => {
-      const anchor = tocAnchors[headingCounter++];
+      const anchor = findHeadingAnchor(children, 3);
       const id = anchor?.id;
       return (
         <h3
