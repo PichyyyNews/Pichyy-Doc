@@ -11,18 +11,27 @@ const STORE_FILE = path.join(DATA_DIR, "docs-store.json");
 
 const INITIAL_DATA: DocSpaceItem[] = [
   {
-    id: "space-introduction",
-    name: "Introduction",
-    slug: "introduction",
-    description: "Personal biography, academic background, and teaching practicum at Lopburi Technical College.",
+    id: "space-teaching-practicum",
+    name: "Teaching Practicum",
+    slug: "teaching-practicum",
+    description: "Educational institution teaching practicum documentation, lesson plans, and portfolio.",
     order: 1,
     isDefault: true,
-    categories: [],
+    categories: [
+      {
+        id: "cat-introduction",
+        docSpaceId: "space-teaching-practicum",
+        name: "Introduction",
+        slug: "introduction",
+        order: 1,
+        isCollapsed: false,
+      },
+    ],
     pages: [
       {
         id: "page-about",
-        docSpaceId: "space-introduction",
-        categoryId: undefined,
+        docSpaceId: "space-teaching-practicum",
+        categoryId: "cat-introduction",
         title: "About Me",
         slug: "about",
         description: "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
@@ -71,8 +80,8 @@ I am actively engaged in my **Educational Institution Teaching Practicum** (‡∏Å‡
       },
       {
         id: "page-college",
-        docSpaceId: "space-introduction",
-        categoryId: undefined,
+        docSpaceId: "space-teaching-practicum",
+        categoryId: "cat-introduction",
         title: "About the College",
         slug: "college",
         description: "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",

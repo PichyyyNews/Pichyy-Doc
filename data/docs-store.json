@@ -1,17 +1,26 @@
 [
   {
-    "id": "space-introduction",
-    "name": "Introduction",
-    "slug": "introduction",
-    "description": "Personal biography, academic background, and teaching practicum at Lopburi Technical College.",
+    "id": "space-teaching-practicum",
+    "name": "Teaching Practicum",
+    "slug": "teaching-practicum",
+    "description": "Educational institution teaching practicum documentation, lesson plans, and portfolio.",
     "order": 1,
     "isDefault": true,
-    "categories": [],
+    "categories": [
+      {
+        "id": "cat-introduction",
+        "docSpaceId": "space-teaching-practicum",
+        "name": "Introduction",
+        "slug": "introduction",
+        "order": 1,
+        "isCollapsed": false
+      }
+    ],
     "pages": [
       {
         "id": "page-about",
-        "docSpaceId": "space-introduction",
-        "categoryId": null,
+        "docSpaceId": "space-teaching-practicum",
+        "categoryId": "cat-introduction",
         "title": "About Me",
         "slug": "about",
         "description": "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
@@ -21,12 +30,12 @@
         "order": 1,
         "isPublished": true,
         "createdAt": "2026-09-18T12:55:00.000Z",
-        "updatedAt": "2026-09-18T12:55:00.000Z"
+        "updatedAt": "2026-09-18T13:10:00.000Z"
       },
       {
         "id": "page-college",
-        "docSpaceId": "space-introduction",
-        "categoryId": null,
+        "docSpaceId": "space-teaching-practicum",
+        "categoryId": "cat-introduction",
         "title": "About the College",
         "slug": "college",
         "description": "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",
@@ -36,7 +45,7 @@
         "order": 2,
         "isPublished": true,
         "createdAt": "2026-09-18T12:55:00.000Z",
-        "updatedAt": "2026-09-18T12:55:00.000Z"
+        "updatedAt": "2026-09-18T13:10:00.000Z"
       }
     ]
   }
