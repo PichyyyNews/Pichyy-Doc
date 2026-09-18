@@ -9,18 +9,8 @@ export function ThemeToggle() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(false);
-    const timer = setTimeout(() => setMounted(true), 10);
-    return () => clearTimeout(timer);
+    setMounted(true);
   }, []);
-
-  if (!mounted) {
-    return (
-      <div className="w-8 h-8 rounded flex items-center justify-center text-kumo-subtle">
-        <Desktop weight="thin" size={18} />
-      </div>
-    );
-  }
 
   const cycleTheme = () => {
     if (theme === "system") {
@@ -33,6 +23,7 @@ export function ThemeToggle() {
   };
 
   const getLabel = () => {
+    if (!mounted) return "Toggle theme";
     if (theme === "system") return "Theme: System";
     if (theme === "dark") return "Theme: Dark";
     return "Theme: Light";
@@ -40,12 +31,16 @@ export function ThemeToggle() {
 
   return (
     <button
+      type="button"
       onClick={cycleTheme}
       title={getLabel()}
       aria-label={getLabel()}
-      className="w-8 h-8 rounded flex items-center justify-center text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kumo-brand select-none"
+      suppressHydrationWarning
+      className="w-8 h-8 rounded flex items-center justify-center text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-kumo-brand select-none transition-none"
     >
-      {theme === "system" ? (
+      {!mounted ? (
+        <Desktop weight="thin" size={18} />
+      ) : theme === "system" ? (
         <Desktop weight="thin" size={18} />
       ) : resolvedTheme === "dark" ? (
         <Moon weight="thin" size={18} />

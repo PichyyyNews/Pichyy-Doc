@@ -180,10 +180,11 @@ export function DocContent({
     },
     hr: () => <hr className="my-8 border-kumo-line clear-both" />,
     p: ({ children }: any) => (
-      <p className="text-sm leading-relaxed mb-4 text-kumo-default">
+      <div className="text-sm leading-relaxed mb-4 text-kumo-default">
         {children}
-      </p>
+      </div>
     ),
+    pre: ({ children }: any) => <>{children}</>,
     ul: ({ children }: any) => (
       <ul className="list-disc pl-5 mb-4 text-sm space-y-1.5 text-kumo-default">
         {children}
