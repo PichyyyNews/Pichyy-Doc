@@ -1,137 +1,42 @@
 [
   {
-    "id": "space-dev-docs",
-    "name": "Developer Docs",
-    "slug": "dev-docs",
-    "description": "Internal engineering documentation and architecture guidelines.",
+    "id": "space-introduction",
+    "name": "Introduction",
+    "slug": "introduction",
+    "description": "Personal biography, academic background, and teaching practicum at Lopburi Technical College.",
     "order": 1,
     "isDefault": true,
-    "categories": [
-      {
-        "id": "cat-getting-started",
-        "docSpaceId": "space-dev-docs",
-        "name": "Getting Started",
-        "slug": "getting-started",
-        "order": 1,
-        "isCollapsed": false
-      },
-      {
-        "id": "cat-core-arch",
-        "docSpaceId": "space-dev-docs",
-        "name": "Core Architecture",
-        "slug": "core-architecture",
-        "order": 2,
-        "isCollapsed": false
-      },
-      {
-        "id": "cat-components",
-        "docSpaceId": "space-dev-docs",
-        "name": "Components",
-        "slug": "components",
-        "order": 3,
-        "isCollapsed": false
-      }
-    ],
+    "categories": [],
     "pages": [
       {
-        "id": "page-overview",
-        "docSpaceId": "space-dev-docs",
-        "categoryId": "cat-getting-started",
-        "title": "Overview",
-        "slug": "overview",
-        "description": "Welcome to the central developer documentation portal.",
-        "content": "\n:::gallery cols=4 ratio=4:3 border=true\n![cat-7152692_640](/uploads/cat-7152692_640-1789626988148-2gm9k.jpg)\n![03](/uploads/03-1789626997322-ako2v.jpg)\n![images (1)](/uploads/images1-1789627002836-73zp2.jpg)\n:::\n\n\n\nWelcome to the central engineering documentation. This system provides developer specifications, internal guidelines, and design system components.\n\n## What is this platform?\n\n![sydney-b-Qx69-7box6U-unsplash](/uploads/sydney-b-qx69-7box6u-1789623000502-59lux.jpg#border=false&width=45%&align=right&wrap=true)\nThis platform serves as our internal single source of truth for technical architecture, development standards, and reusable UI components across all engineering initiatives. By maintaining a centralized hub, teams can align on unified best practices, rapid prototyping, and consistent Kumo UI styling across all administrative workflows.\n\n## Core principles\n- **High performance**: Fast response times and edge caching.\n- **Utilitarian UI**: Clean hairline borders, standard 14px typography, and zero clutter.\n- **Strict standards**: Consistency across all internal tooling.\n\n### Key technologies\n- **Next.js 15 (App Router)**: Full-stack React framework.\n- **Cloudflare Kumo UI**: Authentic design system tokens and components.\n- **PostgreSQL & Prisma**: Robust data persistence.\n\n## Design gallery\n\nExplore our component design systems and visual styling examples below.\n\n:::gallery cols=3 ratio=16:9 border=true\n![Cupcake Architecture Preview](/uploads/sydney-b-qx69-7box6u-1789623000502-59lux.jpg)\n![Cat Standard Tile](/uploads/cat-7152692_640-1789623649205-h31ob.jpg)\n![Munchkin Responsive View](/uploads/longhairedmunchkin-1789622727977-qdhrp.jpg)\n:::\n",
-        "tocAnchors": "[{\"id\":\"what-is-this-platform\",\"text\":\"What is this platform?\",\"level\":2,\"enabled\":true},{\"id\":\"core-principles\",\"text\":\"Core principles\",\"level\":2,\"enabled\":true},{\"id\":\"key-technologies\",\"text\":\"Key technologies\",\"level\":3,\"enabled\":true},{\"id\":\"design-gallery\",\"text\":\"Design gallery\",\"level\":2,\"enabled\":true}]",
-        "searchKeywords": "[\"overview\",\"introduction\",\"welcome\",\"getting started\"]",
+        "id": "page-about",
+        "docSpaceId": "space-introduction",
+        "categoryId": null,
+        "title": "About Me",
+        "slug": "about",
+        "description": "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
+        "content": "# About Me\n\n> Welcome to my teaching practicum portfolio and documentation portal. This section outlines my personal background, education, and current academic standing.\n\n## Personal Profile\n\n- **Full Name**: Mr. Pichayut Sombun (นาย พิชญุตย์ สมบุญ)\n- **Role**: Pre-Service Teacher / Student Teacher (นักศึกษาฝึกประสบการณ์วิชาชีพครู)\n- **Academic Year**: 3rd Year Undergraduate (ชั้นปีที่ 3)\n- **Student ID**: `672041510113`\n- **Program / Branch**: TCT DERA\n- **Status**: Currently undergoing Educational Institution Teaching Practicum\n\n## Academic Background\n\nI am currently pursuing a Bachelor of Science in Technical Education at King Mongkut's University of Technology North Bangkok:\n\n- **Department**: Department of Computer Education (ภาควิชาคอมพิวเตอร์ศึกษา)\n- **Faculty**: Faculty of Technical Education (คณะครุศาสตร์อุตสาหกรรม)\n- **University**: King Mongkut's University of Technology North Bangkok (KMUTNB) (มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ)\n\n## Current Practicum Status\n\nI am actively engaged in my **Educational Institution Teaching Practicum** (การฝึกสอนสถานศึกษา). This practicum provides real-world pedagogical training, curriculum delivery, and instructional design experience in an accredited vocational institution.\n\n### Objectives of the Practicum\n\n1. **Instructional Delivery**: Deliver structured computer education curricula adhering to modern technical standards.\n2. **Pedagogical Practice**: Implement effective classroom management, technical demonstrations, and student assessments.\n3. **Mentorship & Guidance**: Support students in developing practical computer skills, ethics, and professional technical competencies.\n",
+        "tocAnchors": "[{\"id\":\"personal-profile\",\"text\":\"Personal Profile\",\"level\":2,\"enabled\":true},{\"id\":\"academic-background\",\"text\":\"Academic Background\",\"level\":2,\"enabled\":true},{\"id\":\"current-practicum-status\",\"text\":\"Current Practicum Status\",\"level\":2,\"enabled\":true},{\"id\":\"objectives-of-the-practicum\",\"text\":\"Objectives of the Practicum\",\"level\":3,\"enabled\":true}]",
+        "searchKeywords": "[\"about\",\"profile\",\"pichayut\",\"sombun\",\"kmutnb\",\"computer education\",\"tct\"]",
         "order": 1,
         "isPublished": true,
-        "createdAt": "2026-09-17T04:34:06.173Z",
-        "updatedAt": "2026-09-17T06:36:53.098Z"
+        "createdAt": "2026-09-18T12:55:00.000Z",
+        "updatedAt": "2026-09-18T12:55:00.000Z"
       },
       {
-        "id": "page-contributing",
-        "docSpaceId": "space-dev-docs",
-        "categoryId": "cat-getting-started",
-        "title": "Contributing",
-        "slug": "contributing",
-        "description": "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.",
-        "content": "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.\n\n## Before You Start\nFor non-trivial changes, start with alignment before coding:\n- Comment on an existing issue or open one first.\n- Confirm scope, API direction, and migration impact.\n- For small fixes/docs tweaks, you can go straight to a PR.\n\n## 1. Get Set Up Once\nFrom repo root:\n```bash\npnpm install\npnpm dev\n```\n\n### Repository Access and Branching\nEnsure you have cloned the repository and created a new branch following the standard convention:\n```bash\ngit checkout -b feat/my-new-feature\n```\n\n## 2. Pick the Right Contribution Type\nBefore writing code, decide whether this is a component, primitive, fix, or documentation change:\n- **Component**: Reusable design system block.\n- **Fix**: Bug repair without changing API signatures.\n- **Doc update**: Adding guides and code snippets.\n\n## 3. Start the Dev Loop\nRun the local development server:\n```bash\nnpm run dev\n```\nChanges are immediately reflected via hot module reloading.\n\n## 4. Implement the Change\nFollow the official Cloudflare design rules:\n1. Always use 14px for content text.\n2. Always sentence case headings.\n3. Use `font-semibold` for headings and `font-medium` for bold text—never use `font-bold`.\n4. Never transition colors for hover states.\n\n## 5. Run Validation Before PR\nRun the test suite and type check:\n```bash\nnpm run build\n```\n\n## 6. Handle Changesets Correctly\nGenerate a changeset for your patch or minor bump.\n\n## 7. Open and Maintain the PR\nSubmit your pull request and link corresponding issues.\n\n## PR Previews and Tests\nAutomated checks will run on every push to your branch.\n\n## Release Process (How Your Change Ships)\nMerged changes are automatically versioned and deployed to internal registry.\n\n## Practical Guidelines\nKeep PRs focused on a single responsibility to speed up code reviews.\n\n## Related Docs\nSee Architecture overview and Component specifications.\n",
-        "tocAnchors": "[{\"id\":\"before-you-start\",\"text\":\"Before You Start\",\"level\":2,\"enabled\":true},{\"id\":\"1-get-set-up-once\",\"text\":\"1. Get Set Up Once\",\"level\":2,\"enabled\":true},{\"id\":\"repository-access-and-branching\",\"text\":\"Repository Access and Branching\",\"level\":3,\"enabled\":true},{\"id\":\"2-pick-the-right-contribution-type\",\"text\":\"2. Pick the Right Contribution Type\",\"level\":2,\"enabled\":true},{\"id\":\"3-start-the-dev-loop\",\"text\":\"3. Start the Dev Loop\",\"level\":2,\"enabled\":true},{\"id\":\"4-implement-the-change\",\"text\":\"4. Implement the Change\",\"level\":2,\"enabled\":true},{\"id\":\"5-run-validation-before-pr\",\"text\":\"5. Run Validation Before PR\",\"level\":2,\"enabled\":true},{\"id\":\"6-handle-changesets-correctly\",\"text\":\"6. Handle Changesets Correctly\",\"level\":2,\"enabled\":true},{\"id\":\"7-open-and-maintain-the-pr\",\"text\":\"7. Open and Maintain the PR\",\"level\":2,\"enabled\":true},{\"id\":\"pr-previews-and-tests\",\"text\":\"PR Previews and Tests\",\"level\":2,\"enabled\":true},{\"id\":\"release-process-how-your-change-ships\",\"text\":\"Release Process (How Your Change Ships)\",\"level\":2,\"enabled\":true},{\"id\":\"practical-guidelines\",\"text\":\"Practical Guidelines\",\"level\":2,\"enabled\":true},{\"id\":\"related-docs\",\"text\":\"Related Docs\",\"level\":2,\"enabled\":true}]",
-        "searchKeywords": "[\"contributing\",\"git\",\"setup\",\"pull request\",\"pr\",\"workflow\"]",
+        "id": "page-college",
+        "docSpaceId": "space-introduction",
+        "categoryId": null,
+        "title": "About the College",
+        "slug": "college",
+        "description": "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",
+        "content": "# About the College\n\n> Institutional overview of Lopburi Technical College, host department information, and assigned teaching coursework.\n\n## Institutional Profile\n\n- **Institution Name**: Lopburi Technical College (วิทยาลัยเทคนิคลพบุรี)\n- **Address**: 323 Narai Maharach Road, Thale Chup Sorn Subdistrict, Mueang Lop Buri District, Lop Buri 15000, Thailand\n- **Telephone**: `036-411-083` / `+66 36 411 083`\n- **Jurisdiction**: Vocational Education Commission, Ministry of Education, Thailand\n\n## Host Department\n\nI am stationed at the **Department of Computer Technology** (แผนกวิชาเทคโนโลยีคอมพิวเตอร์), which focuses on providing technical and vocational skills across hardware, networking, programming, and IT applications.\n\n## Teaching Assignments\n\nDuring this practicum period, I am assigned to teach students across two academic tiers: the **Vocational Certificate (ปวช.)** and the **High Vocational Certificate (ปวส.)**, encompassing a total of **4 classroom cohorts**:\n\n### Vocational Certificate Level (ปวช.)\n- **Program**: Computer Technical (ช่างเทคนิคคอมพิวเตอร์)\n- **Grade**: Year 1 (ปวช. 1)\n- **Classrooms (2 Rooms)**:\n  - `1 ชทค 1` (Section 1)\n  - `1 ชทค 2` (Section 2)\n\n### High Vocational Certificate Level (ปวส.)\n- **Program**: Computer Technology (เทคโนโลยีคอมพิวเตอร์)\n- **Grade**: Year 1 (ปวส. 1)\n  - **Classroom (1 Room)**: `1 สทค 2`\n- **Grade**: Year 2 (ปวส. 2)\n  - **Classroom (1 Room)**: `2 สทค 4`\n\n## Summary of Teaching Load\n\n| Level | Program / Major | Academic Year | Section Code | Cohort Name |\n| :--- | :--- | :--- | :--- | :--- |\n| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 1 | `1 ชทค 1` |\n| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 2 | `1 ชทค 2` |\n| **High Vocational (ปวส.)** | Computer Technology | Year 1 | Section 2 | `1 สทค 2` |\n| **High Vocational (ปวส.)** | Computer Technology | Year 2 | Section 4 | `2 สทค 4` |\n",
+        "tocAnchors": "[{\"id\":\"institutional-profile\",\"text\":\"Institutional Profile\",\"level\":2,\"enabled\":true},{\"id\":\"host-department\",\"text\":\"Host Department\",\"level\":2,\"enabled\":true},{\"id\":\"teaching-assignments\",\"text\":\"Teaching Assignments\",\"level\":2,\"enabled\":true},{\"id\":\"vocational-certificate-level\",\"text\":\"Vocational Certificate Level (ปวช.)\",\"level\":3,\"enabled\":true},{\"id\":\"high-vocational-certificate-level\",\"text\":\"High Vocational Certificate Level (ปวส.)\",\"level\":3,\"enabled\":true},{\"id\":\"summary-of-teaching-load\",\"text\":\"Summary of Teaching Load\",\"level\":2,\"enabled\":true}]",
+        "searchKeywords": "[\"college\",\"lopburi\",\"technical\",\"practicum\",\"teaching\",\"computer technology\",\"ปวช\",\"ปวส\"]",
         "order": 2,
         "isPublished": true,
-        "createdAt": "2026-09-17T04:34:06.175Z",
-        "updatedAt": "2026-09-17T04:34:06.175Z"
-      }
-    ]
-  },
-  {
-    "id": "space-company-wiki",
-    "name": "Company Wiki",
-    "slug": "company-wiki",
-    "description": "Internal company policies, handbook, and team directories.",
-    "order": 2,
-    "isDefault": false,
-    "categories": [
-      {
-        "id": "cat-handbook",
-        "docSpaceId": "space-company-wiki",
-        "name": "General Handbook",
-        "slug": "general-handbook",
-        "order": 1,
-        "isCollapsed": false
-      }
-    ],
-    "pages": [
-      {
-        "id": "page-welcome-wiki",
-        "docSpaceId": "space-company-wiki",
-        "categoryId": "cat-handbook",
-        "title": "Company Handbook",
-        "slug": "handbook",
-        "description": "General guidelines, communication etiquette, and team resources.",
-        "content": "Welcome to our Company Wiki. Here you will find policies, team directories, and standard operating procedures.\n\n## Communication guidelines\nWe prioritize asynchronous communication:\n- Write clear issue descriptions.\n- Document decisions publicly.\n\n## Tools & Access\nCheck the IT portal for VPN credentials and password managers.\n",
-        "tocAnchors": "[{\"id\":\"communication-guidelines\",\"text\":\"Communication guidelines\",\"level\":2,\"enabled\":true},{\"id\":\"tools-access\",\"text\":\"Tools & Access\",\"level\":2,\"enabled\":true}]",
-        "searchKeywords": "[\"handbook\",\"company\",\"wiki\",\"communication\",\"policies\"]",
-        "order": 1,
-        "isPublished": true,
-        "createdAt": "2026-09-17T04:34:06.175Z",
-        "updatedAt": "2026-09-17T04:34:06.175Z"
-      }
-    ]
-  },
-  {
-    "id": "space-api-ref",
-    "name": "API Reference",
-    "slug": "api-reference",
-    "description": "REST API endpoints, authentication tokens, and request schemas.",
-    "order": 3,
-    "isDefault": false,
-    "categories": [
-      {
-        "id": "cat-endpoints",
-        "docSpaceId": "space-api-ref",
-        "name": "Core Endpoints",
-        "slug": "core-endpoints",
-        "order": 1,
-        "isCollapsed": false
-      }
-    ],
-    "pages": [
-      {
-        "id": "page-auth-api",
-        "docSpaceId": "space-api-ref",
-        "categoryId": "cat-endpoints",
-        "title": "Authentication",
-        "slug": "authentication",
-        "description": "API authentication via Bearer tokens.",
-        "content": "All requests to the REST API must be authenticated using an API token in the Authorization header.\n\n## Request format\n```bash\ncurl -H \"Authorization: Bearer <YOUR_API_TOKEN>\" \\\n  https://api.internal.company.com/v1/user\n```\n\n## Error responses\n- `401 Unauthorized`: Missing or invalid token.\n- `403 Forbidden`: Token lacks required permissions.\n",
-        "tocAnchors": "[{\"id\":\"request-format\",\"text\":\"Request format\",\"level\":2,\"enabled\":true},{\"id\":\"error-responses\",\"text\":\"Error responses\",\"level\":2,\"enabled\":true}]",
-        "searchKeywords": "[\"api\",\"rest\",\"auth\",\"token\",\"endpoints\"]",
-        "order": 1,
-        "isPublished": true,
-        "createdAt": "2026-09-17T04:34:06.175Z",
-        "updatedAt": "2026-09-17T04:34:06.175Z"
+        "createdAt": "2026-09-18T12:55:00.000Z",
+        "updatedAt": "2026-09-18T12:55:00.000Z"
       }
     ]
   }

@@ -11,325 +11,123 @@ const STORE_FILE = path.join(DATA_DIR, "docs-store.json");
 
 const INITIAL_DATA: DocSpaceItem[] = [
   {
-    id: "space-dev-docs",
-    name: "Developer Docs",
-    slug: "dev-docs",
-    description: "Internal engineering documentation and architecture guidelines.",
+    id: "space-introduction",
+    name: "Introduction",
+    slug: "introduction",
+    description: "Personal biography, academic background, and teaching practicum at Lopburi Technical College.",
     order: 1,
     isDefault: true,
-    categories: [
+    categories: [],
+    pages: [
       {
-        id: "cat-getting-started",
-        docSpaceId: "space-dev-docs",
-        name: "Getting Started",
-        slug: "getting-started",
+        id: "page-about",
+        docSpaceId: "space-introduction",
+        categoryId: undefined,
+        title: "About Me",
+        slug: "about",
+        description: "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
+        content: `# About Me
+
+> Welcome to my teaching practicum portfolio and documentation portal. This section outlines my personal background, education, and current academic standing.
+
+## Personal Profile
+
+- **Full Name**: Mr. Pichayut Sombun (นาย พิชญุตย์ สมบุญ)
+- **Role**: Pre-Service Teacher / Student Teacher (นักศึกษาฝึกประสบการณ์วิชาชีพครู)
+- **Academic Year**: 3rd Year Undergraduate (ชั้นปีที่ 3)
+- **Student ID**: \`672041510113\`
+- **Program / Branch**: TCT DERA
+- **Status**: Currently undergoing Educational Institution Teaching Practicum
+
+## Academic Background
+
+I am currently pursuing a Bachelor of Science in Technical Education at King Mongkut's University of Technology North Bangkok:
+
+- **Department**: Department of Computer Education (ภาควิชาคอมพิวเตอร์ศึกษา)
+- **Faculty**: Faculty of Technical Education (คณะครุศาสตร์อุตสาหกรรม)
+- **University**: King Mongkut's University of Technology North Bangkok (KMUTNB) (มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ)
+
+## Current Practicum Status
+
+I am actively engaged in my **Educational Institution Teaching Practicum** (การฝึกสอนสถานศึกษา). This practicum provides real-world pedagogical training, curriculum delivery, and instructional design experience in an accredited vocational institution.
+
+### Objectives of the Practicum
+
+1. **Instructional Delivery**: Deliver structured computer education curricula adhering to modern technical standards.
+2. **Pedagogical Practice**: Implement effective classroom management, technical demonstrations, and student assessments.
+3. **Mentorship & Guidance**: Support students in developing practical computer skills, ethics, and professional technical competencies.
+`,
+        tocAnchors: JSON.stringify([
+          { id: "personal-profile", text: "Personal Profile", level: 2, enabled: true },
+          { id: "academic-background", text: "Academic Background", level: 2, enabled: true },
+          { id: "current-practicum-status", text: "Current Practicum Status", level: 2, enabled: true },
+          { id: "objectives-of-the-practicum", text: "Objectives of the Practicum", level: 3, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["about", "profile", "pichayut", "sombun", "kmutnb", "computer education", "tct"]),
         order: 1,
-        isCollapsed: false,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
       },
       {
-        id: "cat-core-arch",
-        docSpaceId: "space-dev-docs",
-        name: "Core Architecture",
-        slug: "core-architecture",
+        id: "page-college",
+        docSpaceId: "space-introduction",
+        categoryId: undefined,
+        title: "About the College",
+        slug: "college",
+        description: "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",
+        content: `# About the College
+
+> Institutional overview of Lopburi Technical College, host department information, and assigned teaching coursework.
+
+## Institutional Profile
+
+- **Institution Name**: Lopburi Technical College (วิทยาลัยเทคนิคลพบุรี)
+- **Address**: 323 Narai Maharach Road, Thale Chup Sorn Subdistrict, Mueang Lop Buri District, Lop Buri 15000, Thailand
+- **Telephone**: \`036-411-083\` / \`+66 36 411 083\`
+- **Jurisdiction**: Vocational Education Commission, Ministry of Education, Thailand
+
+## Host Department
+
+I am stationed at the **Department of Computer Technology** (แผนกวิชาเทคโนโลยีคอมพิวเตอร์), which focuses on providing technical and vocational skills across hardware, networking, programming, and IT applications.
+
+## Teaching Assignments
+
+During this practicum period, I am assigned to teach students across two academic tiers: the **Vocational Certificate (ปวช.)** and the **High Vocational Certificate (ปวส.)**, encompassing a total of **4 classroom cohorts**:
+
+### Vocational Certificate Level (ปวช.)
+- **Program**: Computer Technical (ช่างเทคนิคคอมพิวเตอร์)
+- **Grade**: Year 1 (ปวช. 1)
+- **Classrooms (2 Rooms)**:
+  - \`1 ชทค 1\` (Section 1)
+  - \`1 ชทค 2\` (Section 2)
+
+### High Vocational Certificate Level (ปวส.)
+- **Program**: Computer Technology (เทคโนโลยีคอมพิวเตอร์)
+- **Grade**: Year 1 (ปวส. 1)
+  - **Classroom (1 Room)**: \`1 สทค 2\`
+- **Grade**: Year 2 (ปวส. 2)
+  - **Classroom (1 Room)**: \`2 สทค 4\`
+
+## Summary of Teaching Load
+
+| Level | Program / Major | Academic Year | Section Code | Cohort Name |
+| :--- | :--- | :--- | :--- | :--- |
+| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 1 | \`1 ชทค 1\` |
+| **Vocational (ปวช.)** | Computer Technical | Year 1 | Section 2 | \`1 ชทค 2\` |
+| **High Vocational (ปวส.)** | Computer Technology | Year 1 | Section 2 | \`1 สทค 2\` |
+| **High Vocational (ปวส.)** | Computer Technology | Year 2 | Section 4 | \`2 สทค 4\` |
+`,
+        tocAnchors: JSON.stringify([
+          { id: "institutional-profile", text: "Institutional Profile", level: 2, enabled: true },
+          { id: "host-department", text: "Host Department", level: 2, enabled: true },
+          { id: "teaching-assignments", text: "Teaching Assignments", level: 2, enabled: true },
+          { id: "vocational-certificate-level", text: "Vocational Certificate Level (ปวช.)", level: 3, enabled: true },
+          { id: "high-vocational-certificate-level", text: "High Vocational Certificate Level (ปวส.)", level: 3, enabled: true },
+          { id: "summary-of-teaching-load", text: "Summary of Teaching Load", level: 2, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["college", "lopburi", "technical", "practicum", "teaching", "computer technology", "ปวช", "ปวส"]),
         order: 2,
-        isCollapsed: false,
-      },
-      {
-        id: "cat-components",
-        docSpaceId: "space-dev-docs",
-        name: "Components",
-        slug: "components",
-        order: 3,
-        isCollapsed: false,
-      },
-    ],
-    pages: [
-      {
-        id: "page-overview",
-        docSpaceId: "space-dev-docs",
-        categoryId: "cat-getting-started",
-        title: "Overview",
-        slug: "overview",
-        description: "Welcome to the central developer documentation portal.",
-        content: `Welcome to the central engineering documentation. This system provides developer specifications, internal guidelines, and design system components.
-
-## What is this platform?
-This platform serves as our internal single source of truth for technical architecture, development standards, and reusable UI components.
-
-## Core principles
-- **High performance**: Fast response times and edge caching.
-- **Utilitarian UI**: Clean hairline borders, standard 14px typography, and zero clutter.
-- **Strict standards**: Consistency across all internal tooling.
-
-### Key technologies
-- **Next.js 15 (App Router)**: Full-stack React framework.
-- **Cloudflare Kumo UI**: Authentic design system tokens and components.
-- **PostgreSQL & Prisma**: Robust data persistence.
-`,
-        tocAnchors: JSON.stringify([
-          { id: "what-is-this-platform", text: "What is this platform?", level: 2, enabled: true },
-          { id: "core-principles", text: "Core principles", level: 2, enabled: true },
-          { id: "key-technologies", text: "Key technologies", level: 3, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["overview", "introduction", "welcome", "getting started"]),
-        order: 1,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: "page-contributing",
-        docSpaceId: "space-dev-docs",
-        categoryId: "cat-getting-started",
-        title: "Contributing",
-        slug: "contributing",
-        description: "Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.",
-        content: `Learn how to contribute to Kumo, from setup and workflows to PR and release guidelines. Everything you need for setup, development, quality checks, and PR process is documented here.
-
-## Before You Start
-For non-trivial changes, start with alignment before coding:
-- Comment on an existing issue or open one first.
-- Confirm scope, API direction, and migration impact.
-- For small fixes/docs tweaks, you can go straight to a PR.
-
-## 1. Get Set Up Once
-From repo root:
-\`\`\`bash
-pnpm install
-pnpm dev
-\`\`\`
-
-### Repository Access and Branching
-Ensure you have cloned the repository and created a new branch following the standard convention:
-\`\`\`bash
-git checkout -b feat/my-new-feature
-\`\`\`
-
-## 2. Pick the Right Contribution Type
-Before writing code, decide whether this is a component, primitive, fix, or documentation change:
-- **Component**: Reusable design system block.
-- **Fix**: Bug repair without changing API signatures.
-- **Doc update**: Adding guides and code snippets.
-
-## 3. Start the Dev Loop
-Run the local development server:
-\`\`\`bash
-npm run dev
-\`\`\`
-Changes are immediately reflected via hot module reloading.
-
-## 4. Implement the Change
-Follow the official Cloudflare design rules:
-1. Always use 14px for content text.
-2. Always sentence case headings.
-3. Use \`font-semibold\` for headings and \`font-medium\` for bold text—never use \`font-bold\`.
-4. Never transition colors for hover states.
-
-## 5. Run Validation Before PR
-Run the test suite and type check:
-\`\`\`bash
-npm run build
-\`\`\`
-
-## 6. Handle Changesets Correctly
-Generate a changeset for your patch or minor bump.
-
-## 7. Open and Maintain the PR
-Submit your pull request and link corresponding issues.
-
-## PR Previews and Tests
-Automated checks will run on every push to your branch.
-
-## Release Process (How Your Change Ships)
-Merged changes are automatically versioned and deployed to internal registry.
-
-## Practical Guidelines
-Keep PRs focused on a single responsibility to speed up code reviews.
-
-## Related Docs
-See Architecture overview and Component specifications.
-`,
-        tocAnchors: JSON.stringify([
-          { id: "before-you-start", text: "Before You Start", level: 2, enabled: true },
-          { id: "1-get-set-up-once", text: "1. Get Set Up Once", level: 2, enabled: true },
-          { id: "repository-access-and-branching", text: "Repository Access and Branching", level: 3, enabled: true },
-          { id: "2-pick-the-right-contribution-type", text: "2. Pick the Right Contribution Type", level: 2, enabled: true },
-          { id: "3-start-the-dev-loop", text: "3. Start the Dev Loop", level: 2, enabled: true },
-          { id: "4-implement-the-change", text: "4. Implement the Change", level: 2, enabled: true },
-          { id: "5-run-validation-before-pr", text: "5. Run Validation Before PR", level: 2, enabled: true },
-          { id: "6-handle-changesets-correctly", text: "6. Handle Changesets Correctly", level: 2, enabled: true },
-          { id: "7-open-and-maintain-the-pr", text: "7. Open and Maintain the PR", level: 2, enabled: true },
-          { id: "pr-previews-and-tests", text: "PR Previews and Tests", level: 2, enabled: true },
-          { id: "release-process-how-your-change-ships", text: "Release Process (How Your Change Ships)", level: 2, enabled: true },
-          { id: "practical-guidelines", text: "Practical Guidelines", level: 2, enabled: true },
-          { id: "related-docs", text: "Related Docs", level: 2, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["contributing", "git", "setup", "pull request", "pr", "workflow"]),
-        order: 2,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: "page-system-design",
-        docSpaceId: "space-dev-docs",
-        categoryId: "cat-core-arch",
-        title: "System Design",
-        slug: "system-design",
-        description: "High-level overview of our architecture, network edge, and data pipelines.",
-        content: `This document explains the high-level architecture of our services.
-
-## Edge layer
-Incoming traffic is terminated at the edge with DDoS mitigation, SSL termination, and routing rules.
-
-## Service topology
-Microservices communicate over gRPC with protobuf definitions.
-
-### Database architecture
-We employ PostgreSQL for relational state and distributed caching for read-heavy workloads.
-`,
-        tocAnchors: JSON.stringify([
-          { id: "edge-layer", text: "Edge layer", level: 2, enabled: true },
-          { id: "service-topology", text: "Service topology", level: 2, enabled: true },
-          { id: "database-architecture", text: "Database architecture", level: 3, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["architecture", "edge", "grpc", "postgres", "topology"]),
-        order: 1,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-      {
-        id: "page-button",
-        docSpaceId: "space-dev-docs",
-        categoryId: "cat-components",
-        title: "Button",
-        slug: "button",
-        description: "Interactive button supporting primary, secondary, destructive, and subtle variants.",
-        content: `Buttons allow users to take actions and make choices with a single tap.
-
-## Variants
-- **Primary**: Use for the primary action on a page or container.
-- **Secondary**: Use for secondary or alternative actions.
-- **Destructive**: Use for dangerous actions like deleting a resource.
-- **Subtle / Ghost**: Use for minimal clutter in toolbars.
-
-## Usage example
-\`\`\`tsx
-import { Button } from "@cloudflare/kumo";
-import { Plus } from "@phosphor-icons/react";
-
-export function Example() {
-  return (
-    <Button variant="primary" icon={<Plus weight="thin" size={16} />}>
-      Add item
-    </Button>
-  );
-}
-\`\`\`
-`,
-        tocAnchors: JSON.stringify([
-          { id: "variants", text: "Variants", level: 2, enabled: true },
-          { id: "usage-example", text: "Usage example", level: 2, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["button", "actions", "component", "ui"]),
-        order: 1,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ],
-  },
-  {
-    id: "space-company-wiki",
-    name: "Company Wiki",
-    slug: "company-wiki",
-    description: "Internal company policies, handbook, and team directories.",
-    order: 2,
-    isDefault: false,
-    categories: [
-      {
-        id: "cat-handbook",
-        docSpaceId: "space-company-wiki",
-        name: "General Handbook",
-        slug: "general-handbook",
-        order: 1,
-        isCollapsed: false,
-      },
-    ],
-    pages: [
-      {
-        id: "page-welcome-wiki",
-        docSpaceId: "space-company-wiki",
-        categoryId: "cat-handbook",
-        title: "Company Handbook",
-        slug: "handbook",
-        description: "General guidelines, communication etiquette, and team resources.",
-        content: `Welcome to our Company Wiki. Here you will find policies, team directories, and standard operating procedures.
-
-## Communication guidelines
-We prioritize asynchronous communication:
-- Write clear issue descriptions.
-- Document decisions publicly.
-
-## Tools & Access
-Check the IT portal for VPN credentials and password managers.
-`,
-        tocAnchors: JSON.stringify([
-          { id: "communication-guidelines", text: "Communication guidelines", level: 2, enabled: true },
-          { id: "tools-access", text: "Tools & Access", level: 2, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["handbook", "company", "wiki", "communication", "policies"]),
-        order: 1,
-        isPublished: true,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      },
-    ],
-  },
-  {
-    id: "space-api-ref",
-    name: "API Reference",
-    slug: "api-reference",
-    description: "REST API endpoints, authentication tokens, and request schemas.",
-    order: 3,
-    isDefault: false,
-    categories: [
-      {
-        id: "cat-endpoints",
-        docSpaceId: "space-api-ref",
-        name: "Core Endpoints",
-        slug: "core-endpoints",
-        order: 1,
-        isCollapsed: false,
-      },
-    ],
-    pages: [
-      {
-        id: "page-auth-api",
-        docSpaceId: "space-api-ref",
-        categoryId: "cat-endpoints",
-        title: "Authentication",
-        slug: "authentication",
-        description: "API authentication via Bearer tokens.",
-        content: `All requests to the REST API must be authenticated using an API token in the Authorization header.
-
-## Request format
-\`\`\`bash
-curl -H "Authorization: Bearer <YOUR_API_TOKEN>" \\
-  https://api.internal.company.com/v1/user
-\`\`\`
-
-## Error responses
-- \`401 Unauthorized\`: Missing or invalid token.
-- \`403 Forbidden\`: Token lacks required permissions.
-`,
-        tocAnchors: JSON.stringify([
-          { id: "request-format", text: "Request format", level: 2, enabled: true },
-          { id: "error-responses", text: "Error responses", level: 2, enabled: true },
-        ]),
-        searchKeywords: JSON.stringify(["api", "rest", "auth", "token", "endpoints"]),
-        order: 1,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
