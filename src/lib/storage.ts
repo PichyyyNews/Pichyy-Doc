@@ -35,9 +35,7 @@ const INITIAL_DATA: DocSpaceItem[] = [
         title: "About Me",
         slug: "about",
         description: "Personal profile, academic background, and student teaching credentials of Pichayut Sombun.",
-        content: `# About Me
-
-> Welcome to my teaching practicum portfolio and documentation portal. This section outlines my personal background, education, and current academic standing.
+        content: `> Welcome to my teaching practicum portfolio and documentation portal. This section outlines my personal background, education, and current academic standing.
 
 ## Personal Profile
 
@@ -85,9 +83,7 @@ I am actively engaged in my **Educational Institution Teaching Practicum** (à¸à
         title: "About the College",
         slug: "college",
         description: "Institutional profile of Lopburi Technical College and assigned teaching practicum responsibilities.",
-        content: `# About the College
-
-> Institutional overview of Lopburi Technical College, host department information, and assigned teaching coursework.
+        content: `> Institutional overview of Lopburi Technical College, host department information, and assigned teaching coursework.
 
 ## Institutional Profile
 

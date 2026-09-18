@@ -131,11 +131,17 @@ export function DocContent({
   const segments = splitMarkdownGalleries(page.content);
 
   const markdownComponents = {
-    h1: ({ children }: any) => (
-      <h2 className="text-2xl font-semibold text-kumo-strong mt-8 mb-4 clear-both">
-        {children}
-      </h2>
-    ),
+    h1: ({ children }: any) => {
+      const text = getHeadingText(children).trim();
+      if (text.toLowerCase() === page.title.trim().toLowerCase()) {
+        return null;
+      }
+      return (
+        <h2 className="text-2xl font-semibold text-kumo-strong mt-8 mb-4 clear-both">
+          {children}
+        </h2>
+      );
+    },
     h2: ({ children }: any) => {
       const anchor = findHeadingAnchor(children, 2);
       const id = anchor?.id;
