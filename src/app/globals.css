@@ -16,6 +16,9 @@
   --kumo-subtle: #6b7280;
   --kumo-strong: #09090b;
   --kumo-glass-bg: rgba(255, 255, 255, 0.82);
+  --kumo-brand: 24 24 27;
+  --kumo-brand-hover: 39 39 42;
+  --kumo-brand-foreground: 255 255 255;
 }
 
 [data-mode="dark"],
@@ -33,6 +36,9 @@
   --kumo-subtle: #9ca3af;
   --kumo-strong: #f9fafb;
   --kumo-glass-bg: rgba(18, 18, 20, 0.82);
+  --kumo-brand: 244 244 245;
+  --kumo-brand-hover: 255 255 255;
+  --kumo-brand-foreground: 9 9 11;
 }
 
 /* Authentic Frosted Glass Navbar */

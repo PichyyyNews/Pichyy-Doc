@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useRef } from "react";
 import {
@@ -397,7 +397,7 @@ export function GallerySettingsModal({
               type="button"
               onClick={handleInsert}
               disabled={images.length === 0}
-              className="flex items-center gap-1.5 px-4 py-1.5 rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white font-medium shadow-xs text-xs disabled:opacity-50"
+              className="flex items-center gap-1.5 px-4 py-1.5 rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground font-medium shadow-xs text-xs disabled:opacity-50"
             >
               <Check weight="thin" size={14} />
               <span>Insert Gallery</span>

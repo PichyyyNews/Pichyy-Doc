@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { TocItem } from "@/lib/types";
+import { Tooltip } from "@/components/ui/Tooltip";
 
 interface OnThisPageProps {
   tocItems: TocItem[];
@@ -83,25 +84,26 @@ export function OnThisPage({
               const isH3 = item.level === 3;
 
               return (
-                <div key={item.id} className="relative flex items-center">
-                  {/* Active Blue Indicator Bar */}
+                <div key={item.id} className="relative flex items-center min-w-0">
+                  {/* Active Monochromatic Indicator Bar */}
                   {isActive && (
-                    <span className="absolute -left-6 top-0 bottom-0 w-[2px] bg-blue-600 rounded-full" />
+                    <span className="absolute -left-6 top-0 bottom-0 w-[2px] bg-kumo-brand rounded-full" />
                   )}
 
                   <a
                     href={`#${item.id}`}
                     onClick={(e) => scrollToHeading(item.id, e)}
-                    className={`transition-none block truncate ${
+                    className={`transition-none block min-w-0 flex-1 ${
                       isH3 ? "pl-4 text-xs" : ""
                     } ${
                       isActive
                         ? "font-semibold text-kumo-strong"
                         : "text-kumo-subtle hover:text-kumo-default"
                     }`}
-                    title={item.text}
                   >
-                    {item.text}
+                    <Tooltip content={item.text} side="left" className="w-full">
+                      <span className="block truncate">{item.text}</span>
+                    </Tooltip>
                   </a>
                 </div>
               );

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DocSpaceItem, CategoryItem, DocPageItem } from "@/lib/types";
 import { SearchModal } from "./SearchModal";
+import { Tooltip } from "@/components/ui/Tooltip";
 import { CaretDown, CaretRight, MagnifyingGlass, X } from "@phosphor-icons/react";
 
 interface DocSidebarProps {
@@ -92,13 +93,15 @@ export function DocSidebar({
             onClick={() => {
               if (isMobile) onMobileClose?.();
             }}
-            className={`px-3 py-1.5 rounded-md text-sm transition-none flex items-center justify-between ${
+            className={`px-3 py-1.5 rounded-md text-sm transition-none flex items-center justify-between min-w-0 ${
               isActive
                 ? "bg-kumo-tint text-kumo-strong font-medium"
                 : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
             }`}
           >
-            <span>{page.title}</span>
+            <Tooltip content={page.title} side="right" className="w-full">
+              <span className="truncate block max-w-[200px]">{page.title}</span>
+            </Tooltip>
           </Link>
         );
       })}
@@ -119,11 +122,13 @@ export function DocSidebar({
             <button
               type="button"
               onClick={() => toggleCategory(cat.id)}
-              className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold text-kumo-strong hover:text-kumo-default transition-none rounded hover:bg-kumo-tint"
+              className="w-full flex items-center justify-between px-2 py-1.5 text-xs font-semibold text-kumo-strong hover:text-kumo-default transition-none rounded hover:bg-kumo-tint min-w-0"
             >
-              <span className="truncate">{cat.name}</span>
+              <Tooltip content={cat.name} side="right" className="min-w-0 flex-1">
+                <span className="truncate block max-w-[170px] text-left">{cat.name}</span>
+              </Tooltip>
               {hasPages && (
-                <span className="text-kumo-subtle">
+                <span className="text-kumo-subtle shrink-0 ml-1">
                   {isCategoryCollapsed ? (
                     <CaretRight weight="thin" size={12} />
                   ) : (
@@ -147,13 +152,15 @@ export function DocSidebar({
                       onClick={() => {
                         if (isMobile) onMobileClose?.();
                       }}
-                      className={`px-2.5 py-1.5 rounded text-sm transition-none truncate ${
+                      className={`px-2.5 py-1.5 rounded text-sm transition-none flex items-center min-w-0 ${
                         isActive
                           ? "bg-kumo-tint text-kumo-strong font-medium"
                           : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
                       }`}
                     >
-                      {page.title}
+                      <Tooltip content={page.title} side="right" className="w-full">
+                        <span className="truncate block max-w-[175px]">{page.title}</span>
+                      </Tooltip>
                     </Link>
                   );
                 })}
@@ -263,18 +270,15 @@ export function DocSidebar({
                       key={sp.id}
                       href={`/docs/${sp.slug}/${targetPage}`}
                       onClick={onMobileClose}
-                      className={`flex items-center justify-between px-3 py-2 text-xs rounded-md transition-none ${
+                      className={`flex items-center px-3 py-2 text-xs rounded-md transition-none min-w-0 ${
                         isActive
-                          ? "bg-kumo-tint font-semibold text-kumo-strong border-l-2 border-kumo-brand"
+                          ? "bg-kumo-tint font-semibold text-kumo-strong"
                           : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
                       }`}
                     >
-                      <span>{sp.name}</span>
-                      {isActive && (
-                        <span className="text-[10px] px-1.5 py-0.5 rounded bg-kumo-brand/10 text-kumo-brand font-medium">
-                          Active
-                        </span>
-                      )}
+                      <Tooltip content={sp.name} side="top" className="w-full">
+                        <span className="truncate block max-w-[240px]">{sp.name}</span>
+                      </Tooltip>
                     </Link>
                   );
                 })}
@@ -312,7 +316,7 @@ export function DocSidebar({
             <Link
               href="/admin"
               onClick={onMobileClose}
-              className="text-xs text-kumo-subtle hover:text-kumo-brand transition-none"
+              className="text-xs text-kumo-subtle hover:text-kumo-strong transition-none"
             >
               Admin Console
             </Link>

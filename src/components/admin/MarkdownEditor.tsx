@@ -277,7 +277,7 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
           <button
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white transition-none disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground transition-none disabled:opacity-50"
           >
             <FloppyDisk weight="thin" size={15} />
             <span>{saving ? "Saving..." : "Save changes"}</span>

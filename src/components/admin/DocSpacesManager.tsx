@@ -105,7 +105,7 @@ export function DocSpacesManager({ spaces, onRefresh }: DocSpacesManagerProps) {
         {!isCreating && !editingId && (
           <button
             onClick={startCreate}
-            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white transition-none"
+            className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground transition-none"
           >
             <Plus weight="thin" size={14} />
             <span>Add doc space</span>
@@ -208,7 +208,7 @@ export function DocSpacesManager({ spaces, onRefresh }: DocSpacesManagerProps) {
             <button
               type="submit"
               disabled={loading}
-              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white transition-none"
+              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground transition-none"
             >
               <Check weight="thin" size={14} />
               <span>{loading ? "Saving..." : "Save doc space"}</span>

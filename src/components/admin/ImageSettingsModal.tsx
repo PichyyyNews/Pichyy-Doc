@@ -328,7 +328,7 @@ export function ImageSettingsModal({
           <button
             type="button"
             onClick={handleInsert}
-            className="flex items-center gap-1.5 px-4 py-1.5 rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white font-medium shadow-xs"
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground font-medium shadow-xs"
           >
             <Check weight="thin" size={14} />
             <span>Insert into Document</span>

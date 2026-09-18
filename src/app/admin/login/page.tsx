@@ -77,7 +77,7 @@ export default function AdminLoginPage() {
           <button
             type="submit"
             disabled={loading || !pin}
-            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md text-xs font-medium text-white bg-kumo-brand hover:bg-kumo-brand-hover disabled:opacity-50 disabled:cursor-not-allowed transition-none"
+            className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-md text-xs font-medium text-kumo-brand-foreground bg-kumo-brand hover:bg-kumo-brand-hover disabled:opacity-50 disabled:cursor-not-allowed transition-none"
           >
             <span>{loading ? "Verifying..." : "Access Admin"}</span>
             <ArrowRight weight="thin" size={14} />

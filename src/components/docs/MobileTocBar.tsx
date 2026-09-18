@@ -125,7 +125,7 @@ export function MobileTocBar({ tocItems }: MobileTocBarProps) {
                     isH3 ? "pl-5 text-[11px]" : "font-medium text-xs"
                   } ${
                     isActive
-                      ? "bg-kumo-tint text-kumo-brand font-semibold border-l-2 border-kumo-brand"
+                      ? "bg-kumo-tint text-kumo-strong font-semibold"
                       : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint/60"
                   }`}
                 >

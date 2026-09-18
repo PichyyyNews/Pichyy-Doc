@@ -192,7 +192,7 @@ export function HierarchyManager({
             setIsCreatingCat(false);
             setPageOrder(currentSpace.pages.length + 1);
           }}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white transition-none"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground transition-none"
         >
           <Plus weight="thin" size={14} />
           <span>Add new page</span>
@@ -254,7 +254,7 @@ export function HierarchyManager({
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white"
+              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground"
             >
               <Check weight="thin" size={14} />
               <span>Create category</span>
@@ -345,7 +345,7 @@ export function HierarchyManager({
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-white"
+              className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium rounded bg-kumo-brand hover:bg-kumo-brand-hover text-kumo-brand-foreground"
             >
               <Check weight="thin" size={14} />
               <span>Create & edit page</span>

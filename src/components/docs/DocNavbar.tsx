@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DocSpaceItem } from "@/lib/types";
 import { ThemeToggle } from "@/components/kumo/ThemeToggle";
+import { Tooltip } from "@/components/ui/Tooltip";
 import { CaretDown, List, MagnifyingGlass, SidebarSimple } from "@phosphor-icons/react";
 
 interface DocNavbarProps {
@@ -76,15 +77,17 @@ export function DocNavbar({
 
         {/* Mobile Doc Space Badge (< md) */}
         {currentSpace && onToggleMobileSidebar && (
-          <button
-            type="button"
-            onClick={onToggleMobileSidebar}
-            className="md:hidden flex items-center gap-1 px-2 py-0.5 text-xs text-kumo-subtle hover:text-kumo-strong bg-kumo-control/80 border border-kumo-hairline rounded max-w-[130px] truncate transition-none"
-            title="Switch documentation space"
-          >
-            <span className="truncate">{currentSpace.name}</span>
-            <CaretDown weight="thin" size={11} className="shrink-0 opacity-70" />
-          </button>
+          <Tooltip content={currentSpace.name} side="bottom">
+            <button
+              type="button"
+              onClick={onToggleMobileSidebar}
+              className="md:hidden flex items-center gap-1 px-2 py-0.5 text-xs text-kumo-subtle hover:text-kumo-strong bg-kumo-control/80 border border-kumo-hairline rounded max-w-[130px] truncate transition-none"
+              aria-label="Switch documentation space"
+            >
+              <span className="truncate">{currentSpace.name}</span>
+              <CaretDown weight="thin" size={11} className="shrink-0 opacity-70" />
+            </button>
+          </Tooltip>
         )}
 
         {/* Desktop Navigation Spaces (md+) */}
@@ -104,7 +107,9 @@ export function DocNavbar({
                     : "text-kumo-subtle hover:text-kumo-default hover:bg-kumo-tint"
                 }`}
               >
-                {space.name}
+                <Tooltip content={space.name} side="bottom">
+                  <span className="truncate block max-w-[130px] sm:max-w-[160px]">{space.name}</span>
+                </Tooltip>
               </Link>
             );
           })}

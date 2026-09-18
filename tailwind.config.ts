@@ -23,8 +23,9 @@ const config: Config = {
           default: "var(--kumo-default)",
           subtle: "var(--kumo-subtle)",
           strong: "var(--kumo-strong)",
-          brand: "#F6821F",
-          "brand-hover": "#e57416",
+          brand: "rgb(var(--kumo-brand) / <alpha-value>)",
+          "brand-hover": "rgb(var(--kumo-brand-hover) / <alpha-value>)",
+          "brand-foreground": "rgb(var(--kumo-brand-foreground) / <alpha-value>)",
         },
       },
       lineHeight: {
