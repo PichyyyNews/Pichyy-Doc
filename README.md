@@ -48,20 +48,28 @@ A modern, high-performance, utilitarian documentation and internal knowledge bas
 - **Interactive Fullscreen Lightbox**:
   - Zoom into any image or step through album galleries using keyboard arrow keys (Left / Right).
 
-### 3. Command Palette Search (`Cmd+K` / `Ctrl+K`)
+### 3. Interactive Mermaid Diagrams
+- Native rendering for ````mermaid ... ```` code blocks into crisp vector SVGs.
+- Minimalist, clean tab switcher to toggle between **Preview** and raw **Code**.
+- Real-time dark mode and light mode adaptive palette matching Cloudflare Kumo standards.
+- Supported in both the public document viewer and the administrative live preview editor.
+
+### 4. Command Palette Search (`Cmd+K` / `Ctrl+K`)
 - Instant fuzzy search across document titles, headings, content snippets, and administrator-assigned keywords.
 - Full keyboard accessibility (Up/Down arrow navigation, Enter to jump, Escape to close).
 
-### 4. Admin Management Console (`/admin`)
+### 5. Admin Management Console (`/admin`)
 - **PIN Authentication**: Secure cookie-based access protected by a configurable numeric PIN (`ADMIN_PIN`).
 - **Split-View Markdown Editor**: Real-time side-by-side preview with custom toolbars.
 - **Heading Anchor Manager**: Interactively toggle which detected headings appear on the public TOC.
 - **Search Keyword Tagger**: Attach indexable search keywords to pages for enhanced discoverability.
 - **Hierarchy Organization**: Drag-and-drop or reorder spaces, categories, and documents.
 
-### 5. Resilient Dual-Storage Engine
+### 6. Resilient Dual-Storage Engine
 - **PostgreSQL + Prisma ORM**: Enterprise relational database support for high concurrency.
 - **Zero-Config File Fallback**: If PostgreSQL is unreachable or not configured, Pichyy-Doc automatically reads and writes to local JSON storage (`data/docs-store.json`), enabling instant offline development and zero-dependency deployments.
+
+> 📖 **Contributing & AI Authoring**: See [AI & Documentation Guidelines](./AI_GUIDELINES.md) for architectural rules, clean Mermaid diagram standards, and image directives.
 
 ---
 
