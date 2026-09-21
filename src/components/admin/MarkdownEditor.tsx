@@ -22,18 +22,9 @@ import {
   SquaresFour,
 } from "@phosphor-icons/react";
 import Link from "next/link";
-import hljs from "highlight.js";
+import { highlightCode } from "@/lib/highlighter";
 
 const PreContext = React.createContext(false);
-
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 interface MarkdownEditorProps {
   page: DocPageItem;
@@ -634,30 +625,7 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
                         const match = /language-(\w+)/.exec(className || "");
                         const explicitLanguage = match ? match[1].toLowerCase() : "";
 
-                        let highlightedHtml = "";
-                        let displayLanguage = explicitLanguage;
-
-                        if (explicitLanguage && hljs.getLanguage(explicitLanguage)) {
-                          try {
-                            const res = hljs.highlight(codeText, { language: explicitLanguage, ignoreIllegals: true });
-                            highlightedHtml = res.value;
-                            displayLanguage = explicitLanguage;
-                          } catch {
-                            highlightedHtml = escapeHtml(codeText);
-                          }
-                        } else if (!explicitLanguage && codeText.trim()) {
-                          try {
-                            const autoRes = hljs.highlightAuto(codeText);
-                            highlightedHtml = autoRes.value;
-                            displayLanguage = autoRes.language || "text";
-                          } catch {
-                            highlightedHtml = escapeHtml(codeText);
-                            displayLanguage = "text";
-                          }
-                        } else {
-                          highlightedHtml = escapeHtml(codeText);
-                          displayLanguage = explicitLanguage || "text";
-                        }
+                        const { html: highlightedHtml, language: displayLanguage } = highlightCode(codeText, explicitLanguage);
 
                         const lines = codeText.split("\n");
                         const showLineNumbers = lines.length > 1;

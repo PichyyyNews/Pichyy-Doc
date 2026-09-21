@@ -10,7 +10,7 @@ import { parseImageSrc, splitMarkdownGalleries, GalleryImage } from "@/lib/markd
 import { GalleryGrid } from "./GalleryGrid";
 import { ImageLightbox } from "./ImageLightbox";
 import { ArrowLeft, ArrowRight, Check, Copy } from "@phosphor-icons/react";
-import hljs from "highlight.js";
+import { highlightCode } from "@/lib/highlighter";
 
 interface DocContentProps {
   space: DocSpaceItem;
@@ -21,15 +21,6 @@ interface DocContentProps {
 }
 
 const PreContext = React.createContext(false);
-
-function escapeHtml(str: string): string {
-  return str
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 // Code Block with Syntax Highlighting, Auto-Detection & Line Numbers
 function CodeBlock({ children, className }: { children: React.ReactNode; className?: string }) {
@@ -47,32 +38,8 @@ function CodeBlock({ children, className }: { children: React.ReactNode; classNa
   const match = /language-(\w+)/.exec(className || "");
   const explicitLanguage = match ? match[1].toLowerCase() : "";
 
-  // Highlight syntax with highlight.js
-  let highlightedHtml = "";
-  let displayLanguage = explicitLanguage;
-
-  if (explicitLanguage && hljs.getLanguage(explicitLanguage)) {
-    try {
-      const res = hljs.highlight(codeText, { language: explicitLanguage, ignoreIllegals: true });
-      highlightedHtml = res.value;
-      displayLanguage = explicitLanguage;
-    } catch {
-      highlightedHtml = escapeHtml(codeText);
-    }
-  } else if (!explicitLanguage && codeText.trim()) {
-    // Auto-detect language if not specified
-    try {
-      const autoRes = hljs.highlightAuto(codeText);
-      highlightedHtml = autoRes.value;
-      displayLanguage = autoRes.language || "text";
-    } catch {
-      highlightedHtml = escapeHtml(codeText);
-      displayLanguage = "text";
-    }
-  } else {
-    highlightedHtml = escapeHtml(codeText);
-    displayLanguage = explicitLanguage || "text";
-  }
+  // Highlight syntax with highlight.js helper
+  const { html: highlightedHtml, language: displayLanguage } = highlightCode(codeText, explicitLanguage);
 
   const lines = codeText.split("\n");
   const showLineNumbers = lines.length > 1;
