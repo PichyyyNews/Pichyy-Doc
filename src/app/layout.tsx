@@ -11,8 +11,8 @@ const caveat = Caveat({
 });
 
 export const metadata: Metadata = {
-  title: "Pichyy Docs - Documentation & Internal Portal",
-  description: "Internal documentation, guides, and engineering knowledge base powered by Kumo UI.",
+  title: "Pichyy-Doc - Modern Documentation Platform",
+  description: "Modern, high-performance documentation and internal knowledge base platform powered by Next.js 15 and Cloudflare Kumo UI.",
 };
 
 export const viewport: Viewport = {

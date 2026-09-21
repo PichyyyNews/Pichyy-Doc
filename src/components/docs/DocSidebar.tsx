@@ -242,7 +242,7 @@ export function DocSidebar({
                 onClick={onMobileClose}
                 className="font-handwriting font-bold text-2xl text-kumo-strong hover:opacity-85"
               >
-                Pichyy
+                Pichyy-Doc
               </Link>
             </div>
             <button
@@ -320,7 +320,7 @@ export function DocSidebar({
             >
               Admin Console
             </Link>
-            <span className="text-[11px] font-mono text-kumo-subtle">Pichyy Docs</span>
+            <span className="text-[11px] font-mono text-kumo-subtle">Pichyy-Doc</span>
           </div>
         </div>
       </div>

@@ -1,7 +1,13 @@
 {
-  "name": "pichyy-kumo-ui-docs",
-  "version": "0.1.0",
-  "private": true,
+  "name": "pichyy-doc",
+  "version": "1.0.0",
+  "description": "A modern, high-performance documentation platform built with Next.js 15 and Cloudflare Kumo UI.",
+  "license": "MIT",
+  "author": "Pichyy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PichyyyNews/Pichyy-Doc.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -17,6 +23,7 @@
     "@phosphor-icons/react": "^2.1.10",
     "@prisma/client": "^6.3.1",
     "clsx": "^2.1.1",
+    "highlight.js": "^11.12.0",
     "motion": "^12.4.7",
     "next": "15.1.7",
     "react": "19.0.0",

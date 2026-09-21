@@ -11,356 +11,441 @@ const STORE_FILE = path.join(DATA_DIR, "docs-store.json");
 
 const INITIAL_DATA: DocSpaceItem[] = [
   {
-    id: "space-teaching-practicum",
-    name: "Teaching Practicum",
-    slug: "teaching-practicum",
-    description: "Educational institution teaching practicum documentation, lesson plans, and portfolio.",
+    id: "space-guide",
+    name: "Platform Guide",
+    slug: "guide",
+    description: "Complete guide, usage instructions, and component references for the Pichyy-Doc platform.",
     order: 1,
     isDefault: true,
     categories: [
       {
-        id: "cat-introduction",
-        docSpaceId: "space-teaching-practicum",
-        name: "บทนำ",
-        slug: "introduction",
+        id: "cat-getting-started",
+        docSpaceId: "space-guide",
+        name: "Getting Started",
+        slug: "getting-started",
         order: 1,
+        isCollapsed: false,
+      },
+      {
+        id: "cat-authoring-features",
+        docSpaceId: "space-guide",
+        name: "Authoring & Features",
+        slug: "authoring-features",
+        order: 2,
+        isCollapsed: false,
+      },
+      {
+        id: "cat-system-deployment",
+        docSpaceId: "space-guide",
+        name: "System & Deployment",
+        slug: "system-deployment",
+        order: 3,
         isCollapsed: false,
       },
     ],
     pages: [
       {
-        id: "page-about",
-        docSpaceId: "space-teaching-practicum",
-        categoryId: "cat-introduction",
-        title: "ประวัติส่วนตัว",
-        slug: "about",
-        description: "ประวัติส่วนตัว ข้อมูลการศึกษา และข้อมูลการฝึกประสบการณ์วิชาชีพครู นายพิชญุตย์ สมบุญ",
-        content: `> ยินดีต้อนรับสู่ระบบเอกสารและพอร์ตโฟลิโอการฝึกประสบการณ์วิชาชีพครู รวบรวมข้อมูลประวัติส่วนตัว ข้อมูลทางการศึกษา และสถานะการปฏิบัติการสอนในสถานศึกษา
+        id: "page-welcome",
+        docSpaceId: "space-guide",
+        categoryId: "cat-getting-started",
+        title: "Welcome to Pichyy-Doc",
+        slug: "welcome",
+        description: "An introduction to Pichyy-Doc, a modern open-source documentation platform built with Next.js 15 and Cloudflare Kumo UI.",
+        content: `> Welcome to **Pichyy-Doc** — a high-performance, utilitarian documentation and internal knowledge base platform engineered with Next.js 15 (App Router) and the Cloudflare Kumo UI design system.
 
-## ข้อมูลส่วนตัว (Personal Profile)
+## Overview
 
-- **ชื่อ - นามสกุล**: นาย พิชญุตย์ สมบุญ (Mr. Pichayut Sombun)
-- **สถานะ**: นักศึกษาฝึกประสบการณ์วิชาชีพครู (Pre-Service Student Teacher)
-- **ระดับการศึกษา**: ชั้นปีที่ 3
-- **รหัสนักศึกษา**: \`672041510113\`
-- **หลักสูตร / สาขาวิชา**: TCT DERA
-- **สถานะปัจจุบัน**: อยู่ในช่วงของการฝึกสอนสถานศึกษา
+Pichyy-Doc was designed from the ground up to provide teams, developers, and creators with a lightning-fast, distraction-free documentation viewer paired with a powerful built-in administrative console.
 
-## ประวัติการศึกษา (Academic Background)
+### Key Highlights
 
-กำลังศึกษาระดับปริญญาตรี คณะครุศาสตร์อุตสาหกรรม มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ:
+- **Utilitarian Cloudflare Kumo UI**: Clean 14px typography, hairline borders, thin iconography, and frosted glassmorphic navigation.
+- **3-Column Public Viewer**: Collapsible hierarchical sidebar, fluid central markdown reader with copy actions, and a sticky real-time scrollspy table of contents.
+- **Resilient Dual-Storage Engine**: Seamless zero-config JSON file storage fallback with native PostgreSQL + Prisma ORM support when a database is available.
+- **Built-in Admin Console**: Protected by PIN authentication, offering live markdown editing, visual gallery builders, TOC anchor managers, and drag-and-drop structural organization.
+- **Command Palette Search**: Global \`Cmd+K\` / \`Ctrl+K\` modal searching titles, headings, snippets, and keywords.
 
-- **ภาควิชา**: ภาควิชาคอมพิวเตอร์ศึกษา (Department of Computer Education)
-- **คณะ**: คณะครุศาสตร์อุตสาหกรรม (Faculty of Technical Education)
-- **มหาวิทยาลัย**: มหาวิทยาลัยเทคโนโลยีพระจอมเกล้าพระนครเหนือ (KMUTNB)
+## System Architecture
 
-## สถานะการฝึกปฏิบัติการสอน (Current Practicum Status)
+\`\`\`text
++-------------------------------------------------------------+
+|                        Pichyy-Doc                           |
++-------------------------------------------------------------+
+|  Public Viewer (/docs)           |  Admin Console (/admin)   |
+|  - Sticky Frosted Topbar         |  - PIN Authentication     |
+|  - Hierarchical Nav Tree         |  - Live Markdown Editor   |
+|  - Rich Markdown Engine          |  - Media & Gallery Modal  |
+|  - Command Palette (Ctrl+K)      |  - Doc Spaces Hierarchy   |
+|  - Interactive Lightbox          |  - Search Keyword Tagger  |
++----------------------------------+--------------------------+
+|                     Dual Storage Layer                      |
+|  - Primary: PostgreSQL (Prisma ORM)                          |
+|  - Fallback: Local JSON Store (data/docs-store.json)         |
++-------------------------------------------------------------+
+\`\`\`
 
-ปัจจุบันอยู่ในช่วงของการ **ฝึกสอนสถานศึกษา** (Educational Institution Teaching Practicum) เพื่อเสริมสร้างทักษะและประสบการณ์วิชาชีพครู การบริหารจัดการชั้นเรียน และการจัดกิจกรรมการเรียนรู้ในสถานศึกษาอาชีวศึกษาจริง
+## Next Steps
 
-### วัตถุประสงค์การฝึกสอน (Practicum Objectives)
+Ready to get started with your own documentation? Check out the following sections:
 
-1. **การจัดการเรียนการสอน**: นำความรู้ด้านวิชาชีพคอมพิวเตอร์และครุศาสตร์มาถ่ายทอดสู่ผู้เรียนอย่างมีแบบแผนและถูกต้องตามหลักสูตร
-2. **การบริหารจัดการชั้นเรียน**: ฝึกฝนทักษะการดูแลชั้นเรียน การใช้นวัตกรรมสื่อการสอน และการวัดผลสัมฤทธิ์ทางการเรียน
-3. **การให้คำปรึกษาและแนะแนว**: ดูแลและส่งเสริมผู้เรียนทั้งในด้านวิชาการ ทักษะการปฏิบัติงาน และจรรยาบรรณวิชาชีพ
+1. [Quick Start & Setup](/docs/guide/quick-start) — Install and launch your own instance in minutes.
+2. [Markdown & Typography](/docs/guide/markdown-typography) — Explore supported markdown formatting, code highlights, and tables.
+3. [Media & Galleries](/docs/guide/media-galleries) — Discover advanced image layout modes and album grids.
+4. [Deployment Guide](/docs/guide/deployment) — Ship your documentation to production using Docker, Vercel, or Linux servers.
 `,
         tocAnchors: JSON.stringify([
-          { id: "personal-profile", text: "ข้อมูลส่วนตัว (Personal Profile)", level: 2, enabled: true },
-          { id: "academic-background", text: "ประวัติการศึกษา (Academic Background)", level: 2, enabled: true },
-          { id: "current-practicum-status", text: "สถานะการฝึกปฏิบัติการสอน (Current Practicum Status)", level: 2, enabled: true },
-          { id: "practicum-objectives", text: "วัตถุประสงค์การฝึกสอน (Practicum Objectives)", level: 3, enabled: true },
+          { id: "overview", text: "Overview", level: 2, enabled: true },
+          { id: "key-highlights", text: "Key Highlights", level: 3, enabled: true },
+          { id: "system-architecture", text: "System Architecture", level: 2, enabled: true },
+          { id: "next-steps", text: "Next Steps", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["ประวัติส่วนตัว", "พิชญุตย์", "สมบุญ", "มจพ", "คอมพิวเตอร์ศึกษา", "ครุศาสตร์อุตสาหกรรม", "tct", "dera"]),
+        searchKeywords: JSON.stringify(["welcome", "introduction", "overview", "architecture", "pichyy-doc", "kumo", "getting started"]),
         order: 1,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
-        id: "page-college",
-        docSpaceId: "space-teaching-practicum",
-        categoryId: "cat-introduction",
-        title: "เกี่ยวกับวิทยาลัย",
-        slug: "college",
-        description: "ข้อมูลทั่วไปของวิทยาลัยเทคนิคลพบุรี แผนกวิชาเทคโนโลยีคอมพิวเตอร์ และกลุ่มชั้นเรียนที่ได้รับมอบหมายการสอน",
-        content: `> ข้อมูลภาพรวมวิทยาลัยเทคนิคลพบุรี แผนกวิชาที่สังกัดปฏิบัติการสอน และภาระงานสอนประจำภาคเรียน
+        id: "page-quick-start",
+        docSpaceId: "space-guide",
+        categoryId: "cat-getting-started",
+        title: "Quick Start & Setup",
+        slug: "quick-start",
+        description: "How to set up, configure, and launch your own Pichyy-Doc instance in minutes.",
+        content: `> Get up and running with Pichyy-Doc locally on your machine in under two minutes.
 
-## ข้อมูลสถานศึกษา (Institutional Profile)
+## Prerequisites
 
-- **ชื่อสถานศึกษา**: วิทยาลัยเทคนิคลพบุรี (Lopburi Technical College)
-- **ที่อยู่**: 323 ถนนนารายณ์มหาราช ตำบลทะเลชุบศร อำเภอเมืองลพบุรี จังหวัดลพบุรี 15000
-- **เบอร์โทรศัพท์**: \`036-411-083\` / \`+66 36 411 083\`
-- **สังกัด**: สำนักงานคณะกรรมการการอาชีวศึกษา (สอศ.) กระทรวงศึกษาธิการ
+Before running Pichyy-Doc, ensure you have the following installed:
 
-## แผนกวิชาที่สังกัดปฏิบัติการสอน (Host Department)
+- **Node.js**: v18.18.0 or later (Node.js 20+ / 22+ LTS recommended)
+- **Package Manager**: npm, pnpm, or yarn
+- **Git**: Installed and configured
 
-สังกัดปฏิบัติการสอน ณ **แผนกวิชาเทคโนโลยีคอมพิวเตอร์** ซึ่งมุ่งเน้นการจัดการเรียนการสอนทักษะวิชาชีพทั้งด้านฮาร์ดแวร์ ระบบเครือข่าย การพัฒนาโปรแกรม และการประยุกต์ใช้เทคโนโลยีสารสนเทศ
+## Quick Installation
 
-## ภาระงานสอนที่ได้รับมอบหมาย (Teaching Assignments)
+### 1. Clone the Repository
 
-ในภาคเรียนนี้ ได้รับมอบหมายให้ปฏิบัติหน้าที่การสอนแก่นักเรียนนักศึกษา 2 ระดับชั้นการศึกษา คือ ระดับประกาศนียบัตรวิชาชีพ (ปวช.) และระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.) รวมทั้งหมด **4 ห้องเรียน**:
+\`\`\`bash
+git clone https://github.com/PichyyyNews/Pichyy-Doc.git
+cd Pichyy-Doc
+\`\`\`
 
-### ระดับประกาศนียบัตรวิชาชีพ (ปวช.)
-- **สาขาวิชา**: ช่างเทคนิคคอมพิวเตอร์
-- **ระดับชั้น**: ปีที่ 1 (ปวช. 1)
-- **ห้องเรียนที่รับผิดชอบ (2 ห้อง)**:
-  - \`1 ชทค 1\` (กลุ่ม 1)
-  - \`1 ชทค 2\` (กลุ่ม 2)
+### 2. Run Automated Setup
 
-### ระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)
-- **สาขาวิชา**: เทคโนโลยีคอมพิวเตอร์
-- **ระดับชั้น**: ปีที่ 1 (ปวส. 1)
-  - **ห้องเรียนที่รับผิดชอบ (1 ห้อง)**: \`1 สทค 2\`
-- **ระดับชั้น**: ปีที่ 2 (ปวส. 2)
-  - **ห้องเรียนที่รับผิดชอบ (1 ห้อง)**: \`2 สทค 4\`
+If you are on Linux or macOS, you can execute the setup shell script directly:
 
-## สรุปกลุ่มชั้นเรียนที่รับผิดชอบการสอน (Summary of Teaching Load)
+\`\`\`bash
+chmod +x *.sh
+./setup.sh
+\`\`\`
 
-| ระดับการศึกษา | สาขาวิชา | ชั้นปี | กลุ่ม | รหัสห้องเรียน |
-| :--- | :--- | :--- | :--- | :--- |
-| **ระดับ ปวช.** | ช่างเทคนิคคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 1 | \`1 ชทค 1\` |
-| **ระดับ ปวช.** | ช่างเทคนิคคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 2 | \`1 ชทค 2\` |
-| **ระดับ ปวส.** | เทคโนโลยีคอมพิวเตอร์ | ปีที่ 1 | กลุ่ม 2 | \`1 สทค 2\` |
-| **ระดับ ปวส.** | เทคโนโลยีคอมพิวเตอร์ | ปีที่ 2 | กลุ่ม 4 | \`2 สทค 4\` |
+Alternatively, install dependencies manually:
+
+\`\`\`bash
+npm install
+cp .env.example .env
+\`\`\`
+
+### 3. Start the Development Server
+
+Run the development script or npm command:
+
+\`\`\`bash
+./dev.sh
+# Or using npm:
+npm run dev
+\`\`\`
+
+Open your browser and navigate to **[http://localhost:3000](http://localhost:3000)**.
+
+## Environment Variables
+
+Pichyy-Doc works out of the box without any external database. Below is the reference for configurable environment variables in \`.env\`:
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| \`DATABASE_URL\` | \`postgresql://...\` | Optional PostgreSQL connection string. If omitted or unreachable, local JSON storage is used automatically. |
+| \`ADMIN_PIN\` | \`123456\` | 6-digit numeric PIN used to unlock the \`/admin\` portal. |
+| \`SESSION_SECRET\` | \`pichyy-doc-secret...\` | Secret salt string used for administrative session tokens. |
+| \`NODE_ENV\` | \`development\` | Environment mode (\`development\` or \`production\`). |
+
+## Accessing the Admin Console
+
+To manage documents, create spaces, or update categories:
+
+1. Visit **[http://localhost:3000/admin](http://localhost:3000/admin)**.
+2. Enter the default PIN: \`123456\`.
+3. Access the full-featured split-pane markdown editor and organization dashboard.
 `,
         tocAnchors: JSON.stringify([
-          { id: "institutional-profile", text: "ข้อมูลสถานศึกษา (Institutional Profile)", level: 2, enabled: true },
-          { id: "host-department", text: "แผนกวิชาที่สังกัดปฏิบัติการสอน (Host Department)", level: 2, enabled: true },
-          { id: "teaching-assignments", text: "ภาระงานสอนที่ได้รับมอบหมาย (Teaching Assignments)", level: 2, enabled: true },
-          { id: "vocational-level", text: "ระดับประกาศนียบัตรวิชาชีพ (ปวช.)", level: 3, enabled: true },
-          { id: "high-vocational-level", text: "ระดับประกาศนียบัตรวิชาชีพชั้นสูง (ปวส.)", level: 3, enabled: true },
-          { id: "summary-of-teaching-load", text: "สรุปกลุ่มชั้นเรียนที่รับผิดชอบการสอน (Summary of Teaching Load)", level: 2, enabled: true },
+          { id: "prerequisites", text: "Prerequisites", level: 2, enabled: true },
+          { id: "quick-installation", text: "Quick Installation", level: 2, enabled: true },
+          { id: "environment-variables", text: "Environment Variables", level: 2, enabled: true },
+          { id: "accessing-the-admin-console", text: "Accessing the Admin Console", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["วิทยาลัยเทคนิคลพบุรี", "เทคนิคลพบุรี", "เทคโนโลยีคอมพิวเตอร์", "ช่างเทคนิคคอมพิวเตอร์", "ปวช", "ปวส", "1 ชทค 1", "1 ชทค 2", "1 สทค 2", "2 สทค 4"]),
+        searchKeywords: JSON.stringify(["quick start", "installation", "setup", "env", "admin pin", "prerequisites", "run dev"]),
         order: 2,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
-        id: "page-mentor-faculty",
-        docSpaceId: "space-teaching-practicum",
-        categoryId: "cat-introduction",
-        title: "อาจารย์พี่เลี้ยงและอาจารย์ในแผนก",
-        slug: "mentor-and-faculty",
-        description: "ข้อมูลครูพี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี",
-        content: `> ข้อมูลครูพี่เลี้ยงและทำเนียบคณาจารย์ แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี
+        id: "page-markdown-typography",
+        docSpaceId: "space-guide",
+        categoryId: "cat-authoring-features",
+        title: "Markdown & Typography",
+        slug: "markdown-typography",
+        description: "Reference for Markdown syntax, typography, tables, callouts, and code blocks.",
+        content: `> Pichyy-Doc supports GitHub Flavored Markdown (GFM) with syntax highlighting, automatic heading anchors, callout blockquotes, and tables.
 
-## ครูพี่เลี้ยง (Practicum Mentor Teacher)
+## Heading Levels & TOC Integration
 
-ครูพี่เลี้ยงมีหน้าที่ให้คำปรึกษา แนะนำการจัดทำแผนการจัดการเรียนรู้ การควบคุมชั้นเรียน การประเมินผลการเรียนรู้ ตลอดจนการปฏิบัติตนตามจรรยาบรรณวิชาชีพครูตลอดระยะเวลาการฝึกปฏิบัติการสอนในสถานศึกษา
+Headings formatted with \`#\` (H1), \`##\` (H2), and \`###\` (H3) are automatically registered with slugified anchor identifiers. You can click on any heading to copy or jump to its direct URL anchor.
 
-### ข้อมูลครูพี่เลี้ยง (Mentor Information)
+### Heading Level 3 Example
 
-![82049_26082813133214](/uploads/82049_26082813133214-1789722487589-e6qmu.jpeg#border=false&width=120px&align=right&wrap=true)
+In the Admin Console, you can selectively toggle which H2 and H3 headings appear in the sticky "On this page" table of contents.
 
-- **ชื่อ - สกุล**: นายไพบูลย์ สมนึก (Mr. Paiboon Somnuek)
-- **ตำแหน่ง / วิทยฐานะ**: ครู ชำนาญการ
-- **ตำแหน่งในแผนกวิชา**: ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-- **ภาระหน้าที่รับผิดชอบ**:
-  - หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานบริหารงานทั่วไป
-- **หน่วยงาน / สังกัด**: แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี
+## Syntax Highlighted Code Blocks
 
-### หน้าที่ในการนิเทศการสอน (Supervisory Responsibilities)
+Code blocks feature language badges and a one-click copy button:
 
-1. **การวางแผนการจัดการเรียนรู้**: ให้คำแนะนำและตรวจประเมินแผนการจัดการเรียนรู้ สื่อการสอน และใบงานปฏิบัติการ
-2. **การสังเกตและประเมินการสอน**: สังเกตการณ์จัดกิจกรรมการเรียนรู้ในชั้นเรียน การควบคุมดูแลผู้เรียนในห้องปฏิบัติการคอมพิวเตอร์ และให้ข้อเสนอแนะเพื่อพัฒนาทักษะการสอน
-3. **การวัดและประเมินผล**: ให้คำปรึกษาการออกแบบเครื่องมือวัดผลสัมฤทธิ์ทางการเรียนและการประเมินทักษะภาคปฏิบัติ
-4. **จรรยาบรรณและการปฏิบัติงานสถานศึกษา**: แนะนำการปฏิบัติตนตามระเบียบวินัย จรรยาบรรณวิชาชีพครู และงานธุรการที่เกี่ยวข้อง
+\`\`\`typescript
+import { getAllDocSpaces } from "@/lib/storage";
 
----
+export async function getSiteNavigation() {
+  const spaces = await getAllDocSpaces();
+  return spaces.map((space) => ({
+    name: space.name,
+    slug: space.slug,
+    pageCount: space.pages.length,
+  }));
+}
+\`\`\`
 
-## คณาจารย์ประจำแผนกวิชา (Department Faculty)
+## Blockquotes & Callouts
 
-ทำเนียบคณาจารย์และบุคลากร แผนกวิชาเทคโนโลยีคอมพิวเตอร์ วิทยาลัยเทคนิคลพบุรี รวมทั้งสิ้น 10 ท่าน ซึ่งร่วมกันขับเคลื่อนการจัดการเรียนการสอน พัฒนาหลักสูตรวิชาชีพ และดูแลงานบริหารตามภารกิจของสถานศึกษา
+Use standard Markdown blockquotes for notices and tips:
 
-### ตารางสรุปข้อมูลครูในแผนก (Faculty Directory)
+> **Tip**: Pichyy-Doc automatically checks PostgreSQL connectivity on startup. If unavailable, it falls back seamlessly to \`data/docs-store.json\` without failing.
 
-| ลำดับ | ชื่อ - สกุล | ตำแหน่ง / วิทยฐานะ | บทบาทหน้าที่ในแผนกวิชา | หน้าที่รับผิดชอบอื่นในสถานศึกษา |
-| :---: | :--- | :--- | :--- | :--- |
-| 1 | **นายรณภูมิ นาคสมบูรณ์** | ครู | หัวหน้าแผนกวิชาเทคโนโลยีคอมพิวเตอร์<br>ครูประจำแผนก | เจ้าหน้าที่ งานบริหารงานทั่วไป (เลขา ผอ.) |
-| 2 | **นายจิตวัฒน์ เปิ่นวงษ์** | ครู ชำนาญการพิเศษ | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | การจัดการเรียนการสอนและพัฒนาผู้เรียน |
-| 3 | **นางสาวศิริพิไลย พรหมแพทย์** | ครู ชำนาญการพิเศษ | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | หัวหน้างาน งานการเงิน<br>เจ้าหน้าที่ งานการเงิน |
-| 4 | **นายไพบูลย์ สมนึก** | ครู ชำนาญการ *(ครูพี่เลี้ยง)* | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ<br>เจ้าหน้าที่ งานบริหารงานทั่วไป |
-| 5 | **นางสาวรจนาถ มูลตรีแก้ว** | ครูผู้ช่วย | ครูประจำแผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานบริหารงานทั่วไป |
-| 6 | **นายอนุชา ดำรงค์สกุล** | ครูผู้ช่วย | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
-| 7 | **นายธนกฤต จำปาทอง** | ครู | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
-| 8 | **นายเมธาวี ภู่โต** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
-| 9 | **นางสาวรพีพร ชูสุวรรณ** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา<br>ลูกจ้างชั่วคราว (ครูพิเศษสอน) |
-| 10 | **นางสาวเพ็ญพิชชา ประยงค์หอม** | ครูพิเศษสอน / ลูกจ้างชั่วคราว | ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์ | ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์ |
+## Tables
 
-### รายละเอียดบทบาทหน้าที่รายบุคคล (Faculty Details)
+Formatted GFM tables render with subtle hairline borders and alternating row styling:
 
-![35313_26072012122729](/uploads/35313_26072012122729-1789722919772-am9fq.jpg#border=false&width=120px&align=right&wrap=true)
-
-#### 1. นายรณภูมิ นาคสมบูรณ์
-- **ตำแหน่ง**: ครู
-- **หน้าที่รับผิดชอบ**:
-  - หัวหน้าแผนก แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานบริหารงานทั่วไป (เลขา ผอ.)
-
----
-
-![3170500097473](/uploads/3170500097473-1789722946657-kjiyy.jpg#border=false&width=120px&align=right&wrap=true)
-
-#### 2. นายจิตวัฒน์ เปิ่นวงษ์
-- **ตำแหน่ง**: ครู ชำนาญการพิเศษ
-- **หน้าที่รับผิดชอบ**:
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-
----
-
-![33062_2402130993824](/uploads/33062_2402130993824-1789723016536-a4hp1.jpg#border=false&width=120px&align=right&wrap=true)
-
-#### 3. นางสาวศิริพิไลย พรหมแพทย์
-- **ตำแหน่ง**: ครู ชำนาญการพิเศษ
-- **หน้าที่รับผิดชอบ**:
-  - หัวหน้างาน งานการเงิน
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานการเงิน
-
----
-
-![82049_26082813133214](/uploads/82049_26082813133214-1789723062751-8za2w.jpeg#border=false&width=120px&align=right&wrap=true)
-
-#### 4. นายไพบูลย์ สมนึก (ครูพี่เลี้ยง)
-- **ตำแหน่ง**: ครู ชำนาญการ
-- **หน้าที่รับผิดชอบ**:
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - หัวหน้างาน งานพัฒนาหลักสูตรสายเทคโนโลยีหรือสายปฏิบัติการ
-  - เจ้าหน้าที่ งานบริหารงานทั่วไป
-
----
-
-![85635_23072217175102](/uploads/85635_23072217175102-1789723037667-t30zh.jpeg#border=false&width=120px&align=right&wrap=true)
-
-#### 5. นางสาวรจนาถ มูลตรีแก้ว
-- **ตำแหน่ง**: ครูผู้ช่วย
-- **หน้าที่รับผิดชอบ**:
-  - ครูประจำ แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานบริหารงานทั่วไป
-
----
-
-![61509_26060915154516](/uploads/61509_26060915154516-1789723145333-7xl93.png#border=false&width=120px&align=right&wrap=true)
-
-#### 6. นายอนุชา ดำรงค์สกุล
-- **ตำแหน่ง**: ครูผู้ช่วย
-- **หน้าที่รับผิดชอบ**:
-  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
-  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-
----
-
-![25096_26060915154300](/uploads/25096_26060915154300-1789723165513-cngyy.jpg#border=false&width=120px&align=right&wrap=true)
-
-#### 7. นายธนกฤต จำปาทอง
-- **ตำแหน่ง**: ครู
-- **หน้าที่รับผิดชอบ**:
-  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
-  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-
----
-
-![61509_26060915152801](/uploads/61509_26060915152801-1789723181214-rzr0z.png#border=false&width=120px&align=right&wrap=true)
-
-#### 8. นายเมธาวี ภู่โต
-- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
-- **หน้าที่รับผิดชอบ**:
-  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
-  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-
----
-
-![61509_26060915155450](/uploads/61509_26060915155450-1789723193546-eoszy.png#border=false&width=120px&align=right&wrap=true)
-
-#### 9. นางสาวรพีพร ชูสุวรรณ
-- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
-- **หน้าที่รับผิดชอบ**:
-  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - เจ้าหน้าที่ งานวิทยบริการและเทคโนโลยีการศึกษา
-  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-
----
-
-![61509_26061610102330](/uploads/61509_26061610102330-1789723240177-k1e5p.png#border=false&width=120px&align=right&wrap=true)
-
-#### 10. นางสาวเพ็ญพิชชา ประยงค์หอม
-- **ตำแหน่ง**: ครูพิเศษสอน / ลูกจ้างชั่วคราว
-- **หน้าที่รับผิดชอบ**:
-  - ครูพิเศษสอน แผนกวิชาเทคโนโลยีคอมพิวเตอร์
-  - ลูกจ้างชั่วคราว (ครูพิเศษสอน) แผนกวิชาเทคโนโลยีคอมพิวเตอร์
+| Feature | JSON Storage | PostgreSQL (Prisma) |
+| :--- | :---: | :---: |
+| Zero Config Setup | Yes | Requires DB Server |
+| Offline Development | Yes | No |
+| High Concurrency | Moderate | High |
+| Production Scale | Good for small sites | Recommended |
 `,
         tocAnchors: JSON.stringify([
-          { id: "practicum-mentor-teacher", text: "ครูพี่เลี้ยง (Practicum Mentor Teacher)", level: 2, enabled: true },
-          { id: "mentor-information", text: "ข้อมูลครูพี่เลี้ยง (Mentor Information)", level: 3, enabled: true },
-          { id: "supervisory-responsibilities", text: "หน้าที่ในการนิเทศการสอน (Supervisory Responsibilities)", level: 3, enabled: true },
-          { id: "department-faculty", text: "คณาจารย์ประจำแผนกวิชา (Department Faculty)", level: 2, enabled: true },
-          { id: "faculty-directory", text: "ตารางสรุปข้อมูลครูในแผนก (Faculty Directory)", level: 3, enabled: true },
-          { id: "faculty-details", text: "รายละเอียดบทบาทหน้าที่รายบุคคล (Faculty Details)", level: 3, enabled: true },
+          { id: "heading-levels-toc-integration", text: "Heading Levels & TOC Integration", level: 2, enabled: true },
+          { id: "heading-level-3-example", text: "Heading Level 3 Example", level: 3, enabled: true },
+          { id: "syntax-highlighted-code-blocks", text: "Syntax Highlighted Code Blocks", level: 2, enabled: true },
+          { id: "blockquotes-callouts", text: "Blockquotes & Callouts", level: 2, enabled: true },
+          { id: "tables", text: "Tables", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["ครูพี่เลี้ยง", "อาจารย์พี่เลี้ยง", "ไพบูลย์", "รณภูมิ", "จิตวัฒน์", "ศิริพิไลย", "รจนาถ", "อนุชา", "ธนกฤต", "เมธาวี", "รพีพร", "เพ็ญพิชชา", "เทคโนโลยีคอมพิวเตอร์"]),
-        order: 3,
+        searchKeywords: JSON.stringify(["markdown", "syntax", "code blocks", "tables", "typography", "callouts", "headings"]),
+        order: 1,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       },
       {
-        id: "page-teaching-schedule",
-        docSpaceId: "space-teaching-practicum",
-        categoryId: "cat-introduction",
-        title: "ตารางสอน",
-        slug: "schedule",
-        description: "ตารางสอนประจำสัปดาห์ คาบเรียน ห้องปฏิบัติการ และภาระงานสอนที่ได้รับมอบหมาย",
-        content: `> ตารางสอนประจำสัปดาห์ คาบเรียน รายวิชาที่สอน และห้องปฏิบัติการคอมพิวเตอร์ ประจำภาคเรียน
+        id: "page-media-galleries",
+        docSpaceId: "space-guide",
+        categoryId: "cat-authoring-features",
+        title: "Media & Gallery Layouts",
+        slug: "media-galleries",
+        description: "Guidelines for responsive images, floating text wraps, and multi-column photo galleries.",
+        content: `> Pichyy-Doc includes advanced image layout directives, border options, width controls, and multi-column gallery albums.
 
-## ตารางสอนประจำสัปดาห์ (Weekly Timetable)
+## Image Layout Directives
 
-รายละเอียดตารางการจัดการเรียนการสอนประจำสัปดาห์ รายวิชา กลุ่มชั้นเรียน และห้องปฏิบัติการคอมพิวเตอร์:
+Images can be customized using URL hash query parameters:
 
-| วัน | คาบเรียน | เวลา | รหัสและชื่อวิชา | กลุ่มชั้นเรียน | ห้องเรียน / ปฏิบัติการ |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **วันจันทร์** | 1 – 4 | 08:30 – 12:30 น. | ปฏิบัติการคอมพิวเตอร์ (Computer Technical Fundamentals) | \`1 ชทค 1\` | ห้องปฏิบัติการคอมพิวเตอร์ 521 |
-| **วันอังคาร** | 5 – 8 | 13:00 – 17:00 น. | การเขียนโปรแกรมและพัฒนาเว็บแอปพลิเคชัน (Programming & Web App) | \`1 สทค 2\` | ห้องปฏิบัติการคอมพิวเตอร์ 523 |
-| **วันพุธ** | 1 – 4 | 08:30 – 12:30 น. | งานบำรุงรักษาอุปกรณ์และระบบคอมพิวเตอร์ (Computer Maintenance) | \`1 ชทค 2\` | โรงฝึกงานฮาร์ดแวร์ 522 |
-| **วันพฤหัสบดี** | 5 – 8 | 13:00 – 17:00 น. | ระบบจัดการฐานข้อมูลขั้นสูง (Advanced Database Systems) | \`2 สทค 4\` | ห้องปฏิบัติการคอมพิวเตอร์ 524 |
-| **วันศุกร์** | 1 – 2 | 08:30 – 10:30 น. | กิจกรรมโฮมรูมและพัฒนาผู้เรียน (Homeroom & Mentorship) | ทุกกลุ่มชั้นเรียน | ลานอเนกประสงค์ อาคาร 5 |
-| **วันศุกร์** | 3 – 8 | 10:30 – 16:30 น. | เตรียมการสอน ผลิตสื่อการสอน และงานสนับสนุนแผนกวิชา | — | สำนักงานแผนกวิชาฯ |
+- \`border=true|false\`: Toggle decorative hairline frame.
+- \`width=100%|75%|50%|300px\`: Explicit width control.
+- \`align=left|center|right\`: Horizontal alignment.
+- \`wrap=true|false\`: Float image next to text with smooth desktop wrap.
 
-## สรุปภาระงานสอนประจำสัปดาห์ (Teaching Load Summary)
+### Example Syntax
 
-สรุปชั่วโมงการสอนต่อสัปดาห์ครอบคลุมทั้งระดับ ปวช. และ ปวส.:
+\`\`\`markdown
+![Architecture Diagram](/uploads/diagram.png#border=true&width=75%&align=center)
+\`\`\`
 
-| ระดับการศึกษา | กลุ่มชั้นเรียน | รายวิชา | ทฤษฎี (ชม.) | ปฏิบัติ (ชม.) | รวม (ชม./สัปดาห์) |
-| :--- | :--- | :--- | :---: | :---: | :---: |
-| **ปวช. 1** | \`1 ชทค 1\` | ปฏิบัติการคอมพิวเตอร์ | 1 | 3 | 4 |
-| **ปวช. 1** | \`1 ชทค 2\` | งานบำรุงรักษาอุปกรณ์และระบบคอมพิวเตอร์ | 1 | 3 | 4 |
-| **ปวส. 1** | \`1 สทค 2\` | การเขียนโปรแกรมและพัฒนาเว็บแอปพลิเคชัน | 1 | 3 | 4 |
-| **ปวส. 2** | \`2 สทค 4\` | ระบบจัดการฐานข้อมูลขั้นสูง | 1 | 3 | 4 |
-| **ทุกระดับ** | ทุกกลุ่มเรียน | กิจกรรมโฮมรูมและพัฒนาผู้เรียน | 2 | 0 | 2 |
-| **รวมทั้งหมด** | | | **6** | **12** | **18** |
+## Multi-Column Gallery Albums (\`:::gallery\`)
 
-## เวลาเตรียมการสอนและให้คำปรึกษา (Office Hours)
+Create responsive photo grids with uniform aspect ratios and keyboard-navigable lightboxes:
 
-ช่วงเวลาสำหรับการเตรียมการสอน การตรวจงาน และการให้คำปรึกษาทางวิชาการแก่นักเรียนนักศึกษา:
+\`\`\`text
+:::gallery cols=3 ratio=16:9 border=true
+![Dashboard View](/assets/preview1.png)
+![Editor Interface](/assets/preview2.png)
+![Mobile Layout](/assets/preview3.png)
+:::
+\`\`\`
 
-- **ช่วงเวลาให้คำปรึกษา**: วันจันทร์ – วันศุกร์ เวลา 12:30 – 13:30 น.
-- **สถานที่**: สำนักงานแผนกวิชาเทคโนโลยีคอมพิวเตอร์ อาคาร 5
-- **ขอบข่ายการให้คำปรึกษา**: สอบถามเนื้อหาบทเรียน ชดเชยการฝึกปฏิบัติการคอมพิวเตอร์ และให้คำปรึกษาโครงงานวิชาชีพ
+### Gallery Options
+
+| Parameter | Options | Description |
+| :--- | :--- | :--- |
+| \`cols\` | \`2\`, \`3\`, \`4\` | Number of columns on desktop view (collapses cleanly on mobile). |
+| \`ratio\` | \`16:9\`, \`4:3\`, \`1:1\`, \`natural\` | Aspect ratio of image tiles. |
+| \`border\` | \`true\`, \`false\` | Apply hairline border around photo tiles. |
+
+## Interactive Lightbox
+
+Clicking any image or gallery item automatically opens a full-screen interactive modal with zoom capability and keyboard navigation (Left/Right arrow keys to step through gallery items).
 `,
         tocAnchors: JSON.stringify([
-          { id: "weekly-timetable", text: "ตารางสอนประจำสัปดาห์ (Weekly Timetable)", level: 2, enabled: true },
-          { id: "teaching-load-summary", text: "สรุปภาระงานสอนประจำสัปดาห์ (Teaching Load Summary)", level: 2, enabled: true },
-          { id: "office-hours", text: "เวลาเตรียมการสอนและให้คำปรึกษา (Office Hours)", level: 2, enabled: true },
+          { id: "image-layout-directives", text: "Image Layout Directives", level: 2, enabled: true },
+          { id: "example-syntax", text: "Example Syntax", level: 3, enabled: true },
+          { id: "multi-column-gallery-albums-gallery", text: "Multi-Column Gallery Albums (:::gallery)", level: 2, enabled: true },
+          { id: "gallery-options", text: "Gallery Options", level: 3, enabled: true },
+          { id: "interactive-lightbox", text: "Interactive Lightbox", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["ตารางสอน", "ตารางเรียน", "คาบสอน", "ชั่วโมงสอน", "ภาระงานสอน", "ปวช", "ปวส", "1 ชทค 1", "1 ชทค 2", "1 สทค 2", "2 สทค 4"]),
-        order: 4,
+        searchKeywords: JSON.stringify(["media", "images", "gallery", "lightbox", "aspect ratio", "photo album", "responsive layout"]),
+        order: 2,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "page-storage-architecture",
+        docSpaceId: "space-guide",
+        categoryId: "cat-system-deployment",
+        title: "Storage & Database Engine",
+        slug: "storage-architecture",
+        description: "Understanding the resilient dual-layer data persistence: PostgreSQL Prisma ORM with automatic JSON fallback.",
+        content: `> Pichyy-Doc employs a hybrid persistence strategy designed for zero-config local prototyping alongside enterprise-grade PostgreSQL scalability.
+
+## How Dual Storage Works
+
+1. **Health Check Probe**: When reading or writing documents, Pichyy-Doc executes a lightweight probe (\`SELECT 1\`) to test PostgreSQL connectivity.
+2. **Database Active**: If PostgreSQL is healthy, Prisma ORM handles queries, relations, and transactions.
+3. **Database Unavailable**: If PostgreSQL connection fails, times out, or is omitted, Pichyy-Doc automatically reads and writes to \`data/docs-store.json\`.
+
+\`\`\`text
+[ Client Request ]
+       |
+       v
+[ Storage Engine (storage.ts) ]
+       |
+  +----+------------------------+
+  |                             |
+  v                             v
+[ PostgreSQL OK? ]      [ PostgreSQL Unreachable ]
+  |                             |
+  v                             v
+Prisma Client (DB)       Local File System (data/docs-store.json)
+\`\`\`
+
+## Switching Between Storage Modes
+
+- **Local File Mode (Default)**: Keep \`DATABASE_URL\` empty or unset in your \`.env\`. All edits in the Admin Console immediately save to \`data/docs-store.json\`.
+- **PostgreSQL Mode**: Set a valid \`DATABASE_URL\` in \`.env\` and run:
+
+\`\`\`bash
+npm run db:push
+npm run db:seed
+\`\`\`
+`,
+        tocAnchors: JSON.stringify([
+          { id: "how-dual-storage-works", text: "How Dual Storage Works", level: 2, enabled: true },
+          { id: "switching-between-storage-modes", text: "Switching Between Storage Modes", level: 2, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["storage", "database", "prisma", "postgresql", "json store", "fallback", "architecture"]),
+        order: 1,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "page-deployment",
+        docSpaceId: "space-guide",
+        categoryId: "cat-system-deployment",
+        title: "Deployment Guide",
+        slug: "deployment",
+        description: "Production deployment instructions for Vercel, Docker, VPS with PM2, and Cloudflare.",
+        content: `> Guidelines for compiling and hosting Pichyy-Doc in staging and production environments.
+
+## Option 1: Vercel Deployment
+
+The quickest way to deploy Pichyy-Doc:
+
+1. Push your repository to GitHub.
+2. Import the repository into [Vercel](https://vercel.com).
+3. Set the environment variables in Vercel Project Settings:
+   - \`ADMIN_PIN\`: A secure 6-digit numeric PIN.
+   - \`SESSION_SECRET\`: A secure random secret string.
+   - \`DATABASE_URL\`: (Optional) PostgreSQL database connection.
+4. Click **Deploy**.
+
+## Option 2: Linux Server (PM2 & Node.js)
+
+To run Pichyy-Doc on an Ubuntu/Debian VPS:
+
+\`\`\`bash
+# 1. Clone repository
+git clone https://github.com/PichyyyNews/Pichyy-Doc.git
+cd Pichyy-Doc
+
+# 2. Run automated setup
+./setup.sh
+
+# 3. Compile production build
+./build.sh
+
+# 4. Start with PM2 process manager
+pm2 start npm --name "pichyy-doc" -- start
+pm2 save
+\`\`\`
+
+## Option 3: Docker Container
+
+You can containerize Pichyy-Doc using a standard multi-stage Dockerfile:
+
+\`\`\`dockerfile
+FROM node:20-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci
+COPY . .
+RUN npm run build
+
+FROM node:20-alpine AS runner
+WORKDIR /app
+ENV NODE_ENV=production
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/data ./data
+
+EXPOSE 3000
+CMD ["npm", "start"]
+\`\`\`
+
+## Security Checklist for Production
+
+- [ ] Change the default \`ADMIN_PIN\` to a strong unique PIN.
+- [ ] Set \`SESSION_SECRET\` to a cryptographically secure random string.
+- [ ] Enable HTTPS with SSL/TLS certificates (e.g. via Cloudflare or Let's Encrypt).
+- [ ] Ensure the \`data/\` folder is writable by the application user if using JSON fallback storage.
+`,
+        tocAnchors: JSON.stringify([
+          { id: "option-1-vercel-deployment", text: "Option 1: Vercel Deployment", level: 2, enabled: true },
+          { id: "option-2-linux-server-pm2-nodejs", text: "Option 2: Linux Server (PM2 & Node.js)", level: 2, enabled: true },
+          { id: "option-3-docker-container", text: "Option 3: Docker Container", level: 2, enabled: true },
+          { id: "security-checklist-for-production", text: "Security Checklist for Production", level: 2, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["deployment", "vercel", "docker", "pm2", "linux", "production", "nginx", "security"]),
+        order: 2,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),

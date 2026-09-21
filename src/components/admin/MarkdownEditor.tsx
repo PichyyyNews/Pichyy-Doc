@@ -22,6 +22,18 @@ import {
   SquaresFour,
 } from "@phosphor-icons/react";
 import Link from "next/link";
+import hljs from "highlight.js";
+
+const PreContext = React.createContext(false);
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
 interface MarkdownEditorProps {
   page: DocPageItem;
@@ -592,19 +604,90 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
                       ),
                       hr: () => <hr className="my-5 border-kumo-line/60 clear-both" />,
                       p: ({ children }) => <div className="mb-3 text-kumo-default">{children}</div>,
-                      pre: ({ children }: any) => <>{children}</>,
+                      pre: ({ children }: any) => (
+                        <PreContext.Provider value={true}>
+                          {children}
+                        </PreContext.Provider>
+                      ),
                       ul: ({ children }) => <ul className="list-disc pl-5 mb-3 space-y-1">{children}</ul>,
                       ol: ({ children }) => <ol className="list-decimal pl-5 mb-3 space-y-1">{children}</ol>,
-                      code: ({ inline, children }: any) =>
-                        inline ? (
-                          <code className="font-mono text-[0.9em] px-1 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong">
-                            {children}
-                          </code>
-                        ) : (
-                          <pre className="p-3 my-3 rounded bg-kumo-recessed border border-kumo-line font-mono text-[11px] overflow-x-auto clear-both">
-                            <code>{children}</code>
-                          </pre>
-                        ),
+                      code: ({ className, children }: any) => {
+                        // eslint-disable-next-line react-hooks/rules-of-hooks
+                        const isInsidePre = React.useContext(PreContext);
+                        if (!isInsidePre) {
+                          return (
+                            <code className="font-mono text-[0.85em] px-1.5 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong font-normal">
+                              {children}
+                            </code>
+                          );
+                        }
+
+                        const extractText = (node: any): string => {
+                          if (typeof node === "string") return node;
+                          if (typeof node === "number") return String(node);
+                          if (Array.isArray(node)) return node.map(extractText).join("");
+                          if (React.isValidElement(node)) return extractText((node.props as any)?.children);
+                          return "";
+                        };
+
+                        const codeText = extractText(children).replace(/\n$/, "");
+                        const match = /language-(\w+)/.exec(className || "");
+                        const explicitLanguage = match ? match[1].toLowerCase() : "";
+
+                        let highlightedHtml = "";
+                        let displayLanguage = explicitLanguage;
+
+                        if (explicitLanguage && hljs.getLanguage(explicitLanguage)) {
+                          try {
+                            const res = hljs.highlight(codeText, { language: explicitLanguage, ignoreIllegals: true });
+                            highlightedHtml = res.value;
+                            displayLanguage = explicitLanguage;
+                          } catch {
+                            highlightedHtml = escapeHtml(codeText);
+                          }
+                        } else if (!explicitLanguage && codeText.trim()) {
+                          try {
+                            const autoRes = hljs.highlightAuto(codeText);
+                            highlightedHtml = autoRes.value;
+                            displayLanguage = autoRes.language || "text";
+                          } catch {
+                            highlightedHtml = escapeHtml(codeText);
+                            displayLanguage = "text";
+                          }
+                        } else {
+                          highlightedHtml = escapeHtml(codeText);
+                          displayLanguage = explicitLanguage || "text";
+                        }
+
+                        const lines = codeText.split("\n");
+                        const showLineNumbers = lines.length > 1;
+
+                        return (
+                          <div className="my-3 rounded-lg border border-kumo-line bg-kumo-recessed overflow-hidden text-xs">
+                            <div className="px-3 py-1 border-b border-kumo-hairline bg-kumo-base text-[10px] uppercase font-mono text-kumo-subtle font-semibold">
+                              {displayLanguage}
+                            </div>
+                            <div className="flex font-mono leading-relaxed overflow-x-auto">
+                              {showLineNumbers && (
+                                <div
+                                  className="select-none text-right pr-2.5 pl-2.5 py-2.5 text-[11px] font-mono text-kumo-subtle/40 border-r border-kumo-line/40 shrink-0 bg-kumo-base/30"
+                                  aria-hidden="true"
+                                >
+                                  {lines.map((_, i) => (
+                                    <div key={i}>{i + 1}</div>
+                                  ))}
+                                </div>
+                              )}
+                              <pre className="p-2.5 text-[11px] font-mono leading-relaxed overflow-x-auto text-kumo-default flex-1">
+                                <code
+                                  className="hljs"
+                                  dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+                                />
+                              </pre>
+                            </div>
+                          </div>
+                        );
+                      },
                       blockquote: ({ children }) => (
                         <blockquote className="border-l-2 border-kumo-brand bg-kumo-recessed px-3 py-2 my-3 text-xs">
                           {children}

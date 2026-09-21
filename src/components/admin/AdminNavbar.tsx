@@ -24,7 +24,7 @@ export function AdminNavbar() {
       <div className="flex items-center gap-3">
         <ShieldCheck weight="thin" size={20} className="text-kumo-brand" />
         <span className="font-semibold text-sm text-kumo-strong flex items-center">
-          <span className="font-handwriting font-bold text-xl mr-1.5">Pichyy</span>
+          <span className="font-handwriting font-bold text-xl mr-1.5">Pichyy-Doc</span>
           <span>Admin Console</span>
         </span>
         <span className="text-[11px] font-mono px-1.5 py-0.5 rounded bg-kumo-control border border-kumo-line text-kumo-subtle">

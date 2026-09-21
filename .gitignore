@@ -1,4 +1,4 @@
-﻿# Dependencies
+# Dependencies
 node_modules/
 /.pnp
 .pnp.js
@@ -25,3 +25,8 @@ Thumbs.db
 
 # TypeScript cache
 *.tsbuildinfo
+
+# Uploaded media
+public/uploads/*
+!public/uploads/.gitkeep
+

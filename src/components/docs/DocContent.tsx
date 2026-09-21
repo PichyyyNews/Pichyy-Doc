@@ -10,6 +10,7 @@ import { parseImageSrc, splitMarkdownGalleries, GalleryImage } from "@/lib/markd
 import { GalleryGrid } from "./GalleryGrid";
 import { ImageLightbox } from "./ImageLightbox";
 import { ArrowLeft, ArrowRight, Check, Copy } from "@phosphor-icons/react";
+import hljs from "highlight.js";
 
 interface DocContentProps {
   space: DocSpaceItem;
@@ -19,12 +20,62 @@ interface DocContentProps {
   tocCollapsed?: boolean;
 }
 
-// Code Block with Copy Button
+const PreContext = React.createContext(false);
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+// Code Block with Syntax Highlighting, Auto-Detection & Line Numbers
 function CodeBlock({ children, className }: { children: React.ReactNode; className?: string }) {
   const [copied, setCopied] = useState(false);
-  const codeText = String(children).replace(/\n$/, "");
+  
+  const extractText = (node: React.ReactNode): string => {
+    if (typeof node === "string") return node;
+    if (typeof node === "number") return String(node);
+    if (Array.isArray(node)) return node.map(extractText).join("");
+    if (React.isValidElement(node)) return extractText((node.props as any)?.children);
+    return "";
+  };
+
+  const codeText = extractText(children).replace(/\n$/, "");
   const match = /language-(\w+)/.exec(className || "");
-  const language = match ? match[1] : "";
+  const explicitLanguage = match ? match[1].toLowerCase() : "";
+
+  // Highlight syntax with highlight.js
+  let highlightedHtml = "";
+  let displayLanguage = explicitLanguage;
+
+  if (explicitLanguage && hljs.getLanguage(explicitLanguage)) {
+    try {
+      const res = hljs.highlight(codeText, { language: explicitLanguage, ignoreIllegals: true });
+      highlightedHtml = res.value;
+      displayLanguage = explicitLanguage;
+    } catch {
+      highlightedHtml = escapeHtml(codeText);
+    }
+  } else if (!explicitLanguage && codeText.trim()) {
+    // Auto-detect language if not specified
+    try {
+      const autoRes = hljs.highlightAuto(codeText);
+      highlightedHtml = autoRes.value;
+      displayLanguage = autoRes.language || "text";
+    } catch {
+      highlightedHtml = escapeHtml(codeText);
+      displayLanguage = "text";
+    }
+  } else {
+    highlightedHtml = escapeHtml(codeText);
+    displayLanguage = explicitLanguage || "text";
+  }
+
+  const lines = codeText.split("\n");
+  const showLineNumbers = lines.length > 1;
 
   const handleCopy = async () => {
     try {
@@ -37,32 +88,66 @@ function CodeBlock({ children, className }: { children: React.ReactNode; classNa
   };
 
   return (
-    <div className="relative group my-4 rounded-lg border border-kumo-line bg-kumo-recessed overflow-hidden">
-      <div className="flex items-center justify-between px-3 py-1.5 border-b border-kumo-hairline bg-kumo-base text-[11px] text-kumo-subtle font-mono">
-        <span>{language || "text"}</span>
+    <div className="relative group my-4 rounded-lg border border-kumo-line bg-kumo-recessed overflow-hidden shadow-xs">
+      <div className="flex items-center justify-between px-3.5 py-1.5 border-b border-kumo-hairline bg-kumo-base text-[11px] text-kumo-subtle font-mono select-none">
+        <span className="uppercase tracking-wider font-semibold text-[10px] text-kumo-subtle">
+          {displayLanguage}
+        </span>
         <button
+          type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1 px-1.5 py-0.5 rounded hover:bg-kumo-tint text-kumo-subtle hover:text-kumo-default transition-none"
+          className="flex items-center gap-1.5 px-2 py-0.5 rounded hover:bg-kumo-tint text-kumo-subtle hover:text-kumo-default transition-none cursor-pointer"
           title="Copy code"
         >
           {copied ? (
             <>
-              <Check weight="thin" size={12} className="text-emerald-500" />
-              <span className="text-emerald-500">Copied</span>
+              <Check weight="bold" size={12} className="text-emerald-500" />
+              <span className="text-emerald-500 text-xs">Copied</span>
             </>
           ) : (
             <>
               <Copy weight="thin" size={12} />
-              <span>Copy</span>
+              <span className="text-xs">Copy</span>
             </>
           )}
         </button>
       </div>
-      <pre className="p-4 text-xs font-mono leading-relaxed overflow-x-auto text-kumo-default">
-        <code>{children}</code>
-      </pre>
+
+      <div className="flex text-xs font-mono leading-relaxed overflow-x-auto bg-kumo-recessed/60">
+        {showLineNumbers && (
+          <div
+            className="select-none text-right pr-3 pl-3 py-3 text-[11px] font-mono text-kumo-subtle/40 border-r border-kumo-line/40 leading-relaxed shrink-0 bg-kumo-base/30"
+            aria-hidden="true"
+          >
+            {lines.map((_, i) => (
+              <div key={i}>{i + 1}</div>
+            ))}
+          </div>
+        )}
+        <pre className="p-3 text-xs font-mono leading-relaxed overflow-x-auto text-kumo-default flex-1">
+          <code
+            className="hljs"
+            dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+          />
+        </pre>
+      </div>
     </div>
   );
+}
+
+function MarkdownCode({ className, children, node, ...props }: any) {
+  const isInsidePre = React.useContext(PreContext);
+  if (!isInsidePre) {
+    return (
+      <code
+        className="font-mono text-[0.85em] px-1.5 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong font-normal"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  }
+  return <CodeBlock className={className}>{children}</CodeBlock>;
 }
 
 export function DocContent({
@@ -195,7 +280,11 @@ export function DocContent({
         {children}
       </div>
     ),
-    pre: ({ children }: any) => <>{children}</>,
+    pre: ({ children }: any) => (
+      <PreContext.Provider value={true}>
+        {children}
+      </PreContext.Provider>
+    ),
     ul: ({ children }: any) => (
       <ul className="list-disc pl-5 mb-4 text-sm space-y-1.5 text-kumo-default">
         {children}
@@ -207,19 +296,7 @@ export function DocContent({
       </ol>
     ),
     li: ({ children }: any) => <li className="text-sm">{children}</li>,
-    code: ({ inline, className, children, ...props }: any) => {
-      if (inline) {
-        return (
-          <code
-            className="font-mono text-[0.9em] px-1.5 py-0.5 rounded bg-kumo-recessed border border-kumo-line text-kumo-strong"
-            {...props}
-          >
-            {children}
-          </code>
-        );
-      }
-      return <CodeBlock className={className}>{children}</CodeBlock>;
-    },
+    code: MarkdownCode,
     blockquote: ({ children }: any) => (
       <blockquote className="border-l-2 border-kumo-brand bg-kumo-recessed px-4 py-2.5 my-4 rounded-r-md text-sm text-kumo-default">
         {children}

@@ -72,7 +72,7 @@ export function DocNavbar({
           href="/"
           className="font-handwriting font-bold text-kumo-strong hover:opacity-85 select-none text-2xl tracking-wide shrink-0 transition-opacity"
         >
-          Pichyy
+          Pichyy-Doc
         </Link>
 
         {/* Mobile Doc Space Badge (< md) */}

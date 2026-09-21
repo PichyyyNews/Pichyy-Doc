@@ -43,7 +43,7 @@ export default function AdminLoginPage() {
         <div className="flex items-center gap-2 mb-2">
           <ShieldCheck weight="thin" size={24} className="text-kumo-brand shrink-0" />
           <h1 className="text-lg font-semibold text-kumo-strong flex items-center">
-            <span className="font-handwriting font-bold text-2xl mr-1.5">Pichyy</span>
+            <span className="font-handwriting font-bold text-2xl mr-1.5">Pichyy-Doc</span>
             <span>Admin</span>
           </h1>
         </div>
