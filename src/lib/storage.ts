@@ -86,6 +86,7 @@ Ready to get started with your own documentation? Check out the following sectio
 2. [Markdown & Typography](/docs/guide/markdown-typography) — Explore supported markdown formatting, code highlights, and tables.
 3. [Media & Galleries](/docs/guide/media-galleries) — Discover advanced image layout modes and album grids.
 4. [Deployment Guide](/docs/guide/deployment) — Ship your documentation to production using Docker, Vercel, or Linux servers.
+5. [Project Hand-off & Operations](/docs/guide/handoff) — Complete architectural overview, development runbook, and maintenance checklist.
 `,
         tocAnchors: JSON.stringify([
           { id: "overview", text: "Overview", level: 2, enabled: true },
@@ -482,6 +483,131 @@ CMD ["npm", "start"]
         ]),
         searchKeywords: JSON.stringify(["deployment", "vercel", "docker", "pm2", "linux", "production", "nginx", "security"]),
         order: 2,
+        isPublished: true,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      },
+      {
+        id: "page-handoff",
+        docSpaceId: "space-guide",
+        categoryId: "cat-system-deployment",
+        title: "Project Hand-off & Operations",
+        slug: "handoff",
+        description: "Complete project hand-off specification, architectural blueprint, development runbook, and maintenance checklist for Pichyy-Doc.",
+        content: `> This document serves as the official, comprehensive project hand-off, operational runbook, and architectural specification for **Pichyy-Doc**.
+
+## System Overview & Repository
+
+Pichyy-Doc is an enterprise-grade documentation and internal knowledge base platform engineered with Next.js 15 (App Router), Cloudflare Kumo UI design system, and a hybrid zero-config persistence engine.
+
+- **Repository**: [https://github.com/PichyyyNews/Pichyy-Doc](https://github.com/PichyyyNews/Pichyy-Doc)
+- **License**: MIT License
+- **Framework**: Next.js 15.1.7 (React 19)
+- **Styling**: Tailwind CSS + \`@cloudflare/kumo\` + \`@phosphor-icons/react\` (weight="thin")
+- **Syntax Engine**: \`highlight.js/lib/common\` (36 high-frequency software engineering languages)
+- **Diagrams**: Interactive Mermaid vector SVG engine with adaptive Light/Dark mode
+
+## Architectural Blueprint
+
+\`\`\`mermaid
+flowchart LR
+    Client[Browser Client]
+    Viewer[Public Viewer]
+    Admin[Admin Console]
+    Storage[(Storage Layer)]
+    Postgres[(PostgreSQL)]
+    JSON[(Local JSON)]
+
+    Client --> Viewer & Admin
+    Viewer & Admin --> Storage
+    Storage -.-> Postgres & JSON
+\`\`\`
+
+## Key Subsystems & Implementations
+
+### 1. Dual-Storage Engine (\`src/lib/storage.ts\`)
+- **Health Check Probe**: Automatically attempts a lightweight \`SELECT 1\` query to verify PostgreSQL connectivity.
+- **Zero-Config Fallback**: If PostgreSQL is unreachable or \`DATABASE_URL\` is omitted, all operations seamlessly fallback to \`data/docs-store.json\`.
+- **Sync Protocol**: The database and JSON store share identical schemas (\`DocSpaceItem\`, \`CategoryItem\`, \`DocPageItem\`, \`TocItem\`).
+
+### 2. High-Performance Syntax Highlighter (\`src/lib/highlighter.ts\`)
+- **Bundle Optimization**: Employs \`highlight.js/lib/common\` (~100 KB) instead of root \`highlight.js\` (4.6 MB / 10,660 modules), eliminating SSR Webpack chunk collisions (\`highlight.js.js\`).
+- **Externalization**: Configured with \`serverExternalPackages: ["highlight.js"]\` in \`next.config.ts\`.
+- **Auto-Detection & Line Numbers**: Unspecified code blocks automatically detect language, and multi-line snippets include non-selectable line numbers.
+
+### 3. Clean Mermaid Diagram Block (\`src/components/docs/MermaidBlock.tsx\`)
+- **Dynamic Vector Rendering**: Automatically transforms \`\`\`mermaid code blocks into theme-adaptive SVG diagrams.
+- **Dual Tab Switcher**: Minimalist, clean controls to toggle between rendered Preview and raw code with one-click copy.
+- **Theme Observer**: Uses \`MutationObserver\` to watch root class/attribute changes and re-render diagrams instantly on theme toggles.
+
+### 4. Media & Gallery Architecture
+- **Public Demo Assets (\`public/demo/\`)**: Curated stock assets tracked in Git to guarantee clone-and-run reliability without 404 broken images.
+- **Runtime Uploads (\`public/uploads/\`)**: Git-ignored runtime uploads folder preserved with \`.gitkeep\`.
+- **Layout Directives**: Supports \`#border=true\`, \`#width=75%\`, \`#align=center\`, and \`#wrap=true\` (floating text wrap with responsive mobile stacking).
+- **Gallery Album Directives**: \`:::gallery cols=3 ratio=16:9 border=true\` with interactive fullscreen lightbox.
+
+### 5. Administrative Console (\`/admin\`)
+- **PIN Authentication**: Cookie-based session validation using \`ADMIN_PIN\` (default \`123456\`) and cryptographic secret \`SESSION_SECRET\`.
+- **Live Markdown Split-Editor**: Full Markdown authoring with real-time preview, drag-and-drop structural reordering, and TOC anchor managers.
+
+## Developer Runbook & Shell Scripts
+
+The repository includes pre-configured executable shell scripts formatted with LF line endings:
+
+| Script | Command | Purpose |
+| :--- | :--- | :--- |
+| \`setup.sh\` | \`./setup.sh\` | Install dependencies and initialize environment files. |
+| \`dev.sh\` | \`./dev.sh\` | Start local Next.js development server on port 3000. |
+| \`build.sh\` | \`./build.sh\` | Generate optimized production build (\`next build\`). |
+| \`start.sh\` | \`./start.sh\` | Launch production server on port 3000 (\`next start\`). |
+
+### Essential CLI Commands
+
+\`\`\`bash
+# Start local development server
+npm run dev
+
+# Run TypeScript type safety verification
+npx tsc --noEmit
+
+# Compile production bundle
+npm run build
+
+# Push database schema (when PostgreSQL is active)
+npm run db:push
+npm run db:seed
+\`\`\`
+
+## Configuration Matrix (.env)
+
+| Variable | Default Value | Description |
+| :--- | :--- | :--- |
+| \`DATABASE_URL\` | \`postgresql://...\` | Optional PostgreSQL connection string. When unset, local JSON storage is active. |
+| \`ADMIN_PIN\` | \`123456\` | 6-digit numeric PIN used to authenticate administrative sessions at \`/admin\`. |
+| \`SESSION_SECRET\` | \`pichyy-doc-secret-...\` | Salt string for cryptographic signature of admin session tokens. |
+| \`NODE_ENV\` | \`development\` | Runtime environment mode (\`development\` or \`production\`). |
+
+## Operational Hand-off & Verification Checklist
+
+Before releasing updates or handing off maintenance tasks, verify the following checklist:
+
+- [ ] **Typecheck Cleanliness**: Run \`npx tsc --noEmit\` and confirm exit code 0.
+- [ ] **Production Build**: Run \`npm run build\` and ensure all 13+ static/dynamic routes compile without chunk errors.
+- [ ] **Clean Mermaid Layout**: Diagrams adhere to \`flowchart LR\` with concise labels and zero nested subgraphs.
+- [ ] **Media Routing**: Test that \`/demo/*.jpg\` static assets return \`HTTP 200 OK\`.
+- [ ] **Inline Code Verification**: Verify that single backtick code badges render as compact inline elements rather than oversized cards.
+- [ ] **Security Review**: Ensure custom \`ADMIN_PIN\` and \`SESSION_SECRET\` are set in production deployments.
+`,
+        tocAnchors: JSON.stringify([
+          { id: "system-overview-repository", text: "System Overview & Repository", level: 2, enabled: true },
+          { id: "architectural-blueprint", text: "Architectural Blueprint", level: 2, enabled: true },
+          { id: "key-subsystems-implementations", text: "Key Subsystems & Implementations", level: 2, enabled: true },
+          { id: "developer-runbook-shell-scripts", text: "Developer Runbook & Shell Scripts", level: 2, enabled: true },
+          { id: "configuration-matrix-env", text: "Configuration Matrix (.env)", level: 2, enabled: true },
+          { id: "operational-hand-off-verification-checklist", text: "Operational Hand-off & Verification Checklist", level: 2, enabled: true },
+        ]),
+        searchKeywords: JSON.stringify(["handoff", "hand-off", "architecture", "runbook", "operations", "maintenance", "developer guide", "checklist", "subsystems", "configuration", "scripts"]),
+        order: 3,
         isPublished: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
