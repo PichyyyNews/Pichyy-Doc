@@ -261,7 +261,7 @@ Formatted GFM tables render with subtle hairline borders and alternating row sty
         title: "Media & Gallery Layouts",
         slug: "media-galleries",
         description: "Guidelines for responsive images, floating text wraps, and multi-column photo galleries.",
-        content: `> Pichyy-Doc includes advanced image layout directives, border options, width controls, and multi-column gallery albums.
+        content: `> Pichyy-Doc includes advanced image layout directives, border options, width controls, floating wraps, and multi-column gallery albums with interactive lightboxes.
 
 ## Image Layout Directives
 
@@ -272,23 +272,35 @@ Images can be customized using URL hash query parameters:
 - \`align=left|center|right\`: Horizontal alignment.
 - \`wrap=true|false\`: Float image next to text with smooth desktop wrap.
 
-### Example Syntax
+### Centered Single Image Showcase
 
-\`\`\`markdown
-![Architecture Diagram](/uploads/diagram.png#border=true&width=75%&align=center)
-\`\`\`
+Here is a live demonstration of a centered hero image with a subtle border and 75% width constraint:
+
+![Modern Architecture Facade](/demo/architecture-facade.jpg#border=true&width=75%&align=center)
+
+### Floating Text Wrap
+
+Using \`#wrap=true&align=right&width=45%\`, images can effortlessly float alongside editorial text on desktop screens while gracefully collapsing on mobile devices:
+
+![Minimalist Workspace Desk](/demo/minimal-workspace.jpg#border=true&width=45%&align=right&wrap=true)
+
+Modern workspace design emphasizes minimalism, natural light, and intentional spatial ergonomics. When engineering high-performance software systems and writing technical documentation, reducing visual clutter in physical surroundings directly mirrors the clarity of modular codebase design.
+
+Pichyy-Doc's floating text wrap ensures that contextual media, architectural diagrams, and component screenshots complement written documentation rather than disrupting reading flow. On wider desktop viewports, text cascades naturally around the media block, while on tablet and mobile viewports, the layout smoothly stacks vertically for optimal legibility.
 
 ## Multi-Column Gallery Albums (\`:::gallery\`)
 
 Create responsive photo grids with uniform aspect ratios and keyboard-navigable lightboxes:
 
-\`\`\`text
+### Interactive Photo Grid Showcase
+
+Click any image below to trigger the interactive full-screen lightbox modal:
+
 :::gallery cols=3 ratio=16:9 border=true
-![Dashboard View](/assets/preview1.png)
-![Editor Interface](/assets/preview2.png)
-![Mobile Layout](/assets/preview3.png)
+![Modern Office Interior](/demo/office-interior.jpg)
+![Geometric Architectural Structure](/demo/geometric-structure.jpg)
+![Modern Concrete Hallway](/demo/modern-hallway.jpg)
 :::
-\`\`\`
 
 ### Gallery Options
 
@@ -304,8 +316,10 @@ Clicking any image or gallery item automatically opens a full-screen interactive
 `,
         tocAnchors: JSON.stringify([
           { id: "image-layout-directives", text: "Image Layout Directives", level: 2, enabled: true },
-          { id: "example-syntax", text: "Example Syntax", level: 3, enabled: true },
+          { id: "centered-single-image-showcase", text: "Centered Single Image Showcase", level: 3, enabled: true },
+          { id: "floating-text-wrap", text: "Floating Text Wrap", level: 3, enabled: true },
           { id: "multi-column-gallery-albums-gallery", text: "Multi-Column Gallery Albums (:::gallery)", level: 2, enabled: true },
+          { id: "interactive-photo-grid-showcase", text: "Interactive Photo Grid Showcase", level: 3, enabled: true },
           { id: "gallery-options", text: "Gallery Options", level: 3, enabled: true },
           { id: "interactive-lightbox", text: "Interactive Lightbox", level: 2, enabled: true },
         ]),
