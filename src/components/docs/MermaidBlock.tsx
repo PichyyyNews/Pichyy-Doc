@@ -128,59 +128,52 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
   const codeLines = code.trim().split("\n");
 
   return (
-    <div className="my-6 rounded-lg border border-kumo-line bg-kumo-base overflow-hidden shadow-xs transition-colors">
+    <div className="my-6 rounded-lg border border-kumo-line bg-kumo-base overflow-hidden">
       {/* Header bar */}
-      <div className="flex items-center justify-between px-3.5 py-2 border-b border-kumo-hairline bg-kumo-recessed text-xs">
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[11px] font-mono font-medium uppercase bg-kumo-base border border-kumo-line text-kumo-strong">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Mermaid Diagram
-          </span>
-
-          {/* Mode Switcher Tabs */}
-          <div className="flex items-center bg-kumo-base border border-kumo-line rounded p-0.5 ml-2">
-            <button
-              type="button"
-              onClick={() => setActiveTab("preview")}
-              className={`flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded transition-colors ${
-                activeTab === "preview"
-                  ? "bg-kumo-recessed text-kumo-strong shadow-xs font-semibold"
-                  : "text-kumo-subtle hover:text-kumo-default"
-              }`}
-            >
-              <Eye weight={activeTab === "preview" ? "fill" : "regular"} className="w-3.5 h-3.5" />
-              Preview
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("code")}
-              className={`flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded transition-colors ${
-                activeTab === "code"
-                  ? "bg-kumo-recessed text-kumo-strong shadow-xs font-semibold"
-                  : "text-kumo-subtle hover:text-kumo-default"
-              }`}
-            >
-              <Code weight={activeTab === "code" ? "bold" : "regular"} className="w-3.5 h-3.5" />
-              Code
-            </button>
-          </div>
+      <div className="flex items-center justify-between px-3.5 py-1.5 border-b border-kumo-hairline bg-kumo-recessed text-xs">
+        {/* Mode Switcher Tabs (Clean Kumo Style - No background or container border) */}
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={() => setActiveTab("preview")}
+            className={`flex items-center gap-1.5 px-2 py-1 text-xs cursor-pointer ${
+              activeTab === "preview"
+                ? "text-kumo-strong font-medium"
+                : "text-kumo-subtle hover:text-kumo-strong"
+            }`}
+          >
+            <Eye weight="thin" className="w-4 h-4" />
+            <span>Preview</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("code")}
+            className={`flex items-center gap-1.5 px-2 py-1 text-xs cursor-pointer ${
+              activeTab === "code"
+                ? "text-kumo-strong font-medium"
+                : "text-kumo-subtle hover:text-kumo-strong"
+            }`}
+          >
+            <Code weight="thin" className="w-4 h-4" />
+            <span>Code</span>
+          </button>
         </div>
 
         {/* Copy button */}
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1 px-2 py-1 rounded text-[11px] font-medium text-kumo-subtle hover:text-kumo-strong hover:bg-kumo-base transition-colors"
+          className="flex items-center gap-1.5 px-2 py-1 text-xs text-kumo-subtle hover:text-kumo-strong cursor-pointer"
           title="Copy diagram code"
         >
           {copied ? (
             <>
-              <Check weight="bold" className="w-3.5 h-3.5 text-emerald-500" />
-              <span className="text-emerald-600 dark:text-emerald-400">Copied</span>
+              <Check weight="thin" className="w-4 h-4 text-emerald-500" />
+              <span className="text-emerald-600 dark:text-emerald-400 font-medium">Copied</span>
             </>
           ) : (
             <>
-              <Copy className="w-3.5 h-3.5" />
+              <Copy weight="thin" className="w-4 h-4" />
               <span>Copy</span>
             </>
           )}
@@ -198,7 +191,7 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
           ) : error ? (
             <div className="w-full">
               <div className="flex items-start gap-2.5 p-3 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-200 text-xs mb-3">
-                <WarningCircle weight="bold" className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
+                <WarningCircle weight="thin" className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <div>
                   <div className="font-semibold mb-0.5">Mermaid Diagram Syntax Error</div>
                   <div className="text-[11px] opacity-90 line-clamp-2 font-mono">{error}</div>
