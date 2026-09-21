@@ -11,6 +11,7 @@ import { GalleryGrid } from "./GalleryGrid";
 import { ImageLightbox } from "./ImageLightbox";
 import { ArrowLeft, ArrowRight, Check, Copy } from "@phosphor-icons/react";
 import { highlightCode } from "@/lib/highlighter";
+import { MermaidBlock } from "./MermaidBlock";
 
 interface DocContentProps {
   space: DocSpaceItem;
@@ -37,6 +38,10 @@ function CodeBlock({ children, className }: { children: React.ReactNode; classNa
   const codeText = extractText(children).replace(/\n$/, "");
   const match = /language-(\w+)/.exec(className || "");
   const explicitLanguage = match ? match[1].toLowerCase() : "";
+
+  if (explicitLanguage === "mermaid") {
+    return <MermaidBlock code={codeText} />;
+  }
 
   // Highlight syntax with highlight.js helper
   const { html: highlightedHtml, language: displayLanguage } = highlightCode(codeText, explicitLanguage);

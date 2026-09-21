@@ -23,6 +23,7 @@ import {
 } from "@phosphor-icons/react";
 import Link from "next/link";
 import { highlightCode } from "@/lib/highlighter";
+import { MermaidBlock } from "@/components/docs/MermaidBlock";
 
 const PreContext = React.createContext(false);
 
@@ -624,6 +625,10 @@ export function MarkdownEditor({ page, spaces, onSaveSuccess }: MarkdownEditorPr
                         const codeText = extractText(children).replace(/\n$/, "");
                         const match = /language-(\w+)/.exec(className || "");
                         const explicitLanguage = match ? match[1].toLowerCase() : "";
+
+                        if (explicitLanguage === "mermaid") {
+                          return <MermaidBlock code={codeText} />;
+                        }
 
                         const { html: highlightedHtml, language: displayLanguage } = highlightCode(codeText, explicitLanguage);
 

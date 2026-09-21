@@ -67,21 +67,27 @@ Pichyy-Doc was designed from the ground up to provide teams, developers, and cre
 
 ## System Architecture
 
-\`\`\`text
-+-------------------------------------------------------------+
-|                        Pichyy-Doc                           |
-+-------------------------------------------------------------+
-|  Public Viewer (/docs)           |  Admin Console (/admin)   |
-|  - Sticky Frosted Topbar         |  - PIN Authentication     |
-|  - Hierarchical Nav Tree         |  - Live Markdown Editor   |
-|  - Rich Markdown Engine          |  - Media & Gallery Modal  |
-|  - Command Palette (Ctrl+K)      |  - Doc Spaces Hierarchy   |
-|  - Interactive Lightbox          |  - Search Keyword Tagger  |
-+----------------------------------+--------------------------+
-|                     Dual Storage Layer                      |
-|  - Primary: PostgreSQL (Prisma ORM)                          |
-|  - Fallback: Local JSON Store (data/docs-store.json)         |
-+-------------------------------------------------------------+
+\`\`\`mermaid
+graph TD
+    Client["Client Browser"]
+    
+    subgraph App ["Pichyy-Doc Platform"]
+        Viewer["Public Viewer (/docs)<br/>- Sticky Frosted Topbar<br/>- Hierarchical Nav Tree<br/>- Rich Markdown & IDE Highlighter<br/>- Interactive Lightbox & Mermaid"]
+        Admin["Admin Console (/admin)<br/>- PIN Authentication<br/>- Live Split Markdown Editor<br/>- Media & Gallery Builder<br/>- Doc Spaces Manager"]
+    end
+    
+    subgraph StorageLayer ["Dual Storage Engine"]
+        StorageRouting{"Storage Resolver"}
+        Postgres[("PostgreSQL (Prisma ORM)")]
+        JSONStore[("JSON Store (docs-store.json)")]
+    end
+
+    Client --> Viewer
+    Client --> Admin
+    Viewer --> StorageRouting
+    Admin --> StorageRouting
+    StorageRouting -->|"Primary (if configured)"| Postgres
+    StorageRouting -->|"Fallback (zero-config)"| JSONStore
 \`\`\`
 
 ## Next Steps
@@ -224,6 +230,41 @@ export async function getSiteNavigation() {
 }
 \`\`\`
 
+## Mermaid Diagrams & Architecture
+
+Embed interactive diagrams directly inside Markdown using \`\`\`mermaid code fences. Pichyy-Doc automatically renders them as crisp, theme-adaptive vector SVGs with dynamic Light/Dark mode switching and a toggle to view or copy the underlying code:
+
+\`\`\`mermaid
+sequenceDiagram
+    autonumber
+    actor Developer
+    participant Viewer as Pichyy-Doc Viewer
+    participant Storage as Dual Storage Resolver
+    participant DB as PostgreSQL / JSON
+    
+    Developer->>Viewer: Request Document (/docs/guide)
+    Viewer->>Storage: Fetch DocSpace and Pages
+    alt PostgreSQL Available
+        Storage->>DB: Query Prisma ORM
+        DB-->>Storage: Return Records
+    else Fallback Mode
+        Storage->>DB: Read data/docs-store.json
+        DB-->>Storage: Return JSON Data
+    end
+    Storage-->>Viewer: Stream Page Payload
+    Viewer-->>Developer: Render UI with Kumo Theme
+\`\`\`
+
+### Supported Diagram Types
+
+Pichyy-Doc supports all standard Mermaid diagram specifications:
+- **Flowcharts & Graphs** (\`flowchart TD\`, \`graph LR\`)
+- **Sequence Diagrams** (\`sequenceDiagram\`)
+- **State Diagrams** (\`stateDiagram-v2\`)
+- **Class & Object Diagrams** (\`classDiagram\`)
+- **Entity-Relationship Diagrams** (\`erDiagram\`)
+- **Git Graphs & Mindmaps** (\`gitGraph\`, \`mindmap\`)
+
 ## Blockquotes & Callouts
 
 Use standard Markdown blockquotes for notices and tips:
@@ -245,10 +286,12 @@ Formatted GFM tables render with subtle hairline borders and alternating row sty
           { id: "heading-levels-toc-integration", text: "Heading Levels & TOC Integration", level: 2, enabled: true },
           { id: "heading-level-3-example", text: "Heading Level 3 Example", level: 3, enabled: true },
           { id: "syntax-highlighted-code-blocks", text: "Syntax Highlighted Code Blocks", level: 2, enabled: true },
+          { id: "mermaid-diagrams-architecture", text: "Mermaid Diagrams & Architecture", level: 2, enabled: true },
+          { id: "supported-diagram-types", text: "Supported Diagram Types", level: 3, enabled: true },
           { id: "blockquotes-callouts", text: "Blockquotes & Callouts", level: 2, enabled: true },
           { id: "tables", text: "Tables", level: 2, enabled: true },
         ]),
-        searchKeywords: JSON.stringify(["markdown", "syntax", "code blocks", "tables", "typography", "callouts", "headings"]),
+        searchKeywords: JSON.stringify(["markdown", "syntax", "code blocks", "tables", "typography", "callouts", "headings", "mermaid", "diagram", "flowchart", "sequence"]),
         order: 1,
         isPublished: true,
         createdAt: new Date().toISOString(),
