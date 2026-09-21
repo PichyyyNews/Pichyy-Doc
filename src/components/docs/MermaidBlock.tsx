@@ -60,32 +60,43 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
           startOnLoad: false,
           securityLevel: "loose",
           theme: isDark ? "dark" : "neutral",
-          fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          fontFamily: "ui-sans-serif, system-ui, -apple-system, sans-serif",
+          fontSize: 12,
+          flowchart: {
+            htmlLabels: true,
+            curve: "basis",
+            nodeSpacing: 24,
+            rankSpacing: 28,
+            padding: 8,
+            useMaxWidth: true,
+          },
           themeVariables: isDark
             ? {
                 darkMode: true,
-                background: "#18181b",
+                background: "transparent",
                 mainBkg: "#27272a",
+                nodeBorder: "#3f3f46",
+                lineColor: "#71717a",
                 primaryColor: "#27272a",
                 primaryTextColor: "#f4f4f5",
                 primaryBorderColor: "#3f3f46",
-                lineColor: "#a1a1aa",
                 secondaryColor: "#1f1f23",
                 tertiaryColor: "#27272a",
-                edgeLabelBackground: "#18181b",
+                edgeLabelBackground: "transparent",
                 nodeTextColor: "#f4f4f5",
               }
             : {
                 darkMode: false,
-                background: "#ffffff",
-                mainBkg: "#f4f4f5",
-                primaryColor: "#f4f4f5",
+                background: "transparent",
+                mainBkg: "#ffffff",
+                nodeBorder: "#e4e4e7",
+                lineColor: "#a1a1aa",
+                primaryColor: "#ffffff",
                 primaryTextColor: "#18181b",
                 primaryBorderColor: "#e4e4e7",
-                lineColor: "#71717a",
                 secondaryColor: "#fafafa",
                 tertiaryColor: "#f4f4f5",
-                edgeLabelBackground: "#ffffff",
+                edgeLabelBackground: "transparent",
                 nodeTextColor: "#18181b",
               },
         });
@@ -128,33 +139,33 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
   const codeLines = code.trim().split("\n");
 
   return (
-    <div className="my-6 rounded-lg border border-kumo-line bg-kumo-base overflow-hidden">
-      {/* Header bar */}
-      <div className="flex items-center justify-between px-3.5 py-1.5 border-b border-kumo-hairline bg-kumo-recessed text-xs">
-        {/* Mode Switcher Tabs (Clean Kumo Style - No background or container border) */}
+    <div className="my-4 rounded-lg bg-kumo-recessed/30 border border-kumo-line/40 p-2.5">
+      {/* Top minimal action strip - no heavy header bar, no divider */}
+      <div className="flex items-center justify-between px-1 pb-1.5 text-xs select-none">
+        {/* Mode Switcher Tabs (Clean Kumo Style) */}
         <div className="flex items-center gap-1">
           <button
             type="button"
             onClick={() => setActiveTab("preview")}
-            className={`flex items-center gap-1.5 px-2 py-1 text-xs cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2 py-0.5 text-xs rounded cursor-pointer ${
               activeTab === "preview"
-                ? "text-kumo-strong font-medium"
+                ? "text-kumo-strong font-medium bg-kumo-tint"
                 : "text-kumo-subtle hover:text-kumo-strong"
             }`}
           >
-            <Eye weight="thin" className="w-4 h-4" />
+            <Eye weight="thin" className="w-3.5 h-3.5" />
             <span>Preview</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveTab("code")}
-            className={`flex items-center gap-1.5 px-2 py-1 text-xs cursor-pointer ${
+            className={`flex items-center gap-1.5 px-2 py-0.5 text-xs rounded cursor-pointer ${
               activeTab === "code"
-                ? "text-kumo-strong font-medium"
+                ? "text-kumo-strong font-medium bg-kumo-tint"
                 : "text-kumo-subtle hover:text-kumo-strong"
             }`}
           >
-            <Code weight="thin" className="w-4 h-4" />
+            <Code weight="thin" className="w-3.5 h-3.5" />
             <span>Code</span>
           </button>
         </div>
@@ -163,17 +174,17 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
         <button
           type="button"
           onClick={handleCopy}
-          className="flex items-center gap-1.5 px-2 py-1 text-xs text-kumo-subtle hover:text-kumo-strong cursor-pointer"
+          className="flex items-center gap-1.5 px-2 py-0.5 text-xs text-kumo-subtle hover:text-kumo-strong cursor-pointer"
           title="Copy diagram code"
         >
           {copied ? (
             <>
-              <Check weight="thin" className="w-4 h-4 text-emerald-500" />
+              <Check weight="thin" className="w-3.5 h-3.5 text-emerald-500" />
               <span className="text-emerald-600 dark:text-emerald-400 font-medium">Copied</span>
             </>
           ) : (
             <>
-              <Copy weight="thin" className="w-4 h-4" />
+              <Copy weight="thin" className="w-3.5 h-3.5" />
               <span>Copy</span>
             </>
           )}
@@ -182,11 +193,11 @@ export function MermaidBlock({ code }: MermaidBlockProps) {
 
       {/* Content Area */}
       {activeTab === "preview" ? (
-        <div className="p-4 sm:p-6 overflow-x-auto min-h-[140px] flex items-center justify-center bg-kumo-base">
+        <div className="overflow-x-auto p-1.5 flex items-center justify-center">
           {isLoading ? (
-            <div className="flex flex-col items-center gap-2 py-6 text-kumo-subtle text-xs">
-              <span className="w-5 h-5 border-2 border-kumo-line border-t-kumo-strong rounded-full animate-spin" />
-              <span>Rendering diagram...</span>
+            <div className="flex items-center gap-2 py-4 text-kumo-subtle text-xs">
+              <span className="w-4 h-4 border-2 border-kumo-line border-t-kumo-strong rounded-full animate-spin" />
+              <span>Rendering...</span>
             </div>
           ) : error ? (
             <div className="w-full">

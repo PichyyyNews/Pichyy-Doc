@@ -68,26 +68,14 @@ Pichyy-Doc was designed from the ground up to provide teams, developers, and cre
 ## System Architecture
 
 \`\`\`mermaid
-graph TD
-    Client["Client Browser"]
-    
-    subgraph App ["Pichyy-Doc Platform"]
-        Viewer["Public Viewer (/docs)<br/>- Sticky Frosted Topbar<br/>- Hierarchical Nav Tree<br/>- Rich Markdown & IDE Highlighter<br/>- Interactive Lightbox & Mermaid"]
-        Admin["Admin Console (/admin)<br/>- PIN Authentication<br/>- Live Split Markdown Editor<br/>- Media & Gallery Builder<br/>- Doc Spaces Manager"]
-    end
-    
-    subgraph StorageLayer ["Dual Storage Engine"]
-        StorageRouting{"Storage Resolver"}
-        Postgres[("PostgreSQL (Prisma ORM)")]
-        JSONStore[("JSON Store (docs-store.json)")]
-    end
+flowchart LR
+    Client[Browser Client]
+    Viewer[Public Viewer]
+    Admin[Admin Console]
+    Storage[(Storage Layer)]
 
-    Client --> Viewer
-    Client --> Admin
-    Viewer --> StorageRouting
-    Admin --> StorageRouting
-    StorageRouting -->|"Primary (if configured)"| Postgres
-    StorageRouting -->|"Fallback (zero-config)"| JSONStore
+    Client --> Viewer & Admin
+    Viewer & Admin --> Storage
 \`\`\`
 
 ## Next Steps
@@ -236,23 +224,14 @@ Embed interactive diagrams directly inside Markdown using \`\`\`mermaid code fen
 
 \`\`\`mermaid
 sequenceDiagram
-    autonumber
-    actor Developer
-    participant Viewer as Pichyy-Doc Viewer
-    participant Storage as Dual Storage Resolver
-    participant DB as PostgreSQL / JSON
+    actor User
+    participant App as Pichyy-Doc
+    participant DB as Storage Layer
     
-    Developer->>Viewer: Request Document (/docs/guide)
-    Viewer->>Storage: Fetch DocSpace and Pages
-    alt PostgreSQL Available
-        Storage->>DB: Query Prisma ORM
-        DB-->>Storage: Return Records
-    else Fallback Mode
-        Storage->>DB: Read data/docs-store.json
-        DB-->>Storage: Return JSON Data
-    end
-    Storage-->>Viewer: Stream Page Payload
-    Viewer-->>Developer: Render UI with Kumo Theme
+    User->>App: Request Document
+    App->>DB: Fetch Content
+    DB-->>App: Return Doc & Anchors
+    App-->>User: Render Kumo UI Page
 \`\`\`
 
 ### Supported Diagram Types
